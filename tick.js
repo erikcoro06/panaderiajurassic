@@ -1,4 +1,3 @@
-        // Precios de los productos
         const precios = {
             "Concha de vainilla": 8,
             "Concha de chocolate": 8,
@@ -33,7 +32,6 @@
             "Pambazo": 10
         };
 
-        // Función para mostrar campos de pago según selección
         function mostrarCamposPago() {
             const metodoPago = document.getElementById('metodo-pago').value;
             const efectivoDiv = document.getElementById('efectivo');
@@ -48,7 +46,6 @@
             }
         }
 
-        // Función para calcular el cambio
         function calcularCambio() {
             const total = parseFloat(document.getElementById('total-pedido').textContent.replace('Total: $', ''));
             const monto = parseFloat(document.getElementById('monto').value) || 0;
@@ -62,13 +59,11 @@
             }
         }
 
-        // Función para cargar los datos del URL y mostrar el resumen
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const listaProductos = document.getElementById('lista-productos');
             let total = 0;
 
-            // Obtener y procesar los parámetros del catálogo
             const categorias = ['biscocho', 'feite', 'panque', 'fritos', 'salados'];
             
             categorias.forEach(categoria => {
@@ -76,7 +71,6 @@
                 const cantidades = urlParams.get(`cantidad-${categoria}`) ? 
                     urlParams.get(`cantidad-${categoria}`).split(',') : [];
 
-                // Mostrar en la tabla de resumen
                 productos.forEach((productoConPrecio, index) => {
                     if (productoConPrecio && cantidades[index]) {
                         const [nombre, precio] = productoConPrecio.split('|');
@@ -105,12 +99,9 @@
             mostrarCamposPago();
         };
 
-        // Función para generar el ticket
         document.getElementById('btn-generar-ticket').addEventListener('click', function() {
-            // Validar campos
             if (!validarFormulario()) return;
             
-            // Recopilar todos los datos
             const pedido = {
                 nombre: document.getElementById('nombre').value,
                 fecha: document.getElementById('fecha').value,
@@ -119,7 +110,6 @@
                 productos: []
             };
 
-            // Recopilar productos
             const filas = document.querySelectorAll('#lista-productos tr');
             filas.forEach(fila => {
                 const celdas = fila.cells;
@@ -131,7 +121,6 @@
                 });
             });
 
-            // Datos de pago
             if (pedido.metodoPago === 'efectivo') {
                 pedido.montoRecibido = document.getElementById('monto').value;
                 pedido.cambio = document.getElementById('cambio').textContent.replace('Cambio: $', '');
@@ -152,19 +141,16 @@
         });
 
         function validarFormulario() {
-            // Validar nombre
             if (document.getElementById('nombre').value.trim() === '') {
                 alert('Por favor ingrese su nombre');
                 return false;
             }
             
-            // Validar fecha
             if (document.getElementById('fecha').value === '') {
                 alert('Por favor seleccione una fecha');
                 return false;
             }
             
-            // Validar método de pago
             const metodoPago = document.getElementById('metodo-pago').value;
             if (metodoPago === 'efectivo') {
                 const monto = parseFloat(document.getElementById('monto').value);
