@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catalogo de complementos </title>
+        <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+     <header>
+      <h1>Catálogo de Pasteles</h1>
+      <h2>Encuentra el pastel perfecto para cada ocasión</h2>
+    </header>
+
+    <form action="ordenar_pastel.js" method="post">
+      <section>
+        <h3>Pasteles Temáticos</h3>
+        <label for="bebidas">Bebidas:</label>
+        <select id="bebidas" name="bebidas[]" multiple>
+          <option value="Cafe">Cafe de olla</option>
+          <option value="capucchino">Capuchino</option>
+          <option value="latte">Latte</option>
+          <option value="expreso">Expreso</option>
+          <option value="americano">Americano</option>
+          <option value="leche">leche</option>
+          <option value="lechecho">leche de chocolate</option>
+          <option value="lechevai">leche de vainilla </option>
+          <option value="lechefre">leche de fresa</option>
+          <option value="jugo">jugo</option>
+          <option value="matcha">Te de matcha</option>
+          <option value="limon">Te de limon</option>
+          <option value="manzanilla">Te de manzanilla</option>
+          <option value="negro">Te negro</option>
+          <option value="verde">Te verde</option>
+          <option value="azahares">Te de 7 azahares</option>
+          <option value="rojo">Te de rosas</option>
+        </select>
+        <label for="cantidad-bebidas">Cantidad:</label>
+        <input type="number" id="cantidad-tematicos" name="cantidad-tematicos" min="1" placeholder="0"><br><br>
+      </section>
+
+      <section>
+        <h3>Pasteles Especiales</h3>
+        <label for="especiales">Tipo de pastel:</label>
+        <select id="especiales" name="especiales[]" multiple>
+          <option value="jugov">jugo verde</option>
+          <option value="Cnaranja">Complemento naranja</option>
+          <option value="JLimon">Limon</option>
+          <option value="menta_chocolate">Naranjaa</option>
+          <option value="mango">Piña</option>
+          <option value="coco">toronja</option>
+          <option value="cafe">Papaya</option>
+           <option value="mango">Mango</option>
+        </select>
+        <label for="cantidad-especiales">Cantidad:</label>
+        <input type="number" id="cantidad-especiales" name="cantidad-especiales" min="1" placeholder="0"><br><br>
+      </section>
+
+      <section>
+        <h3>Pasteles Internacionales</h3>
+        <label for="jugo verde">Tipo de pastel:</label>
+        <select id="jugo verde" name="jugo verde[]" multiple>
+          <option value="selva_negra">jugo verde adelgazador </option>
+          <option value="Apio">apio </option>
+          <option value="Manzana">Manzana Verde</option>
+          <option value="queso_japones">Perejil</option>
+          <option value="santiago">jengibre</option></option>
+          <option value="espin">Esspinacas</option>
+          <option value="chia">Semillas de chia</option>
+          <option value="kiwi">Kiwi</option>
+          <option value="Naran">Naranja</option>
+          <option value="Zanahoria">Zanahoria</option>
+          <option value="Miel">Miel</option>
+          <option value="pepino">Pepino</option>
+          <option value="esparragos">Esparragos</option>
+        </select>
+        <label for="cantidad-internacionales">Cantidad:</label>
+        <input type="number" id="cantidad-internacionales" name="cantidad-internacionales" min="1" placeholder="0"><br><br>
+      </section>
+
+      <section>
+        <h3>Pasteles Veganos</h3>
+        <label for="veganos">Tipo de pastel:</label>
+        <select id="veganos" name="veganos[]" multiple>
+          <option value="platano">Chocolate</option>
+          <option value="aguacate_chocolate">Mermelada</option>
+          <option value="zanahoria_vegano">Miel</option>
+          <option value="cheesecake_vegano">Cheesecake Vegano</option>
+          <option value="almendra_arandanos">Almendra y Arándanos</option>
+        </select>
+        <label for="cantidad-veganos">Cantidad:</label>
+        <input type="number" id="cantidad-veganos" name="cantidad-veganos" min="1" placeholder="0"><br><br>
+      </section>
+
+      <section>
+        <h3>Pasteles Saludables</h3>
+        <label for="saludables">Tipo de pastel:</label>
+        <select id="saludables" name="saludables[]" multiple>
+          <option value="avena_manzana">Integral de Avena y Manzana</option>
+          <option value="keto_chocolate">Keto de Chocolate</option>
+          <option value="naranja_sin_azucar">Naranja sin Azúcar</option>
+          <option value="almendra">Harina de Almendra</option>
+          <option value="proteico_yogur">Proteico de Yogur y Frambuesa</option>
+        </select>
+        <label for="cantidad-saludables">Cantidad:</label>
+        <input type="number" id="cantidad-saludables" name="cantidad-saludables" min="1" placeholder="0"><br><br>
+      </section>
+
+      <button type="submit">Enviar Pedido</button>
+      <button onclick="location.href='pan.html'" type="button">Volver al Inicio</button>
+      <button type="reset">Resetear</button>
+      </form>
+
+    <footer>
+      <p>&copy; 2025 Panaderia Jurrasic Pan Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

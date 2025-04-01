@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedido de Pizza</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="yoyo.css">
+    <style>
+        .mensaje-ok {
+            color: green;
+        }
+        .mensaje-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+  <div id="bienvenida" class="seccion activa">
+    <h1>¡Bienvenido a pizzeria el comunismo de peru!</h1>
+    <p>Gracias por elegirnos para tus antojos</p>
+    <button id="comenzar">Comenzar pedido</button>
+    <a href="index.html">Volver a inicio </a>
+    <br>
+ </div>
+
+<div id="formulario-seccion" class="seccion">
+    <h1>Pedidos de Pizza</h1>
+    <form id="formulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="Fecha">Fecha:</label>
+        <input type="date" id="Fecha" name="Fecha" required>
+
+        <label for="Pizza1">Pizza 1:</label>
+        <select id="Pizza1" name="Pizza1">
+            <option value="10">Mexicana ($10)</option>
+            <option value="12">Pepperoni ($12)</option>
+            <option value="11">Hawaiana ($11)</option>
+        </select>
+        
+        <label for="Pizza2">Pizza 2:</label>
+        <select id="Pizza2" name="Pizza2">
+            <option value="10">Mexicana ($10)</option>
+            <option value="12">Pepperoni ($12)</option>
+            <option value="11">Hawaiana ($11)</option>
+        </select>
+        
+        <label for="Pizza3">Pizza 3:</label>
+        <select id="Pizza3" name="Pizza3">
+            <option value="10">Mexicana ($10)</option>
+            <option value="12">Pepperoni ($12)</option>
+            <option value="11">Hawaiana ($11)</option>
+        </select>
+
+        <h3>Complementos:</h3>
+        <div class="checkbox-container">
+            <input type="checkbox" id="queso1" value="2">
+            <label for="queso1">Queso extra ($2)</label>
+            
+            <input type="checkbox" id="orilla" value="3">
+            <label for="orilla">Orilla rellena ($3)</label>
+            
+            <input type="checkbox" id="refresco" value="1.5">
+            <label for="refresco">Refresco ($1.50)</label>
+            
+            <input type="checkbox" id="papas" value="2.5">
+            <label for="papas">Papas ($2.50)</label>
+        </div>
+
+        <button type="button" id="calcular">Calcular Total</button>
+        <img src="1366_2000.png"/>
+    </form>
+</div>
+
+<div id="detalle-seccion" class="seccion">
+    <h2>Detalle del Pedido</h2>
+    <p id="detallePedido"></p>
+    
+    <h3>Tipo de Servicio:</h3>
+    <input type="radio" name="tipoServicio" value="Entrega a domicilio" id="entregaDomicilio" required>
+    <label for="entregaDomicilio">Entrega a Domicilio</label>
+    <input type="radio" name="tipoServicio" value="Consumo en local" id="consumoLocal" required>
+    <label for="consumoLocal">Consumo en local</label>
+
+    <button type="button" id="continuarServicio">Continuar</button>
+</div>
+
+<div id="pago-seccion" class="seccion">
+    <h2>Método de Pago</h2>
+    <p>Total a pagar: $<span id="totalPagar">0.00</span></p>
+    
+    <input type="radio" name="metodoPago" value="Efectivo" id="pagoEfectivo" required>
+    <label for="pagoEfectivo">Pago en efectivo</label>
+    <input type="radio" name="metodoPago" value="Tarjeta" id="pagoTarjeta" required>
+    <label for="pagoTarjeta">Pago con tarjeta</label>
+
+    <button type="button" id="continuarPago">Continuar</button>
+</div>
+
+<div id="domicilio-seccion" class="seccion">
+    <h1>Datos para Entrega a Domicilio</h1>
+    <form id="domicilioForm">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required>
+
+        <button type="button" id="continuarDomicilio">Continuar</button>
+    </form>
+</div>
+
+<div id="tarjeta-seccion" class="seccion">
+    <h1>Pago con Tarjeta</h1>
+    <form>
+        <label for="numeroTarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numeroTarjeta" required>
+
+        <label for="fechaExp">Fecha de Expiración:</label>
+        <input type="text" id="fechaExp" placeholder="MM/AA" required>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" required>
+
+        <button type="button" id="finalizarTarjeta">Finalizar Pago</button>
+    </form>
+</div>
+
+<div id="efectivo-seccion" class="seccion">
+    <h1>Pago en Efectivo</h1>
+    <p>Total a pagar: $<span id="totalEfectivo">0.00</span></p>
+    
+    <label for="montoPago">Monto con el que pagas:</label>
+    <input type="number" id="montoPago" required>
+    
+    <p id="mensajeCambio"></p>
+    
+    <button type="button" id="finalizarEfectivo">Finalizar Pedido</button>
+</div>
+
+<div id="ticket-seccion" class="seccion">
+    <h1>¡Gracias por tu Pedido!</h1>
+    <h3>Resumen del Pedido</h3>
+    <div id="ticketResumen"></div>
+    <button id="volver-inicio">Volver al Inicio</button>
+</div>
+
+<script src="operacion.js"></script>
+</body>
+</html>
