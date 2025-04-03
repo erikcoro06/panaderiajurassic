@@ -1,242 +1,146 @@
 body {
-  
     background-color: lavender;
-  
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
     color: #333;
-  
     margin: 0;
-  
     padding: 0;
-
-
 }
+
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('1366_2000.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.9;
-  z-index: -1;
-
-  }
-  
-
-  
-/* Contenedor principal */
-  
-.seccion {
-  
-    display: none;
-  
-    max-width: 600px;
-  
-    margin: 50px auto;
-  
-    background-color: #fff;
-  
-    padding: 30px;
-  
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  
-    border-radius: 12px;
-  
-}
-  
-
-  
-.activa {
-  
-    display: block;
-  
-}
-  
-
-  
-/* Encabezados */
-  
-h1, h2, h3 {
-  
-    color: #4A148C;
-  
-    text-align: center;
-  
-    margin-bottom: 20px;
-  
-}
-  
-
-  
-/* Formularios */
-  
-form {
-  
-    display: flex;
-  
-    flex-direction: column;
-  
-}
-  
-
-  
-label {
-  
-    font-weight: bold;
-  
-    margin-bottom: 5px;
-  
-}
-  
-
-  
-input[type="text"], select {
-  
-    padding: 10px;
-  
-    border: 1px solid #ccc;
-  
-    border-radius: 8px;
-  
-    margin-bottom: 15px;
-  
-    transition: border-color 0.3s;
-  
-}
-  
-
-  
-input[type="text"]:focus, select:focus {
-  
-    border-color: #4A148C;
-  
-    outline: none;
-  
-}
-  
-
-  
-/* Botones */
-  
-button {
-  
-    padding: 12px;
-  
-    background-color: #6A1B9A;
-  
-    color: #fff;
-  
-    border: none;
-  
-    border-radius: 8px;
-  
-    cursor: pointer;
-  
-    font-size: 16px;
-  
-    transition: background-color 0.3s;
-  
-    margin-top: 10px;
-  
-    size: center;
-  
-}
-  
-
-  
-button:hover {
-  
-    background-color: #4A148C;
-  
-}
-  
-
-  
-/* Checkbox y radio */
-  
-.checkbox-container input[type="checkbox"], input[type="radio"] {
-  
-    margin-right: 10px;
-  
-}
-  
-
-  
-.checkbox-container label, label[for^="pago"], label[for^="entrega"], label[for^="consumo"] {
-  
-    display: inline-block;
-  
-    margin-right: 20px;
-  
-}
-  
-
-  
-/* Imagen */
-  
-#bienvenida img {
-  
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-  
+    height: 100%;
+    background-image: url('1366_2000.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    z-index: -1;
+}
+
+/* Contenedor principal */
+.seccion {
+    display: none;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     border-radius: 12px;
-  
-    margin-top: 20px;
-  
 }
-  
 
-  
-/* Detalle del pedido */
-  
-#detallePedido {
-  
-    background-color: #f1f1f1;
-  
-    padding: 15px;
-  
+.activa {
+    display: block;
+}
+
+/* Encabezados */
+h1, h2, h3 {
+    color: #4A148C;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], select {
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 8px;
-  
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #4A148C;
+    outline: none;
+}
+
+/* Botones */
+button {
+    padding: 12px;
+    background-color: #6A1B9A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
     margin-top: 10px;
-  
+    size: center;
 }
-  
 
-  
+button:hover {
+    background-color: #4A148C;
+}
+
+/* Checkbox y radio */
+.checkbox-container input[type="checkbox"], input[type="radio"] {
+    margin-right: 10px;
+}
+
+.checkbox-container label, label[for^="pago"], label[for^="entrega"], label[for^="consumo"] {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Imagen */
+#bienvenida img {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+/* Detalle del pedido */
+#detallePedido {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
 ul {
-  
     list-style-type: none;
-  
     padding-left: 0;
-  
 }
-  
 
-  
 ul li {
-  
     padding: 5px 0;
-  
 }
-  
 
-  
 /* Responsive */
-  
 @media (max-width: 650px) {
-  
     .seccion {
-  
         margin: 20px;
-  
         padding: 20px;
-  
     }
-  
 }
-  
+
+/* Estilos adicionales para los complementos */
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
