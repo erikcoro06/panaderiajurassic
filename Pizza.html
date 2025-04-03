@@ -3,6 +3,7 @@
 <head>
     <title>Pedido de Pizza</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="yoyo.css">
     <style>
         .mensaje-ok {
@@ -11,6 +12,34 @@
         .mensaje-error {
             color: red;
         }
+        .container {
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.section {
+  padding: 2rem; 
+}
+        
+body {
+  font-size: 16px;
+}
+
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
     </style>
 </head>
 <body>
