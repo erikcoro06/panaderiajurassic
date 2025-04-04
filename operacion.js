@@ -1,139 +1,77 @@
-// Variables globales
-let totalGlobal = 0;
+totalGlobal = 0;
 let nombreGlobal = "";
-let telefonoGlobal = "";
+let fechaGlobal = "";
 let complementosDetalleGlobal = [];
-let pizzasGlobal = [];
+let pizza1Global = {nombre: "Mexicana", precio: 0};
+let pizza2Global = {nombre: "Pepperoni", precio: 0};
+let pizza3Global = {nombre: "Hawaiana", precio: 0};
 let tipoServicioGlobal = "";
-let direccionGlobal = "";
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', function() {
-    // Evento para comenzar pedido
-    document.getElementById("comenzar").addEventListener("click", function() {
-        document.getElementById("bienvenida").classList.remove("activa");
-        document.getElementById("formulario-seccion").classList.add("activa");
-    });
-
-    // Evento para calcular total
-    document.getElementById("calcular").addEventListener("click", calcularTotal);
-    
-    // Evento para continuar a tipo de servicio
-    document.getElementById("continuarServicio").addEventListener("click", continuarServicio);
-    
-    // Evento para continuar domicilio
-    document.getElementById("continuarDomicilio").addEventListener("click", continuarDomicilio);
-    
-    // Evento para continuar pago
-    document.getElementById("continuarPago").addEventListener("click", continuarPago);
-    
-    // Evento para finalizar con tarjeta
-    document.getElementById("finalizarTarjeta").addEventListener("click", finalizarTarjeta);
-    
-    // Evento para finalizar con efectivo
-    document.getElementById("finalizarEfectivo").addEventListener("click", finalizarEfectivo);
-    
-    // Evento para imprimir ticket
-    document.getElementById("imprimir-ticket").addEventListener("click", imprimirTicket);
-    
-    // Evento para volver al inicio
-    document.getElementById("volver-inicio").addEventListener("click", function() {
-        location.reload();
-    });
-    
-    // Mostrar cambio en tiempo real
-    document.getElementById("montoPago").addEventListener("input", mostrarCambio);
+document.getElementById("comenzar").addEventListener("click", function () {
+    document.getElementById("bienvenida").classList.remove("activa");
+    document.getElementById("formulario-seccion").classList.add("activa");
 });
 
-// Función para calcular el total
-function calcularTotal() {
-    // Obtener datos del formulario
-    nombreGlobal = document.getElementById("nombre").value;
-    telefonoGlobal = document.getElementById("telefono").value;
-    
-    if (!nombreGlobal || !telefonoGlobal) {
-        alert("Por favor complete todos los campos obligatorios");
-        return;
-    }
+// Calcular pedido
+document.getElementById("calcular").addEventListener("click", function () {
+    const nombre = document.getElementById("nombre").value;
+    const Fecha = document.getElementById("Fecha").value;
     
     // Obtener pizzas seleccionadas
-    pizzasGlobal = [];
-    const pizza1 = document.getElementById("Pizza1");
-    if (parseFloat(pizza1.value) > 0) {
-        pizzasGlobal.push({
-            nombre: pizza1.options[pizza1.selectedIndex].text.split(" ")[0],
-            precio: parseFloat(pizza1.value)
-        });
-    }
+    const pizza1Select = document.getElementById("Pizza1");
+    pizza1Global = {
+        nombre: pizza1Select.options[pizza1Select.selectedIndex].text.split(" ")[0],
+        precio: parseFloat(pizza1Select.value)
+    };
     
-    const pizza2 = document.getElementById("Pizza2");
-    if (parseFloat(pizza2.value) > 0) {
-        pizzasGlobal.push({
-            nombre: pizza2.options[pizza2.selectedIndex].text.split(" ")[0],
-            precio: parseFloat(pizza2.value)
-        });
-    }
+    const pizza2Select = document.getElementById("Pizza2");
+    pizza2Global = {
+        nombre: pizza2Select.options[pizza2Select.selectedIndex].text.split(" ")[0],
+        precio: parseFloat(pizza2Select.value)
+    };
     
-    const pizza3 = document.getElementById("Pizza3");
-    if (parseFloat(pizza3.value) > 0) {
-        pizzasGlobal.push({
-            nombre: pizza3.options[pizza3.selectedIndex].text.split(" ")[0],
-            precio: parseFloat(pizza3.value)
-        });
-    }
-    
-    if (pizzasGlobal.length === 0) {
-        alert("Debe seleccionar al menos una pizza");
-        return;
-    }
+    const pizza3Select = document.getElementById("Pizza3");
+    pizza3Global = {
+        nombre: pizza3Select.options[pizza3Select.selectedIndex].text.split(" ")[0],
+        precio: parseFloat(pizza3Select.value)
+    };
 
-    // Calcular complementos
     const complementos = document.querySelectorAll('.checkbox-container input[type="checkbox"]:checked');
     let complementosTotal = 0;
-    complementosDetalleGlobal = [];
-    
+    let complementosDetalle = [];
+
     complementos.forEach((complemento) => {
         complementosTotal += parseFloat(complemento.value);
-        complementosDetalleGlobal.push(complemento.nextElementSibling.textContent);
+        complementosDetalle.push(complemento.nextElementSibling.textContent);
     });
 
-    // Calcular total
-    totalGlobal = pizzasGlobal.reduce((sum, pizza) => sum + pizza.precio, 0) + complementosTotal;
-    
-    // Mostrar resumen
-    mostrarResumenPedido();
-    
-    // Cambiar a sección de resumen
-    document.getElementById("formulario-seccion").classList.remove("activa");
+    const total = pizza1Global.precio + pizza2Global.precio + pizza3Global.precio + complementosTotal;
+
+    // Guardamos globalmente
+    totalGlobal = total;
+    nombreGlobal = nombre;
+    fechaGlobal = Fecha;
+    complementosDetalleGlobal = complementosDetalle;
+
     document.getElementById("detalle-seccion").classList.add("activa");
-}
+    document.getElementById("formulario-seccion").classList.remove("activa");
 
-// Función para mostrar resumen del pedido
-function mostrarResumenPedido() {
-    let html = `
-        <p><strong>Nombre:</strong> ${nombreGlobal}</p>
-        <p><strong>Teléfono:</strong> ${telefonoGlobal}</p>
-        <p><strong>Pizzas:</strong></p>
+    document.getElementById("detallePedido").innerHTML = `
+        <strong>Nombre:</strong> ${nombre}<br>
+        <strong>Fecha:</strong> ${Fecha}<br>
+        <strong>Productos:</strong> 
         <ul>
-    `;
-    
-    pizzasGlobal.forEach(pizza => {
-        html += `<li>${pizza.nombre} - $${pizza.precio.toFixed(2)}</li>`;
-    });
-    
-    html += `
+            <li>Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})</li>
+            <li>Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})</li>
+            <li>Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})</li>
         </ul>
-        <p><strong>Complementos:</strong> ${complementosDetalleGlobal.join(", ") || 'Ninguno'}</p>
-        <p><strong>Total:</strong> $${totalGlobal.toFixed(2)}</p>
+        <strong>Complementos:</strong> ${complementosDetalle.join(", ")}<br>
+        <strong>Total:</strong> $${total.toFixed(2)}
     `;
-    
-    document.getElementById("detallePedido").innerHTML = html;
-    document.getElementById("totalPagar").textContent = totalGlobal.toFixed(2);
-    document.getElementById("totalEfectivo").textContent = totalGlobal.toFixed(2);
-}
+});
 
-// Función para continuar a tipo de servicio
-function continuarServicio() {
+// Continuar selección de servicio
+document.getElementById("continuarServicio").addEventListener("click", function () {
     const servicioSeleccionado = document.querySelector('input[name="tipoServicio"]:checked');
     
     if (!servicioSeleccionado) {
@@ -149,25 +87,27 @@ function continuarServicio() {
         document.getElementById("domicilio-seccion").classList.add("activa");
     } else {
         document.getElementById("pago-seccion").classList.add("activa");
+        document.getElementById("totalPagar").textContent = totalGlobal.toFixed(2);
     }
-}
+});
 
-// Función para continuar domicilio
-function continuarDomicilio() {
-    direccionGlobal = document.getElementById("direccion").value;
-    const referencias = document.getElementById("referencias").value;
+// Continuar domicilio
+document.getElementById("continuarDomicilio").addEventListener("click", function(){
+    const direccion = document.getElementById("direccion").value;
+    const telefono = document.getElementById("telefono").value;
     
-    if (!direccionGlobal) {
-        alert("Por favor ingrese una dirección de entrega");
+    if (!direccion || !telefono) {
+        alert("Por favor complete todos los datos de envío");
         return;
     }
     
     document.getElementById("domicilio-seccion").classList.remove("activa");
     document.getElementById("pago-seccion").classList.add("activa");
-}
+    document.getElementById("totalPagar").textContent = totalGlobal.toFixed(2);
+});
 
-// Función para continuar pago
-function continuarPago() {
+// Continuar pago
+document.getElementById("continuarPago").addEventListener("click", function () {
     const metodoPago = document.querySelector('input[name="metodoPago"]:checked');
     
     if (!metodoPago) {
@@ -179,32 +119,57 @@ function continuarPago() {
     
     if (metodoPago.value === "Efectivo") {
         document.getElementById("efectivo-seccion").classList.add("activa");
-    } else {
+        document.getElementById("totalEfectivo").textContent = totalGlobal.toFixed(2);
+        
+        // Configurar evento para mostrar cambio en tiempo real
+        document.getElementById("montoPago").addEventListener("input", function() {
+            const montoPago = parseFloat(this.value);
+            const mensajeCambio = document.getElementById("mensajeCambio");
+            
+            if (isNaN(montoPago) || montoPago <= 0) {
+                mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
+                return;
+            }
+            
+            if (montoPago < totalGlobal) {
+                mensajeCambio.innerHTML = '<span class="mensaje-error">El monto ingresado es insuficiente</span>';
+                return;
+            }
+            
+            const cambio = montoPago - totalGlobal;
+            mensajeCambio.innerHTML = `<span class="mensaje-ok">Cambio: $${cambio.toFixed(2)}</span>`;
+        });
+    } else if (metodoPago.value === "Tarjeta") {
         document.getElementById("tarjeta-seccion").classList.add("activa");
     }
-}
+});
 
-// Función para mostrar cambio
-function mostrarCambio() {
+// Finalizar efectivo
+document.getElementById("finalizarEfectivo").addEventListener("click", function () {
     const montoPago = parseFloat(document.getElementById("montoPago").value);
     const mensajeCambio = document.getElementById("mensajeCambio");
     
-    if (isNaN(montoPago) {
-        mensajeCambio.innerHTML = '<span class="mensaje-error">Ingrese una cantidad válida</span>';
+    if (isNaN(montoPago) || montoPago <= 0) {
+        mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
         return;
     }
     
     if (montoPago < totalGlobal) {
-        mensajeCambio.innerHTML = '<span class="mensaje-error">Monto insuficiente</span>';
+        mensajeCambio.innerHTML = '<span class="mensaje-error">El monto ingresado es insuficiente</span>';
         return;
     }
     
     const cambio = montoPago - totalGlobal;
     mensajeCambio.innerHTML = `<span class="mensaje-ok">Cambio: $${cambio.toFixed(2)}</span>`;
-}
+    
+    document.getElementById("efectivo-seccion").classList.remove("activa");
+    document.getElementById("ticket-seccion").classList.add("activa");
 
-// Función para finalizar con tarjeta
-function finalizarTarjeta() {
+    mostrarTicket("Efectivo", montoPago, cambio);
+});
+
+// Finalizar tarjeta
+document.getElementById("finalizarTarjeta").addEventListener("click", function () {
     const numeroTarjeta = document.getElementById("numeroTarjeta").value;
     const fechaExp = document.getElementById("fechaExp").value;
     const cvv = document.getElementById("cvv").value;
@@ -215,143 +180,44 @@ function finalizarTarjeta() {
     }
     
     document.getElementById("tarjeta-seccion").classList.remove("activa");
-    mostrarTicketFinal("Tarjeta");
-}
+    document.getElementById("ticket-seccion").classList.add("activa");
 
-// Función para finalizar con efectivo
-function finalizarEfectivo() {
-    const montoPago = parseFloat(document.getElementById("montoPago").value);
-    
-    if (isNaN(montoPago) {
-        alert("Por favor ingrese un monto válido");
-        return;
-    }
-    
-    if (montoPago < totalGlobal) {
-        alert("El monto ingresado es insuficiente");
-        return;
-    }
-    
-    document.getElementById("efectivo-seccion").classList.remove("activa");
-    mostrarTicketFinal("Efectivo", montoPago);
-}
+    mostrarTicket("Tarjeta", totalGlobal, 0);
+});
 
-// Función para mostrar ticket final
-function mostrarTicketFinal(metodoPago, montoPagado = 0) {
-    let html = `
-        <p><strong>Nombre:</strong> ${nombreGlobal}</p>
-        <p><strong>Teléfono:</strong> ${telefonoGlobal}</p>
-        <p><strong>Tipo de servicio:</strong> ${tipoServicioGlobal}</p>
-    `;
-    
-    if (tipoServicioGlobal === "Entrega a domicilio") {
-        html += `<p><strong>Dirección:</strong> ${direccionGlobal}</p>`;
-    }
-    
-    html += `
-        <p><strong>Pizzas:</strong></p>
+// Función para mostrar ticket
+function mostrarTicket(metodoPago, montoPagado, cambio) {
+    let ticketHTML = `
+        <strong>Nombre:</strong> ${nombreGlobal}<br>
+        <strong>Fecha:</strong> ${fechaGlobal}<br>
+        <strong>Tipo de servicio:</strong> ${tipoServicioGlobal}<br>
+        <strong>Productos:</strong>
         <ul>
-    `;
-    
-    pizzasGlobal.forEach(pizza => {
-        html += `<li>${pizza.nombre} - $${pizza.precio.toFixed(2)}</li>`;
-    });
-    
-    html += `
+            <li>Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})</li>
+            <li>Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})</li>
+            <li>Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})</li>
         </ul>
-        <p><strong>Complementos:</strong> ${complementosDetalleGlobal.join(", ") || 'Ninguno'}</p>
-        <p><strong>Total:</strong> $${totalGlobal.toFixed(2)}</p>
-        <p><strong>Método de pago:</strong> ${metodoPago}</p>
+        <strong>Complementos:</strong> ${complementosDetalleGlobal.join(", ")}<br>
+        <strong>Total:</strong> $${totalGlobal.toFixed(2)}<br>
+        <strong>Método de Pago:</strong> ${metodoPago}<br>
     `;
     
     if (metodoPago === "Efectivo") {
-        const cambio = montoPagado - totalGlobal;
-        html += `
-            <p><strong>Monto recibido:</strong> $${montoPagado.toFixed(2)}</p>
-            <p><strong>Cambio:</strong> $${cambio.toFixed(2)}</p>
+        ticketHTML += `
+            <strong>Monto recibido:</strong> $${montoPagado.toFixed(2)}<br>
+            <strong>Cambio:</strong> $${cambio.toFixed(2)}<br>
         `;
     }
     
-    document.getElementById("ticketResumen").innerHTML = html;
-    document.getElementById("ticket-seccion").classList.add("activa");
-}
-
-// Función para imprimir ticket en PDF
-function imprimirTicket() {
-    // Verificar si jsPDF está disponible
-    if (typeof jsPDF === 'undefined') {
-        alert("Error al generar el PDF. Por favor recargue la página.");
-        return;
-    }
-
-    // Crear nuevo documento PDF
-    const doc = new jsPDF();
-    
-    // Configurar estilos
-    doc.setFontSize(18);
-    doc.setTextColor(106, 27, 154); // Color morado
-    doc.text("Pizzería El Comunismo de Perú", 105, 15, { align: 'center' });
-    
-    doc.setFontSize(14);
-    doc.setTextColor(0, 0, 0); // Negro
-    doc.text("Ticket de Compra", 105, 25, { align: 'center' });
-    
-    // Agregar información del cliente
-    doc.setFontSize(12);
-    doc.text(`Nombre: ${nombreGlobal}`, 20, 40);
-    doc.text(`Teléfono: ${telefonoGlobal}`, 20, 50);
-    doc.text(`Tipo de servicio: ${tipoServicioGlobal}`, 20, 60);
-    
     if (tipoServicioGlobal === "Entrega a domicilio") {
-        doc.text(`Dirección: ${direccionGlobal}`, 20, 70);
+        ticketHTML += `<strong>Dirección de entrega:</strong> ${document.getElementById("direccion").value}<br>`;
+        ticketHTML += `<strong>Teléfono:</strong> ${document.getElementById("telefono").value}<br>`;
     }
     
-    // Crear tabla de productos
-    const body = [];
-    
-    // Agregar pizzas
-    pizzasGlobal.forEach(pizza => {
-        body.push([`Pizza ${pizza.nombre}`, `$${pizza.precio.toFixed(2)}`]);
-    });
-    
-    // Agregar complementos
-    if (complementosDetalleGlobal.length > 0) {
-        body.push(["Complementos", complementosDetalleGlobal.join(", ")]);
-    }
-    
-    // Agregar total
-    body.push(["TOTAL", `$${totalGlobal.toFixed(2)}`]);
-    
-    // Generar tabla
-    doc.autoTable({
-        startY: 80,
-        head: [['Producto', 'Precio']],
-        body: body,
-        headStyles: {
-            fillColor: [106, 27, 154], // Color morado
-            textColor: [255, 255, 255] // Texto blanco
-        },
-        styles: {
-            cellPadding: 5,
-            fontSize: 10
-        }
-    });
-    
-    // Agregar método de pago
-    const metodoPago = document.querySelector('input[name="metodoPago"]:checked').value;
-    let finalY = doc.lastAutoTable.finalY + 10;
-    
-    doc.text(`Método de pago: ${metodoPago}`, 20, finalY);
-    
-    // Si es pago en efectivo, mostrar cambio
-    if (metodoPago === "Efectivo") {
-        const montoPago = parseFloat(document.getElementById("montoPago").value);
-        const cambio = montoPago - totalGlobal;
-        
-        doc.text(`Monto recibido: $${montoPago.toFixed(2)}`, 20, finalY + 10);
-        doc.text(`Cambio: $${cambio.toFixed(2)}`, 20, finalY + 20);
-    }
-    
-    // Guardar PDF
-    doc.save(`Ticket_Pizzeria_${nombreGlobal.replace(/ /g, '_')}.pdf`);
+    document.getElementById("ticketResumen").innerHTML = ticketHTML;
 }
+
+// Botón para volver al inicio
+document.getElementById("volver-inicio").addEventListener("click", function () {
+    location.reload();
+}); 
