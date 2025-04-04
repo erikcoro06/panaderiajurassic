@@ -126,7 +126,7 @@ document.getElementById("continuarPago").addEventListener("click", function () {
             const montoPago = parseFloat(this.value);
             const mensajeCambio = document.getElementById("mensajeCambio");
             
-            if (isNaN(montoPago) || montoPago <= 0) {
+            if (isNaN(montoPago) {
                 mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
                 return;
             }
@@ -149,7 +149,7 @@ document.getElementById("finalizarEfectivo").addEventListener("click", function 
     const montoPago = parseFloat(document.getElementById("montoPago").value);
     const mensajeCambio = document.getElementById("mensajeCambio");
     
-    if (isNaN(montoPago) || montoPago <= 0) {
+    if (isNaN(montoPago)) {
         mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
         return;
     }
@@ -220,4 +220,60 @@ function mostrarTicket(metodoPago, montoPagado, cambio) {
 // Botón para volver al inicio
 document.getElementById("volver-inicio").addEventListener("click", function () {
     location.reload();
+});
+
+// Función para generar PDF
+document.getElementById("imprimir-ticket").addEventListener("click", function() {
+    // Crear instancia de jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Configuración del documento
+    doc.setFontSize(18);
+    doc.text("Pizzería El Comunismo de Perú", 105, 15, null, null, 'center');
+    doc.setFontSize(14);
+    doc.text("Ticket de Compra", 105, 25, null, null, 'center');
+    
+    // Información del cliente
+    doc.setFontSize(12);
+    doc.text(`Nombre: ${nombreGlobal}`, 14, 40);
+    doc.text(`Fecha: ${fechaGlobal}`, 14, 50);
+    doc.text(`Tipo de servicio: ${tipoServicioGlobal}`, 14, 60);
+    
+    if (tipoServicioGlobal === "Entrega a domicilio") {
+        doc.text(`Dirección: ${document.getElementById("direccion").value}`, 14, 70);
+        doc.text(`Teléfono: ${document.getElementById("telefono").value}`, 14, 80);
+    }
+    
+    // Tabla de productos
+    doc.autoTable({
+        startY: 90,
+        head: [['Producto', 'Precio']],
+        body: [
+            [`Pizza ${pizza1Global.nombre}`, `$${pizza1Global.precio.toFixed(2)}`],
+            [`Pizza ${pizza2Global.nombre}`, `$${pizza2Global.precio.toFixed(2)}`],
+            [`Pizza ${pizza3Global.nombre}`, `$${pizza3Global.precio.toFixed(2)}`],
+            ['Complementos', complementosDetalleGlobal.join(", ")],
+            ['Total', `$${totalGlobal.toFixed(2)}`]
+        ],
+        theme: 'grid',
+        headStyles: {
+            fillColor: [106, 27, 154] // Color morado
+        }
+    });
+    
+    // Información de pago
+    const metodoPago = document.querySelector('input[name="metodoPago"]:checked').value;
+    let startY = doc.lastAutoTable.finalY + 10;
+    
+    doc.text(`Método de pago: ${metodoPago}`, 14, startY);
+    
+    if (metodoPago === "Efectivo") {
+        const montoPago = parseFloat(document.getElementById("montoPago").value);
+        doc.text(`Monto recibido: $${montoPago.toFixed(2)}`, 14, startY + 10);
+        doc.text(`Cambio: $${(montoPago - totalGlobal).toFixed(2)}`, 14, startY + 20);
+    }
+    
+    // Guardar el PDF
+    doc.save(`ticket_pizzeria_${nombreGlobal.replace(/\s+/g, '_')}.pdf`);
 });
