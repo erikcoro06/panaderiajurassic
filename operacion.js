@@ -222,7 +222,6 @@ document.getElementById("volver-inicio").addEventListener("click", function () {
     location.reload();
 });
 
-// Función para generar PDF
 document.getElementById("imprimir-ticket").addEventListener("click", function() {
     // Crear instancia de jsPDF
     const { jsPDF } = window.jspdf;
