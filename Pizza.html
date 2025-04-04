@@ -4,9 +4,11 @@
     <title>Pedido de Pizza</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="yoyo.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="yoyo.css">     
     <style>
-           .mensaje-ok {
+        .mensaje-ok {
             color: green;
         }
         .mensaje-error {
@@ -38,53 +40,91 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
-        /* Estilos para la sección de complementos */
-.checkbox-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-    gap: 15px;
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-}
+        
+        .checkbox-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
 
-.checkbox-container div {
-    display: flex;
-    align-items: center;
-}
+        .checkbox-container div {
+            display: flex;
+            align-items: center;
+        }
 
-.checkbox-container input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    accent-color: #6A1B9A; /* Color morado para coincidir con tu tema */
-}
+        .checkbox-container input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            accent-color: #6A1B9A;
+        }
 
-.checkbox-container label {
-    font-weight: normal;
-    color: #555;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: color 0.3s;
-}
+        .checkbox-container label {
+            font-weight: normal;
+            color: #555;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
 
-.checkbox-container label:hover {
-    color: #4A148C; /* Color morado más oscuro al hover */
-}
+        .checkbox-container label:hover {
+            color: #4A148C;
+        }
 
-/* Versión responsive para móviles */
-@media (max-width: 600px) {
-    .checkbox-container {
-        grid-template-columns: 1fr; /* 1 columna en móviles */
-    }
-}
+        @media (max-width: 600px) {
+            .checkbox-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .seccion {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .activa {
+            display: block;
+        }
+        
+        button {
+            background-color: #6A1B9A;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        button:hover {
+            background-color: #4A148C;
+        }
+        
+        input, select {
+            padding: 8px;
+            margin: 5px 0 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        #ticketResumen {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
   <div id="bienvenida" class="seccion activa">
-    <h1>¡Bienvenido a pizzeria el comunismo de peru!</h1>
+    <h1>¡Bienvenido a Pizzería El Comunismo de Perú!</h1>
     <p>Gracias por elegirnos para tus antojos</p>
     <button id="comenzar">Comenzar pedido</button>
     <a href="index.html">Volver a inicio </a>
@@ -123,26 +163,25 @@
 
         <h3>Complementos:</h3>
         <div class="checkbox-container">
-    <div>
-        <input type="checkbox" id="queso1" value="2">
-        <label for="queso1">Queso extra (+$2)</label>
-    </div>
-    <div>
-        <input type="checkbox" id="orilla" value="3">
-        <label for="orilla">Orilla rellena (+$3)</label>
-    </div>
-    <div>
-        <input type="checkbox" id="refresco" value="1.5">
-        <label for="refresco">Refresco (+$1.50)</label>
-    </div>
-    <div>
-        <input type="checkbox" id="papas" value="2.5">
-        <label for="papas">Papas fritas (+$2.50)</label>
-    </div>
-</div>
+            <div>
+                <input type="checkbox" id="queso1" value="2">
+                <label for="queso1">Queso extra (+$2)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="orilla" value="3">
+                <label for="orilla">Orilla rellena (+$3)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="refresco" value="1.5">
+                <label for="refresco">Refresco (+$1.50)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="papas" value="2.5">
+                <label for="papas">Papas fritas (+$2.50)</label>
+            </div>
+        </div>
 
         <button type="button" id="calcular">Calcular Total</button>
-        <img src="1366_2000.png"/>
     </form>
 </div>
 
@@ -217,6 +256,7 @@
     <h3>Resumen del Pedido</h3>
     <div id="ticketResumen"></div>
     <button id="volver-inicio">Volver al Inicio</button>
+    <button id="imprimir-ticket">Imprimir Ticket</button>
 </div>
 
 <script src="operacion.js"></script>
