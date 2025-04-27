@@ -1,0 +1,496 @@
+        :root {
+            --negro: #2A2118;
+            --chocolate: #4D3B2A;
+            --crema: #D7CEC5;
+            --pergamino: #F5F1EB;
+            --oro: #C9B176;
+            --cobre: #B38B59;
+            --sombra-suave: 0 4px 24px rgba(42, 33, 24, 0.08);
+            --sombra-profunda: 0 12px 36px rgba(42, 33, 24, 0.12);
+            --transicion: all 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --verde: #5a8f5a;
+            --rojo: #c45656;
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            background-color: var(--pergamino);
+            color: var(--negro);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/rice-paper-3.png');
+            background-attachment: fixed;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Encabezado elegante */
+        header {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--pergamino) 60%, transparent 100%);
+        }
+
+        h1 {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--chocolate);
+            margin: 0;
+            line-height: 1.1;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--oro), transparent);
+        }
+
+        h2 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--oro);
+            margin-top: 1rem;
+            font-style: italic;
+            letter-spacing: 0.8px;
+        }
+
+        /* Formulario principal */
+        .formulario-cliente {
+            background-color: var(--pergamino);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--sombra-suave);
+            border: 1px solid rgba(201, 177, 118, 0.3);
+            margin: 3rem auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formulario-cliente::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--oro), var(--cobre), var(--oro));
+        }
+
+        h3 {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 1.6rem;
+            color: var(--chocolate);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--cobre);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--chocolate);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--crema);
+            border-radius: 6px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+            background-color: var(--pergamino);
+            color: var(--negro);
+            transition: var(--transicion);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--oro);
+            box-shadow: 0 0 0 3px rgba(201, 177, 118, 0.2);
+        }
+
+        /* Resumen del pedido */
+        .resumen-pedido {
+            background-color: rgba(201, 177, 118, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 1px solid var(--crema);
+        }
+
+        .tabla-resumen {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabla-resumen th {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: rgba(75, 59, 42, 0.1);
+            color: var(--chocolate);
+            border-bottom: 2px solid var(--cobre);
+        }
+
+        .tabla-resumen td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--crema);
+        }
+
+        .tabla-resumen tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cantidad-col {
+            text-align: center;
+            width: 80px;
+        }
+
+        .precio-col, .subtotal-col {
+            text-align: right;
+            width: 120px;
+        }
+
+        .total-row {
+            font-weight: 600;
+            background-color: rgba(201, 177, 118, 0.2);
+        }
+
+        .total-row td {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        /* Métodos de pago */
+        .metodo-pago {
+            margin-bottom: 2rem;
+        }
+
+        .metodo-pago-opciones {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .metodo-pago-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border: 1px solid var(--crema);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transicion);
+            background-color: var(--pergamino);
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .metodo-pago-option:hover {
+            border-color: var(--oro);
+        }
+
+        .metodo-pago-option i {
+            color: var(--oro);
+            font-size: 1.2rem;
+        }
+
+        input[type="radio"]:checked + .metodo-pago-option {
+            border-color: var(--oro);
+            background-color: rgba(201, 177, 118, 0.1);
+            box-shadow: 0 0 0 1px var(--oro);
+        }
+
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        /* Sección de efectivo */
+        .seccion-pago {
+            background-color: rgba(201, 177, 118, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border: 1px solid var(--crema);
+        }
+
+        .denominaciones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .btn-denominacion {
+            background-color: var(--pergamino);
+            border: 1px solid var(--crema);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn-denominacion:hover {
+            background-color: var(--crema);
+            border-color: var(--oro);
+        }
+
+        .mensaje-cambio {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cambio-positivo {
+            color: var(--verde);
+            font-weight: 600;
+        }
+
+        .cambio-negativo {
+            color: var(--rojo);
+            font-weight: 600;
+        }
+
+        /* Sección de tarjeta */
+        .tarjeta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .tarjeta-opciones {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta-logo {
+            padding: 8px 15px;
+            border: 1px solid var(--crema);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        input[type="radio"]:checked + .tarjeta-logo {
+            border-color: var(--oro);
+            background-color: rgba(201, 177, 118, 0.1);
+        }
+
+        /* Sección de transferencia */
+        .referencia-pago {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--crema);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .referencia {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--chocolate);
+            margin: 5px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .referencia-pago small {
+            color: var(--chocolate);
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Botones */
+        .botones-accion {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border: none;
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: var(--chocolate);
+            border: 1px solid var(--chocolate);
+        }
+
+        .btn-secundario:hover {
+            background-color: var(--chocolate);
+            color: var(--pergamino);
+            transform: translateY(-2px);
+        }
+
+        .btn-primario {
+            background: linear-gradient(to right, var(--oro), var(--cobre));
+            color: var(--negro);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primario:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(201, 177, 118, 0.3);
+        }
+
+        .btn-primario::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-primario:hover::before {
+            left: 100%;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            color: var(--chocolate);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--crema);
+        }
+
+        /* Clases utilitarias */
+        .hidden {
+            display: none;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .formulario-cliente {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contenedor {
+                padding: 0 25px;
+            }
+
+            .formulario-cliente {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .metodo-pago-opciones {
+                flex-direction: column;
+            }
+
+            .denominaciones-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tarjeta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .botones-accion {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .formulario-cliente {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }

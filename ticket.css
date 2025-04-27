@@ -1,0 +1,198 @@
+        :root {
+            --cafe-oscuro: #4E342E;
+            --cafe-medio: #795548;
+            --cafe-claro: #BCAAA4;
+            --beige: #EFEBE9;
+            --dorado: #D4AF37;
+            --texto: #3E2723;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .ticket-container {
+            width: 100%;
+            max-width: 380px;
+            margin: 20px 0;
+        }
+
+        .ticket {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--dorado);
+        }
+
+        .ticket-header {
+            padding: 25px;
+            text-align: center;
+            background: linear-gradient(to right, var(--cafe-oscuro), var(--cafe-medio));
+            color: white;
+            position: relative;
+        }
+
+        .ticket-header::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: radial-gradient(circle at 50% -10px, transparent 75%, white 76%);
+            background-size: 30px 30px;
+        }
+
+        .ticket-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .ticket-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .ticket-body {
+            padding: 25px;
+        }
+
+        .ticket-info {
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            color: var(--cafe-medio);
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--texto);
+            text-align: right;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .items-table th {
+            text-align: left;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--cafe-claro);
+            color: var(--cafe-medio);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .items-table td {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--cafe-claro);
+            font-size: 14px;
+        }
+
+        .items-table .price {
+            text-align: right;
+        }
+
+        .total-row {
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--cafe-claro);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ticket-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cafe-medio);
+            font-size: 13px;
+            border-top: 1px dashed var(--cafe-claro);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-print {
+            background-color: var(--cafe-oscuro);
+            color: white;
+            border: none;
+        }
+
+        .btn-print:hover {
+            background-color: var(--texto);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background-color: white;
+            color: var(--cafe-medio);
+            border: 1px solid var(--cafe-medio);
+        }
+
+        .btn-back:hover {
+            background-color: var(--beige);
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .actions {
+                display: none;
+            }
+            .ticket {
+                box-shadow: none;
+                border: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }

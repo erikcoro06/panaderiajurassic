@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Pasteles - Jurassic Pan</title>
+        <link rel="stylesheet" href="pastel.css">
+</head>
+<body>
+    <form id="formulario">
+        <h1>Catálogo de Pasteles</h1>
+        <h2>Selecciona tus pasteles favoritos</h2>
+
+        <div class="categoria">
+            <h3>Pasteles Clásicos</h3>
+            <div class="pastel-container">
+                <div class="pastel-item" data-pastel="Pastel de Chocolate" data-precio="350">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Chocolate">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Chocolate</div>
+                        <div class="pastel-descripcion">Delicioso pastel de chocolate con relleno de crema</div>
+                        <div class="pastel-precio">$350</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Pastel de Vainilla" data-precio="320">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Vainilla">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Vainilla</div>
+                        <div class="pastel-descripcion">Esponjoso pastel de vainilla con buttercream</div>
+                        <div class="pastel-precio">$320</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Pastel de Tres Leches" data-precio="380">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Tres Leches">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Tres Leches</div>
+                        <div class="pastel-descripcion">Clásico pastel remojado en mezcla de tres leches</div>
+                        <div class="pastel-precio">$380</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Pastel de Zanahoria" data-precio="400">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Zanahoria">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Zanahoria</div>
+                        <div class="pastel-descripcion">Húmedo pastel de zanahoria con frosting de queso crema</div>
+                        <div class="pastel-precio">$400</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <h3>Pasteles Especiales</h3>
+            <div class="pastel-container">
+                <div class="pastel-item" data-pastel="Pastel de Red Velvet" data-precio="450">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Red Velvet">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Red Velvet</div>
+                        <div class="pastel-descripcion">Exquisito pastel rojo con frosting de queso crema</div>
+                        <div class="pastel-precio">$450</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Pastel de Café" data-precio="420">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1558301211-4330fbaad5ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Café">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Café</div>
+                        <div class="pastel-descripcion">Delicioso pastel con sabor intenso a café</div>
+                        <div class="pastel-precio">$420</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Pastel de Frutas" data-precio="480">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pastel de Frutas">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Pastel de Frutas</div>
+                        <div class="pastel-descripcion">Variedad de frutas frescas sobre crema chantilly</div>
+                        <div class="pastel-precio">$480</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="pastel-item" data-pastel="Cheesecake" data-precio="400">
+                    <div class="pastel-imagen">
+                        <img src="https://images.unsplash.com/photo-1578775887804-699de7086ff9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cheesecake">
+                    </div>
+                    <div class="pastel-info">
+                        <div class="pastel-nombre">Cheesecake</div>
+                        <div class="pastel-descripcion">Clásico cheesecake con base de galleta y topping de frutos rojos</div>
+                        <div class="pastel-precio">$400</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="botones">
+            <button type="button" id="continuar-btn">Continuar con datos del cliente</button>
+            <button type="button" onclick="window.location.href='catalogo.html'">Elejir Panes</button>
+            <button type="button" onclick="window.location.href='catalogo.html'">Elejir Complementos</button>
+            <button type="button" onclick="window.location.href='pan.html'">Volver al Inicio</button>
+            <button type="reset">Resetear</button>
+        </div>
+    </form>
+
+    <footer>
+        <p>&copy; 2025 Panadería Jurassic Pan. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="pastel.js"></script>
+</body>
+</html>

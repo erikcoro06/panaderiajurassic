@@ -1,0 +1,385 @@
+        :root {
+            --negro: #2A2118;
+            --chocolate: #4D3B2A;
+            --crema: #D7CEC5;
+            --pergamino: #F5F1EB;
+            --oro: #C9B176;
+            --cobre: #B38B59;
+            --sombra-suave: 0 4px 24px rgba(42, 33, 24, 0.08);
+            --sombra-profunda: 0 12px 36px rgba(42, 33, 24, 0.12);
+            --transicion: all 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            background-color: var(--pergamino);
+            color: var(--negro);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/rice-paper-3.png');
+            background-attachment: fixed;
+        }
+
+        .contenedor {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--pergamino) 60%, transparent 100%);
+        }
+
+        h1 {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--chocolate);
+            margin: 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--oro);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--chocolate);
+            margin-top: 1.5rem;
+            font-style: italic;
+            letter-spacing: 0.8px;
+        }
+
+        .category {
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .category-title {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 2.2rem;
+            color: var(--chocolate);
+            border-bottom: 2px solid var(--oro);
+            padding-bottom: 0.8rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .category-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--cobre);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--pergamino);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicion);
+            border: 1px solid rgba(201, 177, 118, 0.2);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-profunda);
+            border-color: rgba(201, 177, 118, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(201, 177, 118, 0.2);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 1.5rem;
+            margin: 0 0 1rem;
+            color: var(--chocolate);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .product-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--cobre);
+            display: flex;
+            align-items: center;
+        }
+
+        .product-price::before {
+            content: "$";
+            font-size: 0.9em;
+            margin-right: 2px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .quantity-btn {
+            background-color: var(--oro);
+            color: var(--negro);
+            border: none;
+            width: 36px;
+            height: 36px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicion);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--cobre);
+            color: var(--pergamino);
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            margin: 0 12px;
+            padding: 8px;
+            border: 1px solid rgba(201, 177, 118, 0.5);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: var(--negro);
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, var(--oro), var(--cobre));
+            color: var(--negro);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: var(--transicion);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(201, 177, 118, 0.2);
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(201, 177, 118, 0.3);
+            color: var(--pergamino);
+        }
+
+        .remove-btn {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            margin-top: 10px;
+            color: white;
+        }
+
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #c82333, #a71d2a);
+        }
+
+        /* Botones finales */
+        .botones-finales {
+            display: flex;
+            justify-content: space-between;
+            margin: 5rem 0 3rem;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(201, 177, 118, 0.3);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .btn-continuar {
+            background: linear-gradient(135deg, var(--oro), var(--cobre));
+            color: var(--negro);
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: var(--transicion);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(201, 177, 118, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .btn-continuar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(201, 177, 118, 0.4);
+            color: var(--pergamino);
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: var(--chocolate);
+            border: 1px solid var(--chocolate);
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: var(--transicion);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .btn-secundario:hover {
+            background-color: var(--chocolate);
+            color: var(--pergamino);
+            transform: translateY(-3px);
+        }
+
+        .btn-secundario i, .btn-continuar i {
+            transition: var(--transicion);
+        }
+
+        .btn-secundario:hover i {
+            transform: translateX(-5px);
+        }
+
+        .btn-continuar:hover i {
+            transform: scale(1.1) rotate(-10deg);
+        }
+
+        /* Notificación */
+        .notificacion {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--chocolate);
+            color: var(--pergamino);
+            padding: 16px 28px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: var(--sombra-profunda);
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+            opacity: 0;
+            border-left: 4px solid var(--oro);
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contenedor {
+                padding: 0 30px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h1 span {
+                font-size: 0.95rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+
+            .botones-finales {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-secundario, .btn-continuar {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .product-image {
+                height: 180px;
+            }
+        }

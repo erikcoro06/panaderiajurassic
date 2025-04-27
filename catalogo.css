@@ -1,0 +1,418 @@
+:root {
+            --cafe-oscuro: #4E342E;     
+            --cafe-medio: #795548;       
+            --cafe-claro: #BCAAA4;       
+            --beige: #EFEBE9;         
+            --acento: #8D6E63;           
+            --dorado: #D4AF37;           
+            --texto: #3E2723;           
+            --texto-claro: #5D4037;      
+            
+            /* Sombras sutiles */
+            --sombra-suave: 0 4px 12px rgba(78, 52, 46, 0.1);
+            --sombra-elevacion: 0 8px 24px rgba(78, 52, 46, 0.15);
+            
+            /* Transiciones */
+            --transicion-rapida: all 0.25s ease;
+            --transicion-suave: all 0.4s cubic-bezier(0.28, 0.47, 0.29, 0.99);
+        }
+
+        /* Tipografía elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--beige);
+            color: var(--texto);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+
+        #formulario {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--sombra-elevacion);
+            border: 1px solid var(--cafe-claro);
+            overflow: hidden;
+            position: relative;
+        }
+
+        #formulario::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--cafe-oscuro), var(--dorado), var(--cafe-oscuro));
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            color: var(--cafe-oscuro);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+        }
+
+        h2 {
+            color: var(--texto-claro);
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2.5rem;
+        }
+
+        .categoria {
+            background-color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--cafe-claro);
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicion-rapida);
+        }
+
+        .categoria:hover {
+            box-shadow: 0 6px 16px rgba(78, 52, 46, 0.12);
+        }
+
+        .categoria h3 {
+            margin-top: 0;
+            color: var(--cafe-oscuro);
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .categoria h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--dorado);
+        }
+
+        .pan-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .pan-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicion-suave);
+            position: relative;
+            border: 1px solid var(--cafe-claro);
+        }
+
+        .pan-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(78, 52, 46, 0.15);
+        }
+
+        .pan-imagen {
+            height: 140px;
+            background-color: var(--beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pan-imagen::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--dorado);
+        }
+
+        .pan-imagen img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: var(--transicion-suave);
+        }
+
+        .pan-item:hover .pan-imagen img {
+            transform: scale(1.05);
+        }
+
+        .pan-info {
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .pan-nombre {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--cafe-oscuro);
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .pan-precio {
+            color: var(--acento);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .cantidad-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .cantidad-btn {
+            background-color: var(--cafe-medio);
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicion-rapida);
+        }
+
+        .cantidad-btn:hover {
+            background-color: var(--cafe-oscuro);
+            transform: scale(1.1);
+        }
+
+        .cantidad-input {
+            width: 45px;
+            text-align: center;
+            margin: 0 8px;
+            border: 1px solid var(--cafe-claro);
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 0.95rem;
+            color: var(--texto);
+            transition: var(--transicion-rapida);
+        }
+
+        .cantidad-input:focus {
+            border-color: var(--dorado);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .accion-btn {
+            width: 100%;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: var(--transicion-suave);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .agregar {
+            background-color: var(--cafe-oscuro);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agregar::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+
+        .agregar:hover {
+            background-color: var(--texto);
+            transform: translateY(-2px);
+        }
+
+        .agregar:hover::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .eliminar {
+            background-color: transparent;
+            color: #D32F2F;
+            border: 1px solid #D32F2F;
+        }
+
+        .eliminar:hover {
+            background-color: #D32F2F;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        button[type="submit"], 
+        button[type="button"], 
+        button[type="reset"] {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transicion-suave);
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button[type="submit"] {
+            background-color: var(--cafe-oscuro);
+            color: white;
+        }
+
+        button[type="submit"]::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--texto);
+            transition: var(--transicion-suave);
+            z-index: -1;
+        }
+
+        button[type="submit"]:hover {
+            letter-spacing: 1.5px;
+        }
+
+        button[type="submit"]:hover::before {
+            width: 100%;
+        }
+
+        button[type="button"] {
+            background-color: transparent;
+            color: var(--cafe-medio);
+            border: 1px solid var(--cafe-medio);
+        }
+
+        button[type="button"]:hover {
+            background-color: var(--cafe-medio);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        button[type="reset"] {
+            background-color: transparent;
+            color: var(--texto-claro);
+            border: 1px solid var(--cafe-claro);
+        }
+
+        button[type="reset"]:hover {
+            background-color: var(--cafe-claro);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--texto-claro);
+            font-size: 0.85rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--cafe-claro);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Efecto de carga sutil para las imágenes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pan-item {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Retrasos para el efecto escalonado */
+        .pan-item:nth-child(1) { animation-delay: 0.1s; }
+        .pan-item:nth-child(2) { animation-delay: 0.2s; }
+        .pan-item:nth-child(3) { animation-delay: 0.3s; }
+        .pan-item:nth-child(4) { animation-delay: 0.4s; }
+        .pan-item:nth-child(5) { animation-delay: 0.5s; }
+        .pan-item:nth-child(6) { animation-delay: 0.6s; }
+        .pan-item:nth-child(7) { animation-delay: 0.7s; }
+        .pan-item:nth-child(8) { animation-delay: 0.8s; }
+    </style>

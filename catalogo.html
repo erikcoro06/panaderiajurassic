@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Completo de Panes - Jurassic Pan</title>
+    <link rel="stylesheet" href="catalogo.css">
+</head>
+<body>
+    <form id="formulario">
+        <h1>Catálogo de Panes</h1>
+        <h2>Escoje los panes de tu preferencia</h2>
+        <div class="categoria">
+            <h3>Biscocho</h3>
+            <div class="pan-container" id="biscocho-container">
+                <!-- Ejemplo de un item de pan -->
+                <div class="pan-item" data-pan="Concha de vainilla" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/05/07/21/54/concha-2294048_640.jpg" alt="Concha de vainilla">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Concha de vainilla</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Concha de chocolate" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/05/07/21/54/concha-2294048_640.jpg" alt="Concha de chocolate">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Concha de chocolate</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Cocha de fresa" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/05/07/21/54/concha-2294048_640.jpg" alt="Cocha de fresa">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Cocha de fresa</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Cuernito" data-precio="7">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/18/52/croissant-1850087_640.jpg" alt="Cuernito">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Cuernito</div>
+                        <div class="pan-precio">$7 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Mordida" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_640.jpg" alt="Mordida">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Mordida</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Chocolatin" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" alt="Chocolatin">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Chocolatin</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Corbata" data-precio="12">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/29/11/38/bread-1869159_640.jpg" alt="Corbata">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Corbata</div>
+                        <div class="pan-precio">$12 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Caracol" data-precio="14">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/01/18/21/cinnamon-3366433_640.jpg" alt="Caracol">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Caracol</div>
+                        <div class="pan-precio">$14 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Pan de zarzamora" data-precio="16">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/01/18/21/cinnamon-3366433_640.jpg" alt="Pan de zarzamora">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Pan de zarzamora</div>
+                        <div class="pan-precio">$16 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <h3>Feite</h3>
+            <div class="pan-container" id="feite-container">
+                <div class="pan-item" data-pan="Taco" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/04/13/21/40/bread-3317651_640.jpg" alt="Taco">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Taco</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Oreja" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/17/18/15/pastry-2759527_640.jpg" alt="Oreja">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Oreja</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Mariposa" data-precio="12">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/18/52/croissant-1850087_640.jpg" alt="Mariposa">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Mariposa</div>
+                        <div class="pan-precio">$12 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Abanico" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/04/13/21/40/bread-3317651_640.jpg" alt="Abanico">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Abanico</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Riel" data-precio="9">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/17/18/15/pastry-2759527_640.jpg" alt="Riel">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Riel</div>
+                        <div class="pan-precio">$9 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Broca" data-precio="11">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/18/52/croissant-1850087_640.jpg" alt="Broca">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Broca</div>
+                        <div class="pan-precio">$11 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Mil hojas" data-precio="15">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" alt="Mil hojas">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Mil hojas</div>
+                        <div class="pan-precio">$15 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <h3>Panqué</h3>
+            <div class="pan-container" id="panque-container">
+                <div class="pan-item" data-pan="Mantecada" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" alt="Mantecada">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Mantecada</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Nuez" data-precio="12">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/01/18/21/cinnamon-3366433_640.jpg" alt="Nuez">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Nuez</div>
+                        <div class="pan-precio">$12 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Vainilla" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_640.jpg" alt="Vainilla">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Vainilla</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Chocolate" data-precio="12">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" alt="Chocolate">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Chocolate</div>
+                        <div class="pan-precio">$12 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Queso" data-precio="14">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/01/18/21/cinnamon-3366433_640.jpg" alt="Queso">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Queso</div>
+                        <div class="pan-precio">$14 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Marmol" data-precio="11">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_640.jpg" alt="Marmol">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Marmol</div>
+                        <div class="pan-precio">$11 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <h3>Fritos</h3>
+            <div class="pan-container" id="fritos-container">
+                <div class="pan-item" data-pan="Churros" data-precio="8">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/17/18/15/pastry-2759527_640.jpg" alt="Churros">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Churros</div>
+                        <div class="pan-precio">$8 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Donas" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/04/13/21/40/bread-3317651_640.jpg" alt="Donas">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Donas</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Empanadas" data-precio="12">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/18/52/croissant-1850087_640.jpg" alt="Empanadas">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Empanadas</div>
+                        <div class="pan-precio">$12 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Bolas de Berlin" data-precio="15">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" alt="Bolas de Berlin">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Bolas de Berlin</div>
+                        <div class="pan-precio">$15 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Buñuelo" data-precio="9">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/01/18/21/cinnamon-3366433_640.jpg" alt="Buñuelo">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Buñuelo</div>
+                        <div class="pan-precio">$9 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <h3>Salados</h3>
+            <div class="pan-container" id="salados-container">
+                <div class="pan-item" data-pan="Bolillo" data-precio="7">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_640.jpg" alt="Bolillo">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Bolillo</div>
+                        <div class="pan-precio">$7 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Baguette" data-precio="20">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2018/04/13/21/40/bread-3317651_640.jpg" alt="Baguette">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Baguette</div>
+                        <div class="pan-precio">$20 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Chapata" data-precio="18">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/18/52/croissant-1850087_640.jpg" alt="Chapata">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Chapata</div>
+                        <div class="pan-precio">$18 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="pan-item" data-pan="Pambazo" data-precio="10">
+                    <div class="pan-imagen">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/17/18/15/pastry-2759527_640.jpg" alt="Pambazo">
+                    </div>
+                    <div class="pan-info">
+                        <div class="pan-nombre">Pambazo</div>
+                        <div class="pan-precio">$10 c/u</div>
+                        <div class="cantidad-control">
+                            <button type="button" class="cantidad-btn disminuir">-</button>
+                            <input type="number" class="cantidad-input" value="0" min="0">
+                            <button type="button" class="cantidad-btn aumentar">+</button>
+                        </div>
+                        <button type="button" class="accion-btn agregar">Agregar</button>
+                        <button type="button" class="accion-btn eliminar hidden">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>          <!-- ... (todo el contenido de las categorías de panes se mantiene igual) ... -->
+
+        <div class="botones">
+            <button type="button" onclick="window.location.href='cliente.html'">Continuar con datos del cliente</button>
+            <button type="button" onclick="window.location.href='pastel.html'">elejir pasteles</button>
+            <button type="button" onclick="window.location.href='complementos.html'">elejir complementos</button>
+            <button type="button" onclick="window.location.href='pan.html'">Volver al Inicio</button>
+            <button type="reset">Resetear</button>
+        </div>
+    </form>
+    <footer>
+        <p>&copy; 2025 Panadería Jurassic Pan. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="catalogo.js"> </script>
+</body>
+</html>

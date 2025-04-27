@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Bebidas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;600&family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="complemento.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Bebidas Calientes -->
+        <div class="category">
+            <h2 class="category-title">Bebidas Calientes</h2>
+            <div class="products-grid">
+                <!-- Café de olla -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Café de olla" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Café de olla</h3>
+                        <p class="product-price">25.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Capuchino -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Capuchino" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Capuchino</h3>
+                        <p class="product-price">35.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Té de manzanilla -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Té de manzanilla" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Té de manzanilla</h3>
+                        <p class="product-price">20.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Chocolate caliente -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chocolate caliente" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Chocolate caliente</h3>
+                        <p class="product-price">30.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bebidas Frías -->
+        <div class="category">
+            <h2 class="category-title">Bebidas Frías</h2>
+            <div class="products-grid">
+                <!-- Leche de chocolate -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Leche de chocolate" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Leche de chocolate</h3>
+                        <p class="product-price">28.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Jugo de naranja -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jugo de naranja" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jugo de naranja</h3>
+                        <p class="product-price">22.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Limonada -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Limonada" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Limonada</h3>
+                        <p class="product-price">18.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Smoothie de fresa -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Smoothie de fresa" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Smoothie de fresa</h3>
+                        <p class="product-price">35.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Jugos Saludables -->
+        <div class="category">
+            <h2 class="category-title">Jugos Saludables</h2>
+            <div class="products-grid">
+                <!-- Jugo verde -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jugo verde" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jugo verde</h3>
+                        <p class="product-price">32.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Jugo de apio -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jugo de apio" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jugo de apio</h3>
+                        <p class="product-price">28.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Jugo de zanahoria -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jugo de zanahoria" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jugo de zanahoria</h3>
+                        <p class="product-price">25.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+                
+                <!-- Jugo detox -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jugo detox" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jugo detox</h3>
+                        <p class="product-price">38.00</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar</button>
+                        <button class="add-to-cart remove-btn" style="display:none;">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-finales">
+            <a href="catalogo.html" class="btn-secundario">
+                <i class="fas fa-arrow-left"></i> comprar panes
+            </a>
+             <a href="pastel.html" class="btn-secundario">
+                <i class="fas fa-arrow-left"></i> comprar pasteles
+            </a>
+            <a href="cliente.html" id="btn-finalizar" class="btn-continuar">
+                <i class="fas fa-user-check"></i> Continuar a Datos
+            </a>
+               </a>
+             <a href="pan.html" class="btn-secundario">
+                <i class="fas fa-arrow-left"></i> volver al inicio
+            </a>
+        </div>
+    </div>
+
+        <script src="complemento.js">< </script>
+</body>
+</html>

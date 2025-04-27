@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Cliente | Jurassic Pan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;600;700&family=EB+Garamond:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="cliente.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>Datos del Cliente</h1>
+            <h2>Complete su información para finalizar el pedido</h2>
+        </header>
+
+        <form id="datos-cliente" class="formulario-cliente">
+            <!-- Datos personales -->
+            <div class="form-group">
+                <h3>Información Personal</h3>
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
+                
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 5512345678">
+                
+                <label for="correo">Correo electrónico (opcional)</label>
+                <input type="email" id="correo" name="correo" placeholder="Ej: cliente@ejemplo.com">
+            </div>
+            
+            <!-- Resumen del pedido -->
+            <div class="resumen-pedido">
+                <h3>Resumen de tu pedido</h3>
+                <table class="tabla-resumen">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th class="cantidad-col">Cantidad</th>
+                            <th class="precio-col">Precio Unitario</th>
+                            <th class="subtotal-col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos">
+                        <!-- Los productos se agregarán dinámicamente aquí -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td colspan="3">Total del pedido</td>
+                            <td class="subtotal-col" id="total-pedido">$0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            
+            <!-- Método de pago -->
+            <div class="metodo-pago">
+                <h3>Método de pago</h3>
+                <div class="metodo-pago-opciones">
+                    <input type="radio" id="efectivo" name="metodo-pago" value="efectivo" required checked>
+                    <label for="efectivo" class="metodo-pago-option">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Efectivo</span>
+                    </label>
+                    
+                    <input type="radio" id="tarjeta" name="metodo-pago" value="tarjeta">
+                    <label for="tarjeta" class="metodo-pago-option">
+                        <i class="far fa-credit-card"></i>
+                        <span>Tarjeta</span>
+                    </label>
+                    
+                    <input type="radio" id="transferencia" name="metodo-pago" value="transferencia">
+                    <label for="transferencia" class="metodo-pago-option">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transferencia</span>
+                    </label>
+                </div>
+                
+                <!-- Sección de efectivo -->
+                <div id="efectivo-section">
+                    <div class="seccion-pago">
+                        <label>Especificar pago en efectivo:</label>
+                        <div class="denominaciones-grid">
+                            <button type="button" class="btn-denominacion" data-monto="20">$20</button>
+                            <button type="button" class="btn-denominacion" data-monto="50">$50</button>
+                            <button type="button" class="btn-denominacion" data-monto="100">$100</button>
+                            <button type="button" class="btn-denominacion" data-monto="200">$200</button>
+                            <button type="button" class="btn-denominacion" data-monto="500">$500</button>
+                            <button type="button" class="btn-denominacion" data-monto="1000">$1000</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="monto-efectivo">O ingrese monto exacto:</label>
+                            <input type="number" id="monto-efectivo" class="monto-input" min="0" step="1" placeholder="Ej: 350.00">
+                        </div>
+                        
+                        <div id="mensaje-cambio" class="mensaje-cambio"></div>
+                    </div>
+                </div>
+                
+                <!-- Sección de tarjeta -->
+                <div id="tarjeta-section" class="hidden">
+                    <div class="seccion-pago">
+                        <div class="form-group">
+                            <label>Tipo de tarjeta:</label>
+                            <div class="tarjeta-opciones">
+                                <input type="radio" id="visa" name="tipo-tarjeta" value="visa" checked>
+                                <label for="visa" class="tarjeta-logo">Visa</label>
+                                
+                                <input type="radio" id="mastercard" name="tipo-tarjeta" value="mastercard">
+                                <label for="mastercard" class="tarjeta-logo">Mastercard</label>
+                                
+                                <input type="radio" id="amex" name="tipo-tarjeta" value="amex">
+                                <label for="amex" class="tarjeta-logo">American Express</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="numero-tarjeta">Número de tarjeta:</label>
+                            <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="1234 5678 9012 3456">
+                        </div>
+                        
+                        <div class="tarjeta-grid">
+                            <div class="form-group">
+                                <label for="vencimiento">Vencimiento (MM/AA):</label>
+                                <input type="text" id="vencimiento" name="vencimiento" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nombre-tarjeta">Nombre en la tarjeta:</label>
+                            <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" placeholder="Como aparece en la tarjeta">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección de transferencia -->
+                <div id="transferencia-section" class="hidden">
+                    <div class="seccion-pago">
+                        <div class="form-group">
+                            <label for="banco">Seleccione su banco:</label>
+                            <select id="banco" name="banco" class="monto-input">
+                                <option value="">-- Seleccione un banco --</option>
+                                <option value="BBVA">BBVA</option>
+                                <option value="Santander">Santander</option>
+                                <option value="Banamex">Banamex</option>
+                                <option value="HSBC">HSBC</option>
+                                <option value="Banorte">Banorte</option>
+                                <option value="Scotia">Scotiabank</option>
+                                <option value="Banregio">Banregio</option>
+                                <option value="Otro">Otro banco</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numero-cuenta">Número de cuenta (CLABE):</label>
+                            <input type="text" id="numero-cuenta" name="numero-cuenta" placeholder="18 dígitos" maxlength="18">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre-destinatario">Nombre del destinatario:</label>
+                            <input type="text" id="nombre-destinatario" name="nombre-destinatario" placeholder="Nombre registrado en la cuenta">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monto-transferencia">Monto a transferir:</label>
+                            <input type="number" id="monto-transferencia" class="monto-input" min="0" step="0.01" placeholder="Ej: 350.00" readonly>
+                        </div>
+
+                        <div class="referencia-pago">
+                            <label>Referencia de pago:</label>
+                            <div class="referencia">JP-<span id="referencia-id">${Math.floor(1000 + Math.random() * 9000)}</span></div>
+                            <small>Usa esta referencia al hacer tu transferencia</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           <!-- Botones finales MODIFICADOS -->
+            <div class="botones-accion">
+                <div class="botones-navegacion" style="display: flex; gap: 10px; width: 100%; margin-bottom: 20px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secundario" id="btn-panes">
+                        <i class="fas fa-bread-slice"></i>
+                        Elegir Panes
+                    </button>
+                    
+                    <button type="button" class="btn btn-secundario" id="btn-pasteles">
+                        <i class="fas fa-birthday-cake"></i>
+                        Elegir Pasteles
+                    </button>
+                    
+                    <button type="button" class="btn btn-secundario" id="btn-complementos">
+                        <i class="fas fa-coffee"></i>
+                        Elegir Complementos
+                    </button>
+                </div>
+                
+                <div style="display: flex; gap: 20px; width: 100%;">
+                    <button type="button" class="btn btn-secundario" id="btn-volver" style="flex: 1;">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al Menú Principal
+                    </button>
+                    
+                    <button type="submit" class="btn btn-primario" style="flex: 1;">
+                        <i class="fas fa-check-circle"></i>
+                        Confirmar Pedido
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <footer>
+            <p>&copy; 2025 Jurassic Pan. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="cliente.js"></script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Jurassic Pan | Panadería Artesanal Premium</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Maestría panadera que fusiona tradición centenaria con innovación contemporánea">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;600;700&family=EB+Garamond:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --negro: #2A2118;
+            --chocolate: #4D3B2A;
+            --crema: #D7CEC5;
+            --pergamino: #F5F1EB;
+            --oro: #C9B176;
+            --cobre: #B38B59;
+            --sombra-suave: 0 4px 24px rgba(42, 33, 24, 0.08);
+            --sombra-profunda: 0 12px 36px rgba(42, 33, 24, 0.12);
+            --transicion: all 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            background-color: var(--pergamino);
+            color: var(--negro);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/rice-paper-3.png');
+            background-attachment: fixed;
+        }
+
+        .contenedor {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Encabezado elegante */
+        header {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--pergamino) 60%, transparent 100%);
+        }
+
+        .marca {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .marca::before, .marca::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--oro), transparent);
+        }
+
+        .marca::before {
+            left: -140px;
+        }
+
+        .marca::after {
+            right: -140px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 4.5rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--chocolate);
+            margin: 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--oro);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--chocolate);
+            margin-top: 2rem;
+            font-style: italic;
+            letter-spacing: 0.8px;
+        }
+
+        /* Navegación refinada - Botones elegantes */
+        nav {
+            display: flex;
+            justify-content: center;
+            margin: 4rem auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contenedor-nav {
+            background-color: var(--pergamino);
+            padding: 1.5rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--sombra-suave);
+            border: 1px solid rgba(201, 177, 118, 0.3);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--chocolate);
+            border: none;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: var(--transicion);
+            cursor: pointer;
+            border-radius: 30px;
+            overflow: hidden;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(42, 33, 24, 0.05);
+        }
+
+        .nav-btn i {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            color: var(--oro);
+            transition: var(--transicion);
+        }
+
+        .nav-btn:hover {
+            color: var(--pergamino);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(42, 33, 24, 0.12);
+        }
+
+        .nav-btn:hover i {
+            color: var(--pergamino);
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--oro), var(--cobre));
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .nav-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-btn::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--pergamino);
+            transition: var(--transicion);
+        }
+
+        .nav-btn:hover::after {
+            width: 70%;
+        }
+
+        /* Pie de página lujoso */
+        footer {
+            background-color: var(--negro);
+            color: var(--crema);
+            padding: 5rem 0 3rem;
+            margin-top: 8rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%232A2118" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%232A2118" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%232A2118" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+            background-size: cover;
+        }
+
+        .grid-footer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .columna-footer h3 {
+            font-family: 'Cormorant Infant', serif;
+            font-size: 1.4rem;
+            color: var(--oro);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .columna-footer h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: var(--cobre);
+        }
+
+        .columna-footer p, .columna-footer a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--crema);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            display: block;
+            text-decoration: none;
+            transition: var(--transicion);
+        }
+
+        .columna-footer a:hover {
+            color: var(--oro);
+            padding-left: 5px;
+        }
+
+        .columna-footer i {
+            margin-right: 10px;
+            color: var(--cobre);
+            width: 16px;
+            text-align: center;
+        }
+
+        .redes-sociales {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .redes-sociales a {
+            font-size: 1.2rem;
+            color: var(--crema);
+            transition: var(--transicion);
+        }
+
+        .redes-sociales a:hover {
+            color: var(--oro);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 177, 118, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--cobre);
+            letter-spacing: 1px;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header, nav, footer {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Diseño responsive */
+        @media (max-width: 1200px) {
+            .grid-footer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contenedor {
+                padding: 0 30px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            h1 span {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .marca::before, .marca::after {
+                width: 60px;
+            }
+
+            .marca::before {
+                left: -80px;
+            }
+
+            .marca::after {
+                right: -80px;
+            }
+
+            .contenedor-nav {
+                padding: 1rem;
+                border-radius: 30px;
+            }
+
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .grid-footer {
+                grid-template-columns: 1fr;
+            }
+
+            .marca::before, .marca::after {
+                display: none;
+            }
+
+            .contenedor-nav {
+                flex-direction: column;
+                align-items: center;
+                border-radius: 20px;
+                padding: 1.5rem;
+            }
+
+            .nav-btn {
+                width: 100%;
+                max-width: 220px;
+                margin: 0.3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <div class="marca">
+                <h1>Jurassic Pan<span>Desde 1985</span></h1>
+            </div>
+            <h2>El arte de la panificación en su más noble expresión</h2>
+        </header>
+        
+        <nav>
+            <div class="contenedor-nav">
+                <a href="pastel.html" class="nav-btn">
+                    <i class="fas fa-crown"></i>Pastelería
+                </a>
+                <a href="catalogo.html" class="nav-btn">
+                    <i class="fas fa-wheat-awn"></i>Nuestros Panes
+                </a>
+                <a href="complementos.html" class="nav-btn">
+                    <i class="fas fa-mortar-pestle"></i>Acompañamientos
+                </a>
+            </div>
+        </nav>
+        
+        <footer>
+            <div class="grid-footer">
+                <div class="columna-footer">
+                    <h3>Jurassic Pan</h3>
+                    <p>Desde 1985, perpetuamos la tradición de la excelencia panadera con métodos ancestrales e ingredientes excepcionales.</p>
+                    </div>
+                    </div>
+            <div class="copyright">
+                &copy; 2025 Jurassic Pan. Todos los derechos reservados. | 
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Efecto de desplazamiento suave
+        document.querySelectorAll('a[href^="#"]').forEach(enlace => {
+            enlace.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animación al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 1s ease';
+
+        // Efecto hover mejorado para botones
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
