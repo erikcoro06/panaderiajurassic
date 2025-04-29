@@ -103,27 +103,29 @@
             <label for="Fecha">Fecha:</label>
             <input type="date" id="Fecha" name="Fecha" required>
 
-            <label for="Pizza1">Pizza 1:</label>
-            <select id="Pizza1" name="Pizza1">
-                <option value="10">Mexicana ($10)</option>
-                <option value="12">Pepperoni ($12)</option>
-                <option value="11">Hawaiana ($11)</option>
-            </select>
-            
-            <label for="Pizza2">Pizza 2:</label>
-            <select id="Pizza2" name="Pizza2">
-                <option value="10">Mexicana ($10)</option>
-                <option value="12">Pepperoni ($12)</option>
-                <option value="11">Hawaiana ($11)</option>
-            </select>
-            
-            <label for="Pizza3">Pizza 3:</label>
-            <select id="Pizza3" name="Pizza3">
-                <option value="10">Mexicana ($10)</option>
-                <option value="12">Pepperoni ($12)</option>
-                <option value="11">Hawaiana ($11)</option>
-            </select>
+          <label for="Pizza1">Pizza 1:</label>
+<select id="Pizza1" name="Pizza1">
+    <option value="">-- Seleccionar --</option> 
+    <option value="10">Mexicana ($10)</option>
+    <option value="12">Pepperoni ($12)</option>
+    <option value="11">Hawaiana ($11)</option>
+</select>
 
+<label for="Pizza2">Pizza 2:</label>
+<select id="Pizza2" name="Pizza2">
+    <option value="">-- Seleccionar --</option> 
+    <option value="10">Mexicana ($10)</option>
+    <option value="12">Pepperoni ($12)</option>
+    <option value="11">Hawaiana ($11)</option>
+</select>
+
+<label for="Pizza3">Pizza 3:</label>
+<select id="Pizza3" name="Pizza3">
+    <option value="">-- Seleccionar --</option> 
+    <option value="10">Mexicana ($10)</option>
+    <option value="12">Pepperoni ($12)</option>
+    <option value="11">Hawaiana ($11)</option>
+</select>
             <h3>Complementos:</h3>
             <div class="checkbox-container">
                 <div>
@@ -222,6 +224,24 @@
         <button id="volver-inicio">Volver al Inicio</button>
         <button id="imprimir-ticket">Imprimir Ticket</button>
     </div>
+    
+    <button id="btnQuejas" style="margin-top: 20px;">Quejas, Denuncias y Comentarios</button>
+
+<div id="modalQuejas" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <div style="background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 400px; border-radius: 10px;">
+        <h2>Quejas, Denuncias y Comentarios</h2>
+        <form id="formQuejas">
+            <label for="nombreQueja">Nombre:</label>
+            <input type="text" id="nombreQueja" name="nombreQueja" required style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="comentarioQueja">Comentario:</label>
+            <textarea id="comentarioQueja" name="comentarioQueja" rows="4" required style="width: 100%; margin-bottom: 10px;"></textarea>
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">Enviar</button>
+            <button type="button" id="cerrarModal" style="width: 100%; padding: 10px; margin-top: 10px; background-color: #f44336; color: white; border: none; border-radius: 5px;">Cerrar</button>
+        </form>
+    </div>
+</div
 
     <script src="operacion.js"></script>
 </body>
