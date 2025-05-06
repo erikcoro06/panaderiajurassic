@@ -6,42 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="yoyo.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .seccion {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .activa {
+            display: block;
+        }
+        
+        h1, h2, h3 {
+            color: #6A1B9A;
+        }
+        
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #6A1B9A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #4A148C;
+        }
+        
         .mensaje-ok {
             color: green;
+            font-weight: bold;
         }
+        
         .mensaje-error {
             color: red;
+            font-weight: bold;
         }
-        .container {
-            width: 100%; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-
-        .section {
-            padding: 2rem; 
-        }
-
-        body {
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                font-size: 18px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* Estilos para la sección de complementos */
+        
         .checkbox-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -52,19 +87,19 @@
             border-radius: 10px;
             border: 1px solid #e0e0e0;
         }
-
+        
         .checkbox-container div {
             display: flex;
             align-items: center;
         }
-
+        
         .checkbox-container input[type="checkbox"] {
             width: 18px;
             height: 18px;
             margin-right: 10px;
             accent-color: #6A1B9A;
         }
-
+        
         .checkbox-container label {
             font-weight: normal;
             color: #555;
@@ -72,69 +107,18 @@
             cursor: pointer;
             transition: color 0.3s;
         }
-
+        
         .checkbox-container label:hover {
             color: #4A148C;
         }
-
-        /* Versión responsive para móviles */
-        @media (max-width: 600px) {
-            .checkbox-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Estilos generales para secciones */
-        .seccion {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .activa {
-            display: block;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: #6A1B9A;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 10px 5px;
-        }
-
-        button:hover {
-            background-color: #4A148C;
-        }
-
-        #bienvenida {
-            text-align: center;
-        }
-
-        #bienvenida button {
-            margin-top: 20px;
-        }
-
+        
         #ticketResumen {
-            background-color: #f8f8f8;
+            background-color: #f9f9f9;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
         }
-
-        /* Estilos para el modal de quejas */
+        
         #modalQuejas {
             display: none;
             position: fixed;
@@ -144,23 +128,26 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            justify-content: center;
-            align-items: center;
         }
-
+        
         .modal-contenido {
             background: white;
+            margin: 10% auto;
             padding: 20px;
             width: 90%;
             max-width: 500px;
             border-radius: 10px;
         }
-
-        #btnQuejas {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
+        
+        @media (max-width: 600px) {
+            .checkbox-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-contenido {
+                width: 95%;
+                margin: 5% auto;
+            }
         }
     </style>
 </head>
@@ -227,7 +214,6 @@
             </div>
 
             <button type="button" id="calcular">Calcular Total</button>
-            <img src="1366_2000.png" alt="Pizza" style="max-width: 100%; margin-top: 20px;"/>
         </form>
     </div>
 
@@ -237,7 +223,7 @@
         
         <h3>Tipo de Servicio:</h3>
         <input type="radio" name="tipoServicio" value="Entrega a domicilio" id="entregaDomicilio" required>
-        <label for="entregaDomicilio">Entrega a Domicilio</label><br>
+        <label for="entregaDomicilio">Entrega a Domicilio</label>
         <input type="radio" name="tipoServicio" value="Consumo en local" id="consumoLocal" required>
         <label for="consumoLocal">Consumo en local</label>
 
@@ -249,7 +235,7 @@
         <p>Total a pagar: $<span id="totalPagar">0.00</span></p>
         
         <input type="radio" name="metodoPago" value="Efectivo" id="pagoEfectivo" required>
-        <label for="pagoEfectivo">Pago en efectivo</label><br>
+        <label for="pagoEfectivo">Pago en efectivo</label>
         <input type="radio" name="metodoPago" value="Tarjeta" id="pagoTarjeta" required>
         <label for="pagoTarjeta">Pago con tarjeta</label>
 
@@ -263,7 +249,7 @@
             <input type="text" id="direccion" name="direccion" required>
 
             <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required>
+            <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" title="Ingrese un número de teléfono válido (10 dígitos)">
 
             <button type="button" id="continuarDomicilio">Continuar</button>
         </form>
@@ -271,15 +257,15 @@
 
     <div id="tarjeta-seccion" class="seccion">
         <h1>Pago con Tarjeta</h1>
-        <form id="tarjetaForm">
+        <form>
             <label for="numeroTarjeta">Número de Tarjeta:</label>
-            <input type="text" id="numeroTarjeta" required placeholder="1234 5678 9012 3456">
+            <input type="text" id="numeroTarjeta" required pattern="[0-9]{16}" title="Ingrese 16 dígitos de la tarjeta">
 
             <label for="fechaExp">Fecha de Expiración:</label>
-            <input type="text" id="fechaExp" placeholder="MM/AA" required>
+            <input type="text" id="fechaExp" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Formato MM/AA">
 
             <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" required placeholder="123">
+            <input type="text" id="cvv" required pattern="[0-9]{3,4}" title="3 o 4 dígitos del CVV">
 
             <button type="button" id="finalizarTarjeta">Finalizar Pago</button>
         </form>
@@ -305,44 +291,53 @@
         <button id="imprimir-ticket">Imprimir Ticket</button>
     </div>
     
-    <button id="btnQuejas">Quejas, Denuncias y Comentarios</button>
+ <!-- Botón flotante de quejas -->
+    <button id="btnQuejas" style="position: fixed; bottom: 20px; right: 20px; padding: 15px; background-color: #f44336; color: white; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 999;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
 
+    <!-- Modal de Quejas -->
     <div id="modalQuejas">
         <div class="modal-contenido">
             <h2>Quejas, Denuncias y Comentarios</h2>
             <form id="formQuejas">
                 <label for="nombreQueja">Nombre:</label>
                 <input type="text" id="nombreQueja" name="nombreQueja" required>
-
+                
+                <label for="emailQueja">Correo electrónico:</label>
+                <input type="email" id="emailQueja" name="emailQueja" required>
+                
                 <label for="comentarioQueja">Comentario:</label>
-                <textarea id="comentarioQueja" name="comentarioQueja" rows="4" required></textarea>
-
+                <textarea id="comentarioQueja" name="comentarioQueja" required></textarea>
+                
                 <button type="submit">Enviar</button>
                 <button type="button" id="cerrarModal">Cerrar</button>
             </form>
         </div>
     </div>
-
+ <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-        // Variables globales
         let totalGlobal = 0;
         let nombreGlobal = "";
         let fechaGlobal = "";
         let complementosDetalleGlobal = [];
-        let pizza1Global = { nombre: "No seleccionada", precio: 0 };
-        let pizza2Global = { nombre: "No seleccionada", precio: 0 };
-        let pizza3Global = { nombre: "No seleccionada", precio: 0 };
+        let pizza1Global = {nombre: "", precio: 0};
+        let pizza2Global = {nombre: "", precio: 0};
+        let pizza3Global = {nombre: "", precio: 0};
         let tipoServicioGlobal = "";
+        let metodoPagoGlobal = "";
         let direccionGlobal = "";
         let telefonoGlobal = "";
-        let metodoPagoGlobal = "";
 
-        // Iniciar pedido
-        document.getElementById("comenzar").addEventListener("click", function() {
-            document.getElementById("bienvenida").classList.remove("activa");
-            document.getElementById("formulario-seccion").classList.add("activa");
-        });
-
+        // Comenzar pedido
+      document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("comenzar").addEventListener("click", function() {
+        document.getElementById("bienvenida").classList.remove("activa");
+        document.getElementById("formulario-seccion").classList.add("activa");
+    });
+});
         // Calcular pedido
         document.getElementById("calcular").addEventListener("click", function() {
             const nombre = document.getElementById("nombre").value;
@@ -353,23 +348,25 @@
                 return;
             }
 
-            // Obtener pizzas seleccionadas
-            const obtenerPizza = (id) => {
-                const pizzaSelect = document.getElementById(id);
-                if (pizzaSelect.value === "") {
-                    return { nombre: "No seleccionada", precio: 0 };
-                }
-                return {
-                    nombre: pizzaSelect.options[pizzaSelect.selectedIndex].text.split(" ")[0],
-                    precio: parseFloat(pizzaSelect.value),
-                };
+            const pizza1Select = document.getElementById("Pizza1");
+            pizza1Global = {
+                nombre: pizza1Select.options[pizza1Select.selectedIndex].text.split(" ")[0],
+                precio: parseFloat(pizza1Select.value) || 0
             };
 
-            pizza1Global = obtenerPizza("Pizza1");
-            pizza2Global = obtenerPizza("Pizza2");
-            pizza3Global = obtenerPizza("Pizza3");
+            const pizza2Select = document.getElementById("Pizza2");
+            pizza2Global = {
+                nombre: pizza2Select.options[pizza2Select.selectedIndex].text.split(" ")[0],
+                precio: parseFloat(pizza2Select.value) || 0
+            };
 
-            // Verificar que al menos una pizza fue seleccionada
+            const pizza3Select = document.getElementById("Pizza3");
+            pizza3Global = {
+                nombre: pizza3Select.options[pizza3Select.selectedIndex].text.split(" ")[0],
+                precio: parseFloat(pizza3Select.value) || 0
+            };
+
+            // Validar que al menos una pizza fue seleccionada
             if (pizza1Global.precio === 0 && pizza2Global.precio === 0 && pizza3Global.precio === 0) {
                 alert("Por favor seleccione al menos una pizza");
                 return;
@@ -386,28 +383,38 @@
 
             const total = pizza1Global.precio + pizza2Global.precio + pizza3Global.precio + complementosTotal;
 
-            // Guardamos globalmente
             totalGlobal = total;
             nombreGlobal = nombre;
             fechaGlobal = fecha;
             complementosDetalleGlobal = complementosDetalle;
 
-            // Mostrar detalle del pedido
             document.getElementById("detalle-seccion").classList.add("activa");
             document.getElementById("formulario-seccion").classList.remove("activa");
 
-            document.getElementById("detallePedido").innerHTML = `
+            let detalleHTML = `
                 <strong>Nombre:</strong> ${nombre}<br>
                 <strong>Fecha:</strong> ${fecha}<br>
                 <strong>Productos:</strong> 
                 <ul>
-                    <li>Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})</li>
-                    <li>Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})</li>
-                    <li>Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})</li>
+            `;
+
+            if (pizza1Global.precio > 0) {
+                detalleHTML += `<li>Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})</li>`;
+            }
+            if (pizza2Global.precio > 0) {
+                detalleHTML += `<li>Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})</li>`;
+            }
+            if (pizza3Global.precio > 0) {
+                detalleHTML += `<li>Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})</li>`;
+            }
+
+            detalleHTML += `
                 </ul>
-                <strong>Complementos:</strong> ${complementosDetalle.join(", ")}<br>
+                <strong>Complementos:</strong> ${complementosDetalle.join(", ") || 'Ninguno'}<br>
                 <strong>Total:</strong> $${total.toFixed(2)}
             `;
+
+            document.getElementById("detallePedido").innerHTML = detalleHTML;
         });
 
         // Continuar selección de servicio
@@ -459,221 +466,198 @@
             }
 
             metodoPagoGlobal = metodoPago.value;
+
             document.getElementById("pago-seccion").classList.remove("activa");
 
             if (metodoPagoGlobal === "Efectivo") {
                 document.getElementById("efectivo-seccion").classList.add("activa");
                 document.getElementById("totalEfectivo").textContent = totalGlobal.toFixed(2);
-
-                // Configurar evento para mostrar cambio en tiempo real
-                document.getElementById("montoPago").addEventListener("input", function() {
-                    const montoPago = parseFloat(this.value);
-                    const mensajeCambio = document.getElementById("mensajeCambio");
-
-                    if (isNaN(montoPago) {
-                        mensajeCambio.innerHTML = "";
-                        return;
-                    }
-
-                    if (montoPago <= 0) {
-                        mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
-                        return;
-                    }
-
-                    if (montoPago < totalGlobal) {
-                        mensajeCambio.innerHTML = '<span class="mensaje-error">El monto ingresado es insuficiente</span>';
-                        return;
-                    }
-
-                    const cambio = montoPago - totalGlobal;
-                    mensajeCambio.innerHTML = `<span class="mensaje-ok">Cambio: $${cambio.toFixed(2)}</span>`;
-                });
             } else if (metodoPagoGlobal === "Tarjeta") {
                 document.getElementById("tarjeta-seccion").classList.add("activa");
             }
         });
 
-        // Finalizar con tarjeta
+       // Finalizar efectivo
+document.getElementById("finalizarEfectivo").addEventListener("click", function() {
+    const montoPago = parseFloat(document.getElementById("montoPago").value);
+    const mensajeCambio = document.getElementById("mensajeCambio");
+
+    if (isNaN(montoPago)) {  // Aquí estaba el error: faltaba cerrar el paréntesis
+        mensajeCambio.innerHTML = '<span class="mensaje-error">Por favor ingrese una cantidad válida</span>';
+        return;
+    }
+
+    if (montoPago < totalGlobal) {
+        mensajeCambio.innerHTML = '<span class="mensaje-error">El monto ingresado es insuficiente</span>';
+        return;
+    }
+
+    const cambio = montoPago - totalGlobal;
+    mensajeCambio.innerHTML = `<span class="mensaje-ok">Cambio: $${cambio.toFixed(2)}</span>`;
+
+    document.getElementById("efectivo-seccion").classList.remove("activa");
+    document.getElementById("ticket-seccion").classList.add("activa");
+
+    mostrarTicket("Efectivo", montoPago, cambio);
+});
+        // Finalizar tarjeta
         document.getElementById("finalizarTarjeta").addEventListener("click", function() {
             const numeroTarjeta = document.getElementById("numeroTarjeta").value;
             const fechaExp = document.getElementById("fechaExp").value;
             const cvv = document.getElementById("cvv").value;
-            
+
             if (!numeroTarjeta || !fechaExp || !cvv) {
                 alert("Por favor complete todos los datos de la tarjeta");
                 return;
             }
-            
-            if (!/^\d{16}$/.test(numeroTarjeta.replace(/\s/g, ""))) {
-                alert("Por favor ingrese un número de tarjeta válido (16 dígitos)");
+
+            // Validación básica de tarjeta
+            if (!/^\d{16}$/.test(numeroTarjeta)) {
+                alert("Número de tarjeta inválido. Debe tener 16 dígitos");
                 return;
             }
-            
+
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fechaExp)) {
+                alert("Formato de fecha inválido. Use MM/AA");
+                return;
+            }
+
             if (!/^\d{3,4}$/.test(cvv)) {
-                alert("Por favor ingrese un CVV válido (3 o 4 dígitos)");
+                alert("CVV inválido. Debe tener 3 o 4 dígitos");
                 return;
             }
-            
-            mostrarTicket();
-        });
 
-        // Finalizar con efectivo
-        document.getElementById("finalizarEfectivo").addEventListener("click", function() {
-            const montoPago = parseFloat(document.getElementById("montoPago").value);
-            
-            if (isNaN(montoPago)) {
-                alert("Por favor ingrese un monto válido");
-                return;
-            }
-            
-            if (montoPago <= 0) {
-                alert("El monto debe ser mayor que cero");
-                return;
-            }
-            
-            if (montoPago < totalGlobal) {
-                alert("El monto ingresado es insuficiente");
-                return;
-            }
-            
-            mostrarTicket();
-        });
-
-        // Mostrar ticket
-        function mostrarTicket() {
-            document.querySelector(".seccion.activa").classList.remove("activa");
+            document.getElementById("tarjeta-seccion").classList.remove("activa");
             document.getElementById("ticket-seccion").classList.add("activa");
-            
-            let resumen = `
-                <strong>Nombre:</strong> ${nombreGlobal}<br>
-                <strong>Fecha:</strong> ${fechaGlobal}<br>
+
+            mostrarTicket("Tarjeta", totalGlobal, 0);
+        });
+
+        // Mostrar ticket completo
+        function mostrarTicket(metodoPago, montoPagado, cambio) {
+            let ticketHTML = `
+                <h3>Pizzería El Comunismo de Perú</h3>
+                <p>Fecha: ${new Date().toLocaleString()}</p>
+                <hr>
+                <strong>Cliente:</strong> ${nombreGlobal}<br>
+                <strong>Fecha del pedido:</strong> ${fechaGlobal}<br>
                 <strong>Tipo de servicio:</strong> ${tipoServicioGlobal}<br>
             `;
-            
+
             if (tipoServicioGlobal === "Entrega a domicilio") {
-                resumen += `
+                ticketHTML += `
                     <strong>Dirección:</strong> ${direccionGlobal}<br>
                     <strong>Teléfono:</strong> ${telefonoGlobal}<br>
                 `;
             }
-            
-            resumen += `
-                <strong>Productos:</strong><br>
+
+            ticketHTML += `
+                <hr>
+                <h4>Detalle del Pedido:</h4>
                 <ul>
-                    <li>Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})</li>
-                    <li>Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})</li>
-                    <li>Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})</li>
-                </ul>
-                <strong>Complementos:</strong> ${complementosDetalleGlobal.join(", ")}<br>
-                <strong>Método de pago:</strong> ${metodoPagoGlobal}<br>
-                <strong>Total:</strong> $${totalGlobal.toFixed(2)}
             `;
-            
-            document.getElementById("ticketResumen").innerHTML = resumen;
+
+            if (pizza1Global.precio > 0) {
+                ticketHTML += `<li>Pizza ${pizza1Global.nombre} - $${pizza1Global.precio.toFixed(2)}</li>`;
+            }
+            if (pizza2Global.precio > 0) {
+                ticketHTML += `<li>Pizza ${pizza2Global.nombre} - $${pizza2Global.precio.toFixed(2)}</li>`;
+            }
+            if (pizza3Global.precio > 0) {
+                ticketHTML += `<li>Pizza ${pizza3Global.nombre} - $${pizza3Global.precio.toFixed(2)}</li>`;
+            }
+
+            if (complementosDetalleGlobal.length > 0) {
+                ticketHTML += `<li>Complementos: ${complementosDetalleGlobal.join(", ")}</li>`;
+            }
+
+            ticketHTML += `
+                </ul>
+                <hr>
+                <strong>Subtotal:</strong> $${(pizza1Global.precio + pizza2Global.precio + pizza3Global.precio).toFixed(2)}<br>
+                <strong>Complementos:</strong> $${(totalGlobal - (pizza1Global.precio + pizza2Global.precio + pizza3Global.precio)).toFixed(2)}<br>
+                <strong>Total:</strong> $${totalGlobal.toFixed(2)}<br>
+                <strong>Método de Pago:</strong> ${metodoPago}<br>
+            `;
+
+            if (metodoPago === "Efectivo") {
+                ticketHTML += `
+                    <strong>Monto recibido:</strong> $${montoPagado.toFixed(2)}<br>
+                    <strong>Cambio:</strong> $${cambio.toFixed(2)}<br>
+                `;
+            }
+
+            ticketHTML += `
+                <hr>
+                <p>¡Gracias por su compra!</p>
+            `;
+
+            document.getElementById("ticketResumen").innerHTML = ticketHTML;
         }
 
-        // Imprimir ticket
-        document.getElementById("imprimir-ticket").addEventListener("click", function() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Configuración del documento
-            doc.setFontSize(18);
-            doc.setTextColor(106, 27, 154); // Color morado
-            doc.text("Pizzería El Comunismo de Perú", 105, 15, { align: "center" });
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text("Ticket de Pedido", 105, 25, { align: "center" });
-            
-            // Línea divisoria
-            doc.setDrawColor(106, 27, 154);
-            doc.setLineWidth(0.5);
-            doc.line(20, 30, 190, 30);
-            
-            // Detalles del pedido
-            doc.setFontSize(10);
-            let y = 40;
-            
-            doc.text(`Nombre: ${nombreGlobal}`, 20, y);
-            y += 7;
-            doc.text(`Fecha: ${fechaGlobal}`, 20, y);
-            y += 7;
-            doc.text(`Tipo de servicio: ${tipoServicioGlobal}`, 20, y);
-            y += 7;
-            
-            if (tipoServicioGlobal === "Entrega a domicilio") {
-                doc.text(`Dirección: ${direccionGlobal}`, 20, y);
-                y += 7;
-                doc.text(`Teléfono: ${telefonoGlobal}`, 20, y);
-                y += 7;
-            }
-            
-            doc.text("Productos:", 20, y);
-            y += 7;
-            
-            doc.text(`- Pizza ${pizza1Global.nombre} ($${pizza1Global.precio.toFixed(2)})`, 25, y);
-            y += 7;
-            doc.text(`- Pizza ${pizza2Global.nombre} ($${pizza2Global.precio.toFixed(2)})`, 25, y);
-            y += 7;
-            doc.text(`- Pizza ${pizza3Global.nombre} ($${pizza3Global.precio.toFixed(2)})`, 25, y);
-            y += 7;
-            
-            doc.text(`Complementos: ${complementosDetalleGlobal.join(", ")}`, 20, y);
-            y += 7;
-            doc.text(`Método de pago: ${metodoPagoGlobal}`, 20, y);
-            y += 10;
-            
-            // Total
-            doc.setFontSize(12);
-            doc.setFont(undefined, "bold");
-            doc.text(`Total: $${totalGlobal.toFixed(2)}`, 20, y);
-            
-            // Pie de página
-            doc.setFontSize(8);
-            doc.setTextColor(150, 150, 150);
-            doc.text("¡Gracias por su compra!", 105, 280, { align: "center" });
-            doc.text("Pizzería El Comunismo de Perú", 105, 285, { align: "center" });
-            
-            // Guardar el PDF
-            doc.save(`ticket_pizza_${nombreGlobal.replace(/\s+/g, "_")}.pdf`);
-        });
-
-        // Volver al inicio
+        // Funcionalidad para volver al inicio
         document.getElementById("volver-inicio").addEventListener("click", function() {
             location.reload();
         });
 
-        // Botón "Quejas, Denuncias y Comentarios"
+        // Funcionalidad para imprimir ticket
+        document.getElementById("imprimir-ticket").addEventListener("click", function() {
+            const contenido = document.getElementById("ticketResumen").innerHTML;
+            const ventana = window.open('', '', 'width=600,height=600');
+            ventana.document.write('<html><head><title>Ticket de Compra</title></head><body>');
+            ventana.document.write(contenido);
+            ventana.document.write('</body></html>');
+            ventana.document.close();
+            ventana.print();
+        });
+
+      // Inicializa EmailJS con tu User ID
+        (function() {
+            emailjs.init('I7oEhEpXP4jX3imk-'); // Reemplaza con tu User ID de EmailJS
+        })();
+        
+        // Funcionalidad del botón de quejas
         document.getElementById("btnQuejas").addEventListener("click", function() {
             document.getElementById("modalQuejas").style.display = "flex";
         });
 
-        // Cerrar modal de comentarios
         document.getElementById("cerrarModal").addEventListener("click", function() {
             document.getElementById("modalQuejas").style.display = "none";
+            document.getElementById("formQuejas").reset();
         });
 
-        // Enviar formulario de comentarios
-        document.getElementById("formQuejas").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            const nombreQueja = document.getElementById("nombreQueja").value;
-            const comentarioQueja = document.getElementById("comentarioQueja").value;
-
-            if (!nombreQueja || !comentarioQueja) {
-                alert("Por favor complete todos los campos");
-                return;
-            }
-
-            const destinatario = "coronelefa113@gmail.com";
-            const asunto = "Queja, Denuncia o Comentario";
-            const cuerpo = `Nombre: ${nombreQueja}\nComentario: ${comentarioQueja}`;
-
-            window.location.href = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-            document.getElementById("modalQuejas").style.display = "none";
-            this.reset();
-        });
+        document.getElementById("formQuejas").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const nombre = document.getElementById("nombreQueja").value;
+    const email = document.getElementById("emailQueja").value;
+    const comentario = document.getElementById("comentarioQueja").value;
+    
+    // Formatear fecha
+    const ahora = new Date();
+    const fechaFormateada = ahora.toLocaleDateString('es-PE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    emailjs.send('service_38oqoc8', 'template_si5y8mg', {
+        from_name: nombre,
+        from_email: email,
+        message: comentario,
+        date: fechaFormateada
+    })
+    .then(function(response) {
+        alert("Gracias por tus comentarios. Haremos lo posible por mejorar.");
+        document.getElementById("modalQuejas").style.display = "none";
+        document.getElementById("formQuejas").reset();
+    }, function(error) {
+        console.error('Error al enviar:', error);
+        alert("Ocurrió un error al enviar tu mensaje. Por favor intenta nuevamente.");
+    });
+});
     </script>
 </body>
 </html>
