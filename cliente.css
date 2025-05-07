@@ -494,3 +494,32 @@
                 font-size: 1.8rem;
             }
         }
+/* CSS */
+.tabla-resumen {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-resumen th, .tabla-resumen td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabla-resumen thead {
+    background-color: #f4f4f4;
+}
+
+.tabla-resumen tfoot {
+    font-weight: bold;
+}
+
+.resumen-pedido {
+    overflow-x: auto; /* Permite el scroll horizontal */
+}
+
+@media (max-width: 768px) {
+    .tabla-resumen th, .tabla-resumen td {
+        font-size: 14px; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+    }
+}
