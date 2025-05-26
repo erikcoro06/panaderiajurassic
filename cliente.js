@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos del DOM
+document.addEventListener('DOMContentLoaded', function () {
+    // ==== Elementos del DOM ====
     const tablaProductos = document.getElementById('tabla-productos');
     const totalPedidoElement = document.getElementById('total-pedido');
     const efectivoSection = document.getElementById('efectivo-section');
@@ -8,32 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const mensajeCambio = document.getElementById('mensaje-cambio');
     const formDatosCliente = document.getElementById('datos-cliente');
 
-    // Botones de navegación
+    // Navegación
     const btnPanes = document.getElementById('btn-panes');
     const btnPasteles = document.getElementById('btn-pasteles');
     const btnComplementos = document.getElementById('btn-complementos');
     const btnVolver = document.getElementById('btn-volver');
 
-    // ========= NUEVO: Recuperar datos del cliente =========
-    const cliente_nombre = localStorage.getItem('cliente_nombre');
-    const cliente_telefono = localStorage.getItem('cliente_telefono');
-    const cliente_correo = localStorage.getItem('cliente_correo');
-    if (cliente_nombre) document.getElementById('nombre').value = cliente_nombre;
-    if (cliente_telefono) document.getElementById('telefono').value = cliente_telefono;
-    if (cliente_correo) document.getElementById('correo').value = cliente_correo;
-    // ======================================================
+    // ==== Recuperar y mostrar datos del cliente ====
+    ['nombre', 'telefono', 'correo'].forEach(campo => {
+        const valor = localStorage.getItem(`cliente_${campo}`);
+        if (valor) document.getElementById(campo).value = valor;
+    });
 
-    // Recuperar el pedido del localStorage
-    const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
-    let pedido = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
+    // ==== Recuperar pedido ====
+    let pedido = obtenerPedidoGuardado();
 
-    // Verificar si hay pedido válido
-    if (!pedido || !pedido.items || pedido.items.length === 0) {
+    if (!pedido || !Array.isArray(pedido.items) || pedido.items.length === 0) {
         mostrarAlertaYRedirigir('No hay productos en tu pedido. Serás redirigido al catálogo.', 'pan.html');
         return;
     }
 
-    // Mostrar productos en la tabla
+    // ==== Mostrar productos en la tabla ====
     let totalPedido = 0;
     pedido.items.forEach(item => {
         const fila = document.createElement('tr');
@@ -48,56 +43,65 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     totalPedidoElement.textContent = `$${totalPedido.toFixed(2)}`;
 
-    // Configurar métodos de pago
     configurarMetodosPago(totalPedido);
-
-    // Configurar navegación
     configurarNavegacion();
 
-    // Configurar envío del formulario
-    formDatosCliente.addEventListener('submit', function(e) {
+    // ==== Manejo del envío del formulario ====
+    formDatosCliente.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        // ========= NUEVO: Guardar datos del cliente =========
-        localStorage.setItem('cliente_nombre', document.getElementById('nombre').value.trim());
-        localStorage.setItem('cliente_telefono', document.getElementById('telefono').value.trim());
-        localStorage.setItem('cliente_correo', document.getElementById('correo').value.trim());
-        // ====================================================
-
+        guardarDatosCliente();
         procesarPedido(totalPedido);
     });
 
-    // ===== FUNCIONES PRINCIPALES =====
+    // ==== FUNCIONES ====
+
+    function obtenerPedidoGuardado() {
+        try {
+            const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
+            if (!pedidoGuardado) return { items: [] };
+            const pedido = JSON.parse(pedidoGuardado);
+            return pedido && Array.isArray(pedido.items) ? pedido : { items: [] };
+        } catch (e) {
+            return { items: [] };
+        }
+    }
+
+    function guardarDatosCliente() {
+        ['nombre', 'telefono', 'correo'].forEach(campo => {
+            const valor = document.getElementById(campo).value.trim();
+            localStorage.setItem(`cliente_${campo}`, valor);
+        });
+    }
 
     function configurarMetodosPago(total) {
-        // Cambio entre métodos de pago
         document.querySelectorAll('input[name="metodo-pago"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                efectivoSection.classList.add('hidden');
-                tarjetaSection.classList.add('hidden');
-                transferenciaSection.classList.add('hidden');
-                
-                if (this.value === 'efectivo') {
-                    efectivoSection.classList.remove('hidden');
-                    configurarEfectivo(total);
-                } else if (this.value === 'tarjeta') {
-                    tarjetaSection.classList.remove('hidden');
-                } else if (this.value === 'transferencia') {
-                    transferenciaSection.classList.remove('hidden');
-                    document.getElementById('monto-transferencia').value = total.toFixed(2);
-                    document.getElementById('referencia-id').textContent = Math.floor(1000 + Math.random() * 9000);
-                }
-            });
+            radio.addEventListener('change', () => mostrarSeccionPago(radio.value, total));
         });
+        // Mostrar la sección seleccionada por defecto
+        const metodoSeleccionado = document.querySelector('input[name="metodo-pago"]:checked');
+        if (metodoSeleccionado) mostrarSeccionPago(metodoSeleccionado.value, total);
+    }
 
-        // Configurar sección de efectivo
-        configurarEfectivo(total);
+    function mostrarSeccionPago(metodo, total) {
+        [efectivoSection, tarjetaSection, transferenciaSection].forEach(sec => sec.classList.add('hidden'));
+        if (metodo === 'efectivo') {
+            efectivoSection.classList.remove('hidden');
+            configurarEfectivo(total);
+        } else if (metodo === 'tarjeta') {
+            tarjetaSection.classList.remove('hidden');
+        } else if (metodo === 'transferencia') {
+            transferenciaSection.classList.remove('hidden');
+            document.getElementById('monto-transferencia').value = total.toFixed(2);
+            document.getElementById('referencia-id').textContent = generarReferencia();
+        }
     }
 
     function configurarEfectivo(total) {
         const montoInput = document.getElementById('monto-efectivo');
-        
+        const botones = document.querySelectorAll('.btn-denominacion');
+
         function calcularCambio(montoEfectivo) {
+            if (isNaN(montoEfectivo) || montoEfectivo < 0) montoEfectivo = 0;
             if (montoEfectivo >= total) {
                 const cambio = montoEfectivo - total;
                 mensajeCambio.innerHTML = `<span class="cambio-positivo">Cambio: $${cambio.toFixed(2)}</span>`;
@@ -108,34 +112,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 mensajeCambio.style.backgroundColor = 'rgba(196, 86, 86, 0.1)';
             }
         }
-        
-        // Botones de denominación
-        document.querySelectorAll('.btn-denominacion').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const monto = parseFloat(this.dataset.monto);
+
+        botones.forEach(btn => {
+            btn.onclick = () => {
+                const monto = parseFloat(btn.dataset.monto);
                 montoInput.value = monto;
                 calcularCambio(monto);
-            });
+            };
         });
-        
-        // Input manual
-        montoInput.addEventListener('input', function() {
-            const monto = parseFloat(this.value) || 0;
-            calcularCambio(monto);
-        });
-        
-        // Calcular cambio inicial
+
+        montoInput.oninput = () => {
+            calcularCambio(parseFloat(montoInput.value));
+        };
+
         calcularCambio(parseFloat(montoInput.value) || 0);
     }
 
     function configurarNavegacion() {
-        btnPanes.addEventListener('click', () => guardarYRedirigir('catalogo.html'));
-        btnPasteles.addEventListener('click', () => guardarYRedirigir('pastel.html'));
-        btnComplementos.addEventListener('click', () => guardarYRedirigir('complementos.html'));
-        btnVolver.addEventListener('click', () => {
+        btnPanes.onclick = () => guardarYRedirigir('catalogo.html');
+        btnPasteles.onclick = () => guardarYRedirigir('pastel.html');
+        btnComplementos.onclick = () => guardarYRedirigir('complementos.html');
+        btnVolver.onclick = () => {
             limpiarPedido();
             window.location.href = 'pan.html';
-        });
+        };
     }
 
     function procesarPedido(total) {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nombre: document.getElementById('nombre').value.trim(),
             telefono: document.getElementById('telefono').value.trim(),
             correo: document.getElementById('correo').value.trim() || 'No proporcionado',
-            metodoPago: document.querySelector('input[name="metodo-pago"]:checked').value
+            metodoPago: (document.querySelector('input[name="metodo-pago"]:checked') || {}).value
         };
 
         if (!cliente.nombre || !cliente.telefono) {
@@ -175,21 +175,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 const numeroTarjeta = document.getElementById('numero-tarjeta').value.trim();
                 const vencimiento = document.getElementById('vencimiento').value.trim();
                 const cvv = document.getElementById('cvv').value.trim();
-                if (!numeroTarjeta || !vencimiento || !cvv) {
+                const tipoTarjeta = document.querySelector('input[name="tipo-tarjeta"]:checked');
+                if (!numeroTarjeta || !vencimiento || !cvv || !tipoTarjeta) {
                     alert('Por favor complete todos los datos de la tarjeta');
+                    return false;
+                }
+                if (!/^\d{16}$/.test(numeroTarjeta)) {
+                    alert('El número de tarjeta debe tener 16 dígitos');
                     return false;
                 }
                 pedido.pago = {
                     metodo: 'tarjeta',
-                    tipo: document.querySelector('input[name="tipo-tarjeta"]:checked').value,
+                    tipo: tipoTarjeta.value,
                     ultimosDigitos: numeroTarjeta.slice(-4)
                 };
             } else if (metodo === 'transferencia') {
                 const banco = document.getElementById('banco').value;
                 const numeroCuenta = document.getElementById('numero-cuenta').value.trim();
                 const nombreDestinatario = document.getElementById('nombre-destinatario').value.trim();
+                const referencia = document.getElementById('referencia-id').textContent;
                 if (!banco || !numeroCuenta || !nombreDestinatario) {
                     alert('Por favor complete todos los datos de la transferencia');
+                    return false;
+                }
+                if (!/^\d{10,20}$/.test(numeroCuenta)) {
+                    alert('El número de cuenta debe tener entre 10 y 20 dígitos');
                     return false;
                 }
                 pedido.pago = {
@@ -197,8 +207,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     banco: banco,
                     numeroCuenta: numeroCuenta.slice(-4),
                     nombreDestinatario: nombreDestinatario,
-                    referencia: document.getElementById('referencia-id').textContent
+                    referencia: referencia
                 };
+            } else {
+                alert('Seleccione un método de pago');
+                return false;
             }
             return true;
         } catch (error) {
@@ -213,8 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
         pedido.fecha = new Date().toLocaleString();
         pedido.numeroPedido = 'JP-' + Math.floor(Math.random() * 1000000);
         pedido.total = total;
-
         localStorage.setItem('pedidoCompletoJurassicPan', JSON.stringify(pedido));
+        // Limpiar datos temporales
+        ['nombre', 'telefono', 'correo'].forEach(campo => localStorage.removeItem(`cliente_${campo}`));
         limpiarPedido();
         window.location.href = 'ticket.html';
     }
@@ -231,5 +245,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function mostrarAlertaYRedirigir(mensaje, destino) {
         alert(mensaje);
         window.location.href = destino;
+    }
+
+    function generarReferencia() {
+        return Math.floor(1000 + Math.random() * 9000);
     }
 });
