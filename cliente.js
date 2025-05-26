@@ -14,6 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnComplementos = document.getElementById('btn-complementos');
     const btnVolver = document.getElementById('btn-volver');
 
+    // ========= NUEVO: Recuperar datos del cliente =========
+    const cliente_nombre = localStorage.getItem('cliente_nombre');
+    const cliente_telefono = localStorage.getItem('cliente_telefono');
+    const cliente_correo = localStorage.getItem('cliente_correo');
+    if (cliente_nombre) document.getElementById('nombre').value = cliente_nombre;
+    if (cliente_telefono) document.getElementById('telefono').value = cliente_telefono;
+    if (cliente_correo) document.getElementById('correo').value = cliente_correo;
+    // ======================================================
+
     // Recuperar el pedido del localStorage
     const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
     let pedido = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
@@ -48,6 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar envío del formulario
     formDatosCliente.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // ========= NUEVO: Guardar datos del cliente =========
+        localStorage.setItem('cliente_nombre', document.getElementById('nombre').value.trim());
+        localStorage.setItem('cliente_telefono', document.getElementById('telefono').value.trim());
+        localStorage.setItem('cliente_correo', document.getElementById('correo').value.trim());
+        // ====================================================
+
         procesarPedido(totalPedido);
     });
 
