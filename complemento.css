@@ -352,26 +352,45 @@ h2 {
 
 /* Menú de navegación */
 .navbar {
-  background-color: #231f20;
+  background-color: #3f2e14;
   padding: 0.5em 0;
   margin-top: 2em;
   margin-bottom: 1em;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-.navbar ul {
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  position: relative;
+}
+.navbar-logo a {
+  color: #fff;
+  font-family: 'Cormorant Infant', serif;
+  font-size: 1.25em;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 2px;
+  padding: 0.3em 1em 0.3em 0;
+  display: block;
+}
+.navbar-menu {
+  display: flex;
+  gap: 2em;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: inline-flex;
-  gap: 2em;
+  align-items: center;
 }
-.navbar li {
-  margin: 0;
-  padding: 0;
-}
-.navbar a {
+.navbar-menu li a {
   color: #fff;
   text-decoration: none;
   font-size: 1.1em;
@@ -382,8 +401,85 @@ h2 {
   border-radius: 4px;
   display: block;
 }
-.navbar a:hover,
-.navbar a:focus {
+.navbar-menu li a.activo,
+.navbar-menu li a:hover,
+.navbar-menu li a:focus {
   background-color: #f2d16b;
   color: #231f20;
+}
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 1.5em;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-toggle .bar {
+  display: block;
+  width: 28px;
+  height: 4px;
+  background: var(--oro);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* --- RESPONSIVE HAMBURGER MENU --- */
+@media (max-width: 900px) {
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.7em;
+  }
+  .navbar-menu {
+    gap: 1em;
+  }
+}
+@media (max-width: 700px) {
+  .navbar-container {
+    flex-wrap: wrap;
+  }
+  .navbar-toggle {
+    display: flex;
+  }
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 98vw;
+    background: #231f20;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 0.4em;
+    box-shadow: 0 6px 12px 0 rgba(42,33,24,0.13);
+    border-radius: 0 0 10px 10px;
+    z-index: 200;
+    padding-bottom: 1em;
+    text-align: left;
+  }
+  .navbar-menu.active {
+    display: flex;
+    animation: fadeInDown 0.23s;
+  }
+  .navbar-menu li {
+    margin-bottom: 0.3em;
+  }
+  .navbar-menu li a {
+    font-size: 1.08em;
+    padding: 0.9em 2em;
+    border-radius: 6px;
+    width: 95vw;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+  }
+}
+@keyframes fadeInDown {
+  from { opacity:0; transform: translateY(-20px);}
+  to { opacity:1; transform: translateY(0);}
 }
