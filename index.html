@@ -3,121 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal - Restaurantes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="unit.css">
-    <meta name="description" content="Selecciona entre los mejores restaurantes y panaderías de la ciudad">
+    <title>Menú Principal - Restaurantes FoodMexico</title>
+    <meta name="description" content="Pizzería El Comunista de Perú y Panadería Jurassic Pan te esperan.">
+    <meta name="keywords" content="restaurantes, pizzería, panadería, comida, delivery, FoodMexico">
+    <meta name="author" content="FoodMexico">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="FoodMexico - Los Mejores Restaurantes">
+    <meta property="og:description" content="Selecciona entre los mejores">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="assets/styles.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
 </head>
 <body>
-    <div class="content">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-link">Ir al contenido principal</a>
+    
+    <main id="main" class="content">
         <header>
             <h1>Bienvenidos</h1>
             <h2>Por favor seleccione el sitio de alimentos de su preferencia</h2>
         </header>
         
-        <nav aria-label="Restaurantes disponibles">
-            <a href="Pizza.html" class="restaurant-btn pizza-btn">
-                <i class="fas fa-pizza-slice"></i>
-                Pizzeria El Comunista de Perú
+        <nav aria-label="Restaurantes disponibles" role="navigation">
+            <a href="pizza.html" class="restaurant-btn pizza-btn" aria-describedby="pizza-desc">
+                <i class="fas fa-pizza-slice" aria-hidden="true"></i>
+                <span>Pizzería El Comunista de Perú</span>
             </a>
-            <a href="pan.html" class="restaurant-btn bread-btn">
-                <i class="fas fa-bread-slice"></i>
-                Panadería Jurassic Pan
+            <span id="pizza-desc" class="sr-only">Acceder al menú de la pizzería</span>
+            
+            <a href="pan.html" class="restaurant-btn bread-btn" aria-describedby="bread-desc">
+                <i class="fas fa-bread-slice" aria-hidden="true"></i>
+                <span>Panadería Jurassic Pan</span>
             </a>
+            <span id="bread-desc" class="sr-only">Acceder al menú de la panadería</span>
         </nav>
-    </div>
+    </main>
 
-    <footer class="social-footer">
+    <footer class="social-footer" role="contentinfo">
         <div class="social-container">
-            <h3>Síguenos en redes</h3>
-            <ul class="social-icons">
+            <h3>Síguenos en redes sociales</h3>
+            <ul class="social-icons" role="list">
                 <!-- Facebook -->
                 <li class="icon-content" data-social="facebook">
-                    <a href="hhttps://www.facebook.com/erikmexa06/?locale=es_LA" aria-label="Facebook">
-                        <div class="filled"></div>
-                        <i class="fab fa-facebook-f"></i>
+                    <a href="https://www.facebook.com/erikmexa06/?locale=es_LA" 
+                       aria-label="Seguir en Facebook" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">Facebook</span>
+                    <span class="tooltip" role="tooltip">Facebook</span>
                 </li>
                 
                 <!-- TikTok -->
                 <li class="icon-content" data-social="tiktok">
-                    <a href="#" aria-label="TikTok">
-                        <div class="filled"></div>
-                        <i class="fab fa-tiktok"></i>
+                    <a href="#" 
+                       aria-label="Seguir en TikTok" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">TikTok</span>
+                    <span class="tooltip" role="tooltip">TikTok</span>
                 </li>
                 
                 <!-- Twitter -->
                 <li class="icon-content" data-social="twitter">
-                    <a href="https://x.com/Erik_1945/" aria-label="Twitter">
-                        <div class="filled"></div>
-                        <i class="fab fa-twitter"></i>
+                    <a href="https://x.com/Erik_1945/" 
+                       aria-label="Seguir en Twitter" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">Twitter</span>
+                    <span class="tooltip" role="tooltip">Twitter</span>
                 </li>
                 
                 <!-- YouTube -->
                 <li class="icon-content" data-social="youtube">
-                    <a href="https://youtube.com/@erikmexa?si=KMHPaG6kVCn5tZIL" aria-label="YouTube">
-                        <div class="filled"></div>
-                        <i class="fab fa-youtube"></i>
+                    <a href="https://youtube.com/@erikmexa?si=KMHPaG6kVCn5tZIL" 
+                       aria-label="Suscribirse en YouTube" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">YouTube</span>
+                    <span class="tooltip" role="tooltip">YouTube</span>
                 </li>
                 
                 <!-- GitHub -->
                 <li class="icon-content" data-social="github">
-                    <a href="https://github.com/erikcoro06" aria-label="GitHub">
-                        <div class="filled"></div>
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/erikcoro06" 
+                       aria-label="Ver en GitHub" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">GitHub</span>
+                    <span class="tooltip" role="tooltip">GitHub</span>
                 </li>
                 
                 <!-- Instagram -->
                 <li class="icon-content" data-social="instagram">
-                    <a href="https://www.instagram.com/erikmexa06/" aria-label="Instagram">
-                        <div class="filled"></div>
-                        <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/erikmexa06/" 
+                       aria-label="Seguir en Instagram" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
                     </a>
-                    <span class="tooltip">Instagram</span>
+                    <span class="tooltip" role="tooltip">Instagram</span>
                 </li>
             </ul>
             
             <div class="footer-info">
-                <p>© <span id="current-year">2023</span> FoodMexico - Todos los derechos reservados</p>
+                <p>&copy; <span id="current-year">2024</span> FoodMexico - Todos los derechos reservados</p>
                 <p class="contact-email">
-                    <i class="fas fa-envelope"></i>
-  <a href="mailto:coronelefa113@gmail.com">coronelefa113@gmail.com</a>               
-</p>
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:coronelefa113@gmail.com">coronelefa113@gmail.com</a>               
+                </p>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            
-            const buttons = document.querySelectorAll('.restaurant-btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            
-            const elements = document.querySelectorAll('h1, h2, nav, .social-footer');
-            elements.forEach((el, index) => {
-                el.style.animationDelay = `${index * 0.15}s`;
-            });
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="assets/script.js"></script>
 </body>
 </html>
