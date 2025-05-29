@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- MENÚ NAVBAR RESPONSIVE ---
+    // --- NAVBAR MENÚ MÓVIL HAMBURGUESA ---
     const toggle = document.getElementById('navbar-toggle');
     const menu = document.getElementById('navbar-menu');
     if(toggle && menu) {
         toggle.addEventListener('click', function() {
             menu.classList.toggle('active');
         });
-        // Cerrar menú al hacer click en un enlace (opcional)
+        // Cerrar el menú al hacer click en un enlace
         menu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => menu.classList.remove('active'));
         });
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Manejar cambios en los inputs de cantidad
     document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
-            // Remueve letras, solo permite números
+            // Solo permite números, elimina letras
             let val = parseInt(this.value.replace(/\D/g, ''));
             if (isNaN(val) || val < 0) val = 0;
             this.value = val;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Función para actualizar estado de los botones Agregar/Eliminar
+    // Actualizar botones Agregar/Eliminar según cantidad
     function updateCartButtonState(input) {
         const card = input.closest('.product-card');
         const addBtn = card.querySelector('.add-to-cart:not(.remove-btn)');
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Manejar evento de clic en botón Agregar
+    // Botón Agregar al carrito
     document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.closest('.product-info').querySelector('.quantity-input');
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Manejar evento de clic en botón Eliminar
+    // Botón Eliminar del carrito
     document.querySelectorAll('.remove-btn').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.closest('.product-info').querySelector('.quantity-input');
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Funcionalidad del botón Finalizar Compra
+    // Botón Finalizar Compra
     const btnFinalizar = document.getElementById('btn-finalizar');
     if (btnFinalizar) {
         btnFinalizar.addEventListener('click', function(e) {
