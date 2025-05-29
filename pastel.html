@@ -7,14 +7,24 @@
         <link rel="stylesheet" href="pastel.css">
 </head>
 <body>
-      <nav class="navbar">
-        <ul>
-            <li><a href="pan.html">Inicio</a></li>
-            <li><a href="catalogo.html">Catálogo</a></li>
-            <li><a href="complementos.html">Complementos</a></li>
-<li><a href="cliente.html" id="link-cliente">Datos del Cliente</a></li>
-        </ul>
-    </nav>
+     <nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <a href="index.html">Jurassic Pan</a>
+    </div>
+    <button class="navbar-toggle" id="navbar-toggle" aria-label="Menú">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="navbar-menu" id="navbar-menu">
+      <li><a href="catalogo.html">Panes</a></li>
+      <li><a href="pastel.html">Pasteles</a></li>
+      <li><a href="complementos.html" class="activo">Complementos</a></li>
+      <li><a href="cliente.html" id="link-cliente">Datos del Cliente</a></li>
+    </ul>
+  </div>
+</nav>
     <form id="formulario">
         <h1>Catálogo de Pasteles</h1>
         <h2>Selecciona tus pasteles favoritos</h2>
