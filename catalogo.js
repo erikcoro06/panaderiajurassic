@@ -12,20 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.cantidad-btn.aumentar').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
-            input.value = parseInt(input.value) + 1;
+            let val = parseInt(input.value);
+            input.value = isNaN(val) ? 1 : val + 1;
         });
     });
     document.querySelectorAll('.cantidad-btn.disminuir').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
-            input.value = Math.max(0, parseInt(input.value) - 1);
+            let val = parseInt(input.value);
+            input.value = isNaN(val) || val <= 0 ? 0 : val - 1;
         });
     });
 
-    // Prevenir valores negativos desde el input
+    // Prevenir valores negativos o no numéricos desde el input
     document.querySelectorAll('.cantidad-input').forEach(input => {
-        input.addEventListener('change', function() {
-            if (this.value < 0) this.value = 0;
+        input.addEventListener('input', function() {
+            // Quitar letras y dejar solo números
+            let val = parseInt(this.value.replace(/\D/g, ''));
+            if (isNaN(val) || val < 0) val = 0;
+            this.value = val;
         });
     });
 
@@ -38,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const input = panItem.querySelector('.cantidad-input');
             let cantidad = parseInt(input.value);
 
-            // Si la cantidad es 0 o NaN, al presionar Agregar lo cambia a 1 automáticamente
-            if (!cantidad || cantidad < 1) {
+            // Si la cantidad es 0, NaN, vacía o inválida, al presionar Agregar lo cambia a 1 automáticamente
+            if (!cantidad || isNaN(cantidad) || cantidad < 1) {
                 cantidad = 1;
                 input.value = 1;
             }
