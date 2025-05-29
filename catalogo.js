@@ -1,133 +1,134 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Función para manejar el botón de agregar/eliminar
-    document.querySelectorAll('.accion-btn.agregar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const panItem = this.closest('.pan-item');
-            const eliminarBtn = panItem.querySelector('.eliminar');
-            
-            // Cambiar visibilidad de botones
-            this.classList.add('hidden');
-            eliminarBtn.classList.remove('hidden');
-            
-            // Asegurar que la cantidad sea al menos 1
-            const cantidadInput = panItem.querySelector('.cantidad-input');
-            if (cantidadInput.value == 0) {
-                cantidadInput.value = 1;
+    // Función para mostrar notificaciones
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notificacion';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    // Manejar eventos de los botones de cantidad
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('.quantity-input');
+            let value = parseInt(input.value);
+
+            if (this.classList.contains('plus')) {
+                input.value = value + 1;
+            } else if (this.classList.contains('minus') && value > 0) {
+                input.value = value - 1;
             }
+
+            updateCartButtonState(input);
         });
     });
-    
-    // Función para manejar el botón de eliminar
-    document.querySelectorAll('.accion-btn.eliminar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const panItem = this.closest('.pan-item');
-            const agregarBtn = panItem.querySelector('.agregar');
-            
-            // Cambiar visibilidad de botones
-            this.classList.add('hidden');
-            agregarBtn.classList.remove('hidden');
-            
-            // Resetear cantidad a 0
-            const cantidadInput = panItem.querySelector('.cantidad-input');
-            cantidadInput.value = 0;
-        });
-    });
-    
-    // Función para aumentar cantidad
-    document.querySelectorAll('.cantidad-btn.aumentar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
-            input.value = parseInt(input.value) + 1;
-        });
-    });
-    
-    // Función para disminuir cantidad
-    document.querySelectorAll('.cantidad-btn.disminuir').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
-            if (parseInt(input.value) > 0) {
-                input.value = parseInt(input.value) - 1;
-                
-                // Si llega a 0, cambiar a botón de agregar
-                if (input.value == 0) {
-                    const panItem = this.closest('.pan-item');
-                    const agregarBtn = panItem.querySelector('.agregar');
-                    const eliminarBtn = panItem.querySelector('.eliminar');
-                    
-                    agregarBtn.classList.remove('hidden');
-                    eliminarBtn.classList.add('hidden');
-                }
-            }
-        });
-    });
-    
-    // Validar que no se puedan introducir números negativos manualmente
-    document.querySelectorAll('.cantidad-input').forEach(input => {
+
+    // Manejar cambios en los inputs de cantidad
+    document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('change', function() {
-            if (parseInt(this.value) < 0) {
-                this.value = 0;
-            }
+            if (this.value < 0) this.value = 0;
+            updateCartButtonState(this);
         });
     });
-    
-    // Manejar el botón "Continuar con datos del cliente"
-    document.querySelector('button[onclick*="cliente.html"]').addEventListener('click', function() {
-        const nuevosPanes = {
-            items: [],
-            total: 0,
-            fecha: new Date().toLocaleString(),
-            tipo: "panes" // Para identificar que es un pedido de panes
-        };
-        
-        // Recolectar todos los panes con cantidad > 0
-        document.querySelectorAll('.pan-item').forEach(panItem => {
-            const cantidad = parseInt(panItem.querySelector('.cantidad-input').value);
-            if (cantidad > 0) {
-                const nombre = panItem.dataset.pan;
-                const precio = parseFloat(panItem.dataset.precio);
-                const subtotal = cantidad * precio;
-                
-                nuevosPanes.items.push({
-                    nombre: nombre,
-                    cantidad: cantidad,
-                    precio: precio,
-                    subtotal: subtotal
-                });
-                
-                nuevosPanes.total += subtotal;
-            }
-        });
-        
-        // Validar que se haya seleccionado al menos un pan
-        if (nuevosPanes.items.length === 0) {
-            alert('Por favor selecciona al menos un pan antes de continuar.');
-            return;
+
+    // Actualizar botones Agregar/Eliminar según cantidad
+    function updateCartButtonState(input) {
+        const card = input.closest('.product-card');
+        const addBtn = card.querySelector('.add-to-cart:not(.remove-btn)');
+        const removeBtn = card.querySelector('.remove-btn');
+        const quantity = parseInt(input.value);
+
+        if (quantity > 0) {
+            addBtn.style.display = 'none';
+            removeBtn.style.display = 'block';
+        } else {
+            addBtn.style.display = 'block';
+            removeBtn.style.display = 'none';
         }
-        
-        // Leer el pedido existente en localStorage
-        const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
-        let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
+    }
 
-        // Fusionar los productos actuales con los ya existentes
-        nuevosPanes.items.forEach(nuevoProducto => {
-            const productoExistente = pedidoActual.items.find(item => item.nombre === nuevoProducto.nombre);
-            if (productoExistente) {
-                // Si el producto ya existe, sumar cantidades y subtotales
-                productoExistente.cantidad += nuevoProducto.cantidad;
-                productoExistente.subtotal += nuevoProducto.subtotal;
-            } else {
-                // Si no existe, agregarlo al pedido
-                pedidoActual.items.push(nuevoProducto);
-            }
+    // Botón Agregar
+    document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.closest('.product-info').querySelector('.quantity-input');
+            input.value = parseInt(input.value) + 1;
+            updateCartButtonState(input);
+            showNotification('Producto agregado al carrito');
         });
-
-        // Actualizar el total del pedido
-        pedidoActual.total = pedidoActual.items.reduce((sum, item) => sum + item.subtotal, 0);
-
-        // Guardar el pedido actualizado en localStorage
-        localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedidoActual));
-
-        // Redirigir a la página de datos del cliente
-        window.location.href = 'cliente.html';
     });
+
+    // Botón Eliminar
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.closest('.product-info').querySelector('.quantity-input');
+            input.value = 0;
+            updateCartButtonState(input);
+            showNotification('Producto eliminado del carrito');
+        });
+    });
+
+    // Intercepta el clic en el menú "Datos del Cliente"
+    const linkCliente = document.getElementById('link-cliente');
+    if (linkCliente) {
+        linkCliente.addEventListener('click', function(e) {
+            e.preventDefault();
+            guardarPanesSeleccionadosYRedirigir();
+        });
+    }
+
+    // Si tienes un botón "Finalizar Compra" también puedes usar la misma función
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener('click', function(e) {
+            e.preventDefault();
+            guardarPanesSeleccionadosYRedirigir();
+        });
+    }
 });
+
+// Función para guardar los panes seleccionados y redirigir
+function guardarPanesSeleccionadosYRedirigir() {
+    const panesSeleccionados = [];
+    document.querySelectorAll('.product-card').forEach(card => {
+        const cantidad = parseInt(card.querySelector('.quantity-input').value);
+        if (cantidad > 0) {
+            const nombre = card.querySelector('.product-name').textContent;
+            const precio = parseFloat(card.querySelector('.product-price').textContent);
+            const subtotal = precio * cantidad;
+            panesSeleccionados.push({
+                nombre: nombre,
+                cantidad: cantidad,
+                precio: precio,
+                subtotal: subtotal
+            });
+        }
+    });
+
+    if (panesSeleccionados.length === 0) {
+        alert('Por favor selecciona al menos un pan.');
+        return;
+    }
+
+    // Guarda en localStorage bajo la misma clave que usan tus otros módulos
+    const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
+    let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
+
+    panesSeleccionados.forEach(nuevoPan => {
+        const existente = pedidoActual.items.find(item => item.nombre === nuevoPan.nombre);
+        if (existente) {
+            existente.cantidad += nuevoPan.cantidad;
+            existente.subtotal += nuevoPan.subtotal;
+        } else {
+            pedidoActual.items.push(nuevoPan);
+        }
+    });
+    pedidoActual.total = pedidoActual.items.reduce((sum, item) => sum + item.subtotal, 0);
+
+    localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedidoActual));
+
+    window.location.href = 'cliente.html';
+}
