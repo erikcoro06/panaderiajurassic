@@ -350,9 +350,10 @@ h2 {
   }
 }
 
-/* Menú de navegación */
+
+/* --- NAVBAR RESPONSIVE --- */
 .navbar {
-  background-color: #3f2e14;
+  background-color: #231f20;
   padding: 0.5em 0;
   margin-top: 2em;
   margin-bottom: 1em;
