@@ -3,458 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal - Restaurantes FoodMexico</title>
-    <meta name="description" content="Pizzería El Comunista de Perú y Panadería Jurassic Pan te esperan.">
-    <meta name="keywords" content="restaurantes, pizzería, panadería, comida, delivery, FoodMexico">
-    <meta name="author" content="FoodMexico">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="FoodMexico - Los Mejores Restaurantes">
-    <meta property="og:description" content="Selecciona entre los mejores">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="/">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    <link rel="preload" href="assets/unit.css" as="style">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <title>Menú Principal - Restaurantes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="unit.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+    <meta name="description" content="Selecciona entre los mejores restaurantes y panaderías de la ciudad">
 </head>
 <body>
-    <!-- Skip to main content for accessibility -->
-    <a href="#main" class="skip-link">Ir al contenido principal</a>
-    
-    <main id="main" class="content">
+    <div class="content">
         <header>
             <h1>Bienvenidos</h1>
             <h2>Por favor seleccione el sitio de alimentos de su preferencia</h2>
         </header>
         
-        <nav aria-label="Restaurantes disponibles" role="navigation">
-            <a href="pizza.html" class="restaurant-btn pizza-btn" aria-describedby="pizza-desc">
-                <i class="fas fa-pizza-slice" aria-hidden="true"></i>
-                <span>Pizzería El Comunista de Perú</span>
+        <nav aria-label="Restaurantes disponibles">
+            <a href="Pizza.html" class="restaurant-btn pizza-btn">
+                <i class="fas fa-pizza-slice"></i>
+                Pizzeria El Comunista de Perú
             </a>
-            <span id="pizza-desc" class="sr-only">Acceder al menú de la pizzería</span>
-            
-            <a href="pan.html" class="restaurant-btn bread-btn" aria-describedby="bread-desc">
-                <i class="fas fa-bread-slice" aria-hidden="true"></i>
-                <span>Panadería Jurassic Pan</span>
+            <a href="pan.html" class="restaurant-btn bread-btn">
+                <i class="fas fa-bread-slice"></i>
+                Panadería Jurassic Pan
             </a>
-            <span id="bread-desc" class="sr-only">Acceder al menú de la panadería</span>
         </nav>
-    </main>
+    </div>
 
-    <footer class="social-footer" role="contentinfo">
+    <footer class="social-footer">
         <div class="social-container">
-            <h3>Síguenos en redes sociales</h3>
-            <ul class="social-icons" role="list">
+            <h3>Síguenos en redes</h3>
+            <ul class="social-icons">
                 <!-- Facebook -->
                 <li class="icon-content" data-social="facebook">
-                    <a href="https://www.facebook.com/erikmexa06/?locale=es_LA" 
-                       aria-label="Seguir en Facebook" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    <a href="hhttps://www.facebook.com/erikmexa06/?locale=es_LA" aria-label="Facebook">
+                        <div class="filled"></div>
+                        <i class="fab fa-facebook-f"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">Facebook</span>
+                    <span class="tooltip">Facebook</span>
                 </li>
                 
                 <!-- TikTok -->
                 <li class="icon-content" data-social="tiktok">
-                    <a href="#" 
-                       aria-label="Seguir en TikTok" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                    <a href="#" aria-label="TikTok">
+                        <div class="filled"></div>
+                        <i class="fab fa-tiktok"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">TikTok</span>
+                    <span class="tooltip">TikTok</span>
                 </li>
                 
                 <!-- Twitter -->
                 <li class="icon-content" data-social="twitter">
-                    <a href="https://x.com/Erik_1945/" 
-                       aria-label="Seguir en Twitter" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    <a href="https://x.com/Erik_1945/" aria-label="Twitter">
+                        <div class="filled"></div>
+                        <i class="fab fa-twitter"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">Twitter</span>
+                    <span class="tooltip">Twitter</span>
                 </li>
                 
                 <!-- YouTube -->
                 <li class="icon-content" data-social="youtube">
-                    <a href="https://youtube.com/@erikmexa?si=KMHPaG6kVCn5tZIL" 
-                       aria-label="Suscribirse en YouTube" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    <a href="https://youtube.com/@erikmexa?si=KMHPaG6kVCn5tZIL" aria-label="YouTube">
+                        <div class="filled"></div>
+                        <i class="fab fa-youtube"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">YouTube</span>
+                    <span class="tooltip">YouTube</span>
                 </li>
                 
                 <!-- GitHub -->
                 <li class="icon-content" data-social="github">
-                    <a href="https://github.com/erikcoro06" 
-                       aria-label="Ver en GitHub" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-github" aria-hidden="true"></i>
+                    <a href="https://github.com/erikcoro06" aria-label="GitHub">
+                        <div class="filled"></div>
+                        <i class="fab fa-github"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">GitHub</span>
+                    <span class="tooltip">GitHub</span>
                 </li>
                 
                 <!-- Instagram -->
                 <li class="icon-content" data-social="instagram">
-                    <a href="https://www.instagram.com/erikmexa06/" 
-                       aria-label="Seguir en Instagram" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    <a href="https://www.instagram.com/erikmexa06/" aria-label="Instagram">
+                        <div class="filled"></div>
+                        <i class="fab fa-instagram"></i>
                     </a>
-                    <span class="tooltip" role="tooltip">Instagram</span>
+                    <span class="tooltip">Instagram</span>
                 </li>
             </ul>
             
             <div class="footer-info">
-                <p>&copy; <span id="current-year">2024</span> FoodMexico - Todos los derechos reservados</p>
+                <p>© <span id="current-year">2023</span> FoodMexico - Todos los derechos reservados</p>
                 <p class="contact-email">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                    <a href="mailto:coronelefa113@gmail.com">coronelefa113@gmail.com</a>               
-                </p>
+                    <i class="fas fa-envelope"></i>
+  <a href="mailto:coronelefa113@gmail.com">coronelefa113@gmail.com</a>               
+</p>
             </div>
         </div>
     </footer>
 
- 
-    <script >
-function() {
-    'use strict';
-
-    // DOM ready state check
-    function domReady(fn) {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fn);
-        } else {
-            fn();
-        }
-    }
-
-    // Utility functions
-    const utils = {
-        // Debounce function for performance optimization
-        debounce: function(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        },
-
-        // Check if element is in viewport
-        isInViewport: function(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        },
-
-        // Smooth scroll polyfill for older browsers
-        smoothScrollTo: function(element) {
-            if ('scrollBehavior' in document.documentElement.style) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                // Fallback for older browsers
-                const targetPosition = element.offsetTop;
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                const duration = 1000;
-                let start = null;
-
-                function step(timestamp) {
-                    if (!start) start = timestamp;
-                    const progress = timestamp - start;
-                    window.scrollTo(0, easeInOutCubic(progress, startPosition, distance, duration));
-                    if (progress < duration) window.requestAnimationFrame(step);
-                }
-
-                function easeInOutCubic(t, b, c, d) {
-                    t /= d / 2;
-                    if (t < 1) return c / 2 * t * t * t + b;
-                    t -= 2;
-                    return c / 2 * (t * t * t + 2) + b;
-                }
-
-                window.requestAnimationFrame(step);
-            }
-        }
-    };
-
-    // Main application object
-    const FoodMexicoApp = {
-        // Initialize the application
-        init: function() {
-            this.updateCopyright();
-            this.initButtonAnimations();
-            this.initSocialLinks();
-            this.initKeyboardNavigation();
-            this.initAnimationObserver();
-            this.initErrorHandling();
-            this.initPerformanceOptimizations();
-            console.log('FoodMexico app initialized successfully');
-        },
-
-        // Update copyright year
-        updateCopyright: function() {
-            const yearElement = document.getElementById('current-year');
-            if (yearElement) {
-                yearElement.textContent = new Date().getFullYear();
-            }
-        },
-
-        // Initialize button animations and interactions
-        initButtonAnimations: function() {
-            const buttons = document.querySelectorAll('.restaurant-btn');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar año automáticamente
+            document.getElementById('current-year').textContent = new Date().getFullYear();
             
+            // Efecto hover para botones principales
+            const buttons = document.querySelectorAll('.restaurant-btn');
             buttons.forEach(btn => {
-                // Mouse enter effect
                 btn.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-5px)';
                 });
-
-                // Mouse leave effect
                 btn.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
-
-                // Click effect
-                btn.addEventListener('mousedown', function() {
-                    this.style.transform = 'translateY(-1px)';
-                });
-
-                btn.addEventListener('mouseup', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-
-                // Focus handling for accessibility
-                btn.addEventListener('focus', function() {
-                    this.style.transform = 'translateY(-3px)';
-                });
-
-                btn.addEventListener('blur', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-
-                // Handle broken links gracefully
-                btn.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    
-                    // Check if the linked page exists (basic check)
-                    if (href && (href.endsWith('.html') || href.endsWith('.htm'))) {
-                        // For demo purposes, show a loading state
-                        this.style.opacity = '0.7';
-                        this.style.pointerEvents = 'none';
-                        
-                        setTimeout(() => {
-                            this.style.opacity = '1';
-                            this.style.pointerEvents = 'auto';
-                        }, 1000);
-                    }
-                });
             });
-        },
-
-        // Initialize social media links
-        initSocialLinks: function() {
-            const socialLinks = document.querySelectorAll('.icon-content a');
             
-            socialLinks.forEach(link => {
-                // Add click tracking
-                link.addEventListener('click', function(e) {
-                    const platform = this.closest('.icon-content').getAttribute('data-social');
-                    console.log(`Social link clicked: ${platform}`);
-                    
-                    // Handle empty or invalid links
-                    if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
-                        e.preventDefault();
-                        console.warn(`No valid URL for ${platform}`);
-                        
-                        // Show a temporary message
-                        const tooltip = this.parentNode.querySelector('.tooltip');
-                        const originalText = tooltip.textContent;
-                        tooltip.textContent = 'Próximamente';
-                        tooltip.style.opacity = '1';
-                        tooltip.style.visibility = 'visible';
-                        
-                        setTimeout(() => {
-                            tooltip.textContent = originalText;
-                            tooltip.style.opacity = '0';
-                            tooltip.style.visibility = 'hidden';
-                        }, 2000);
-                    }
-                });
-
-                // Enhance keyboard navigation
-                link.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
+            // Simular carga progresiva
+            const elements = document.querySelectorAll('h1, h2, nav, .social-footer');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.15}s`;
             });
-        },
-
-        // Initialize keyboard navigation
-        initKeyboardNavigation: function() {
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // ESC key to focus skip link
-                if (e.key === 'Escape') {
-                    const skipLink = document.querySelector('.skip-link');
-                    if (skipLink) {
-                        skipLink.focus();
-                    }
-                }
-
-                // Alt + 1 for first restaurant
-                if (e.altKey && e.key === '1') {
-                    e.preventDefault();
-                    const firstRestaurant = document.querySelector('.pizza-btn');
-                    if (firstRestaurant) {
-                        firstRestaurant.focus();
-                    }
-                }
-
-                // Alt + 2 for second restaurant
-                if (e.altKey && e.key === '2') {
-                    e.preventDefault();
-                    const secondRestaurant = document.querySelector('.bread-btn');
-                    if (secondRestaurant) {
-                        secondRestaurant.focus();
-                    }
-                }
-            });
-
-            // Handle skip link
-            const skipLink = document.querySelector('.skip-link');
-            if (skipLink) {
-                skipLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.focus();
-                        utils.smoothScrollTo(target);
-                    }
-                });
-            }
-        },
-
-        // Initialize intersection observer for animations
-        initAnimationObserver: function() {
-            // Check if Intersection Observer is supported
-            if ('IntersectionObserver' in window) {
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                };
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.animationPlayState = 'running';
-                        }
-                    });
-                }, observerOptions);
-
-                // Observe elements with animations
-                const animatedElements = document.querySelectorAll('h1, h2, nav, .social-footer');
-                animatedElements.forEach((el, index) => {
-                    el.style.animationDelay = `${index * 0.15}s`;
-                    el.style.animationPlayState = 'paused';
-                    observer.observe(el);
-                });
-            }
-        },
-
-        // Initialize error handling
-        initErrorHandling: function() {
-            // Global error handler
-            window.addEventListener('error', function(e) {
-                console.error('JavaScript error:', e.error);
-                // In production, you might want to send this to a logging service
-            });
-
-            // Handle unhandled promise rejections
-            window.addEventListener('unhandledrejection', function(e) {
-                console.error('Unhandled promise rejection:', e.reason);
-                e.preventDefault();
-            });
-
-            // Handle image loading errors
-            document.addEventListener('error', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    console.warn('Image failed to load:', e.target.src);
-                    // Could implement fallback image here
-                }
-            }, true);
-        },
-
-        // Initialize performance optimizations
-        initPerformanceOptimizations: function() {
-            // Preload critical pages
-            const criticalLinks = document.querySelectorAll('.restaurant-btn');
-            criticalLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && href.endsWith('.html')) {
-                    // Create prefetch link
-                    const prefetchLink = document.createElement('link');
-                    prefetchLink.rel = 'prefetch';
-                    prefetchLink.href = href;
-                    document.head.appendChild(prefetchLink);
-                }
-            });
-
-            // Optimize animations based on user preferences
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.documentElement.style.setProperty('--transition-fast', '0ms');
-                document.documentElement.style.setProperty('--transition-normal', '0ms');
-                document.documentElement.style.setProperty('--transition-slow', '0ms');
-            }
-
-            // Handle viewport changes efficiently
-            const handleResize = utils.debounce(() => {
-                // Trigger any necessary recalculations here
-                console.log('Viewport resized');
-            }, 250);
-
-            window.addEventListener('resize', handleResize);
-        }
-    };
-
-    // Initialize the application when DOM is ready
-    domReady(() => {
-        FoodMexicoApp.init();
-    });
-
-    // Expose app to global scope for debugging (only in development)
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        window.FoodMexicoApp = FoodMexicoApp;
-    }
-
-})();
-
-</script>
+        });
+    </script>
 </body>
 </html>
