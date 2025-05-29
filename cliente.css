@@ -1,108 +1,202 @@
 :root {
-  --color-primario: #145a32;
-  --color-secundario: #f5b041;
-  --color-fondo: #fff9e6;
-  --color-texto: #222;
-  --color-navbg: #145a32;
-  --color-navtext: #fff;
-  --color-btn: #f5b041;
-  --color-btn-hover: #d4ac0d;
+    --color-primario: #145a32;
+    --color-secundario: #f5b041;
+    --color-fondo: #fff9e6;
+    --color-texto: #2A2118;
+    --color-navbg: #145a32;
+    --color-navtext: #fff;
+    --color-btn: #f5b041;
+    --color-btn-hover: #d4ac0d;
+    --color-borde: #C9B176;
+    --radius: 14px;
+    --sombra: 0 6px 24px rgba(42, 33, 24, 0.06);
+    --sombra-input: 0 2px 8px rgba(42, 33, 24, 0.04);
 }
 
 body {
-  background: var(--color-fondo);
-  color: var(--color-texto);
-  font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 
 .navbar {
-  background: var(--color-navbg);
-  padding: 0.5em 0;
+    background: var(--color-navbg);
+    padding: 0.5em 0;
+    box-shadow: 0 1px 10px rgba(20,90,50,0.06);
 }
 .navbar ul {
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .navbar a {
-  color: var(--color-navtext);
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.2s;
+    color: var(--color-navtext);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 1px;
+    padding: 0.2em 0.8em;
+    border-radius: 7px;
 }
-.navbar a.activo,
-.navbar a:hover {
-  color: var(--color-btn-hover);
+.navbar a.activo, .navbar a:hover {
+    color: var(--color-btn-hover);
+    background: rgba(213,172,13,0.11);
 }
 
-h1, h2, h3 {
-  color: var(--color-primario);
-  text-align: center;
+/* Título */
+h1, h2 {
+    color: var(--color-primario);
+    text-align: center;
+    margin-top: 1.7em;
+    font-family: 'EB Garamond', 'Cormorant Infant', serif;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+h2 {
+    font-size: 1.25em;
+    margin-top: 0.7em;
+    font-weight: 400;
+    letter-spacing: 1.2px;
 }
 
 .form-cliente {
-  background: #fff;
-  max-width: 400px;
-  margin: 2em auto;
-  padding: 2em;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
+    background: #fff;
+    max-width: 450px;
+    margin: 2.5em auto 2em auto;
+    padding: 2.5em 2em 2em 2em;
+    border-radius: var(--radius);
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px solid var(--color-borde);
+    animation: fadeInUp 0.8s;
 }
 
 .form-cliente label {
-  font-weight: bold;
-  color: var(--color-primario);
-  margin-bottom: 0.3em;
+    font-weight: 500;
+    color: var(--color-primario);
+    margin-bottom: 0.2em;
+    letter-spacing: 1px;
 }
 
 .form-cliente input,
 .form-cliente select,
 .form-cliente textarea {
-  padding: 0.7em;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1em;
-  background: #fafafa;
-  color: var(--color-texto);
-  margin-bottom: 0.5em;
+    padding: 0.7em 1em;
+    border: 1.5px solid #e1dcc7;
+    border-radius: 8px;
+    font-size: 1em;
+    background: #fafaf8;
+    color: var(--color-texto);
+    margin-bottom: 0.5em;
+    font-family: inherit;
+    box-shadow: var(--sombra-input);
+    outline: none;
+    transition: border 0.2s;
+}
+.form-cliente input:focus,
+.form-cliente select:focus,
+.form-cliente textarea:focus {
+    border: 1.5px solid var(--color-btn-hover);
+    background: #fffdf3;
+}
+
+.form-cliente textarea {
+    min-height: 80px;
+    resize: vertical;
 }
 
 .form-cliente button,
 .btn-principal {
-  background: var(--color-btn);
-  color: #fff;
-  border: none;
-  padding: 1em 1.5em;
-  border-radius: 8px;
-  font-size: 1.1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  margin-top: 1em;
+    background: linear-gradient(90deg, var(--color-btn), var(--color-btn-hover));
+    color: #fff;
+    border: none;
+    padding: 1em 1.5em;
+    border-radius: 8px;
+    font-size: 1.08em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.18s;
+    margin-top: 1em;
+    box-shadow: 0 2px 12px rgba(213,172,13,0.08);
+    letter-spacing: 1px;
 }
-
 .form-cliente button:hover,
 .btn-principal:hover {
-  background: var(--color-btn-hover);
-  color: #fff;
+    background: linear-gradient(90deg, var(--color-btn-hover), var(--color-btn));
+    color: #fff;
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Mensajes de error/exito */
+.mensaje-error {
+    background: #ffe6e6;
+    color: #b71c1c;
+    border: 1px solid #eb9e9e;
+    border-radius: 6px;
+    padding: 0.7em 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.mensaje-exito {
+    background: #e6ffe6;
+    color: #145a32;
+    border: 1px solid #81c784;
+    border-radius: 6px;
+    padding: 0.7em 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Footer mínimo y elegante */
+footer {
+    background: var(--color-navbg);
+    color: #fff;
+    text-align: center;
+    font-size: 0.93em;
+    padding: 0.6em 0 0.2em 0;
+    margin-top: 3em;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 -1px 8px rgba(20,90,50,0.10);
+}
+footer a {
+    color: var(--color-secundario);
+    text-decoration: none;
+    margin: 0 0.3em;
+    transition: color 0.18s;
+}
+footer a:hover {
+    color: var(--color-btn-hover);
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .form-cliente {
-    max-width: 95vw;
-    padding: 1em;
-  }
-  .navbar ul {
-    flex-direction: column;
-    gap: 1em;
-  }
+@media (max-width: 700px) {
+    .form-cliente {
+        max-width: 96vw;
+        padding: 1em;
+    }
+    .navbar ul {
+        flex-direction: column;
+        gap: 1em;
+    }
+    h1 {
+        font-size: 2.2em;
+    }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px);}
+    to   { opacity: 1; transform: translateY(0);}
 }
