@@ -36,11 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombre = panItem.getAttribute('data-pan');
             const precio = parseFloat(panItem.getAttribute('data-precio'));
             const input = panItem.querySelector('.cantidad-input');
-            const cantidad = parseInt(input.value);
+            let cantidad = parseInt(input.value);
 
+            // Si la cantidad es 0 o NaN, al presionar Agregar lo cambia a 1 automáticamente
             if (!cantidad || cantidad < 1) {
-                alert('Selecciona una cantidad mayor a 0.');
-                return;
+                cantidad = 1;
+                input.value = 1;
             }
 
             let pedido = JSON.parse(localStorage.getItem('pedidoJurassicPan')) || {items: []};
