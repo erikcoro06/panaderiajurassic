@@ -1,102 +1,127 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar notificaciones simples
+    // --- NAVBAR MENÚ MÓVIL HAMBURGUESA ---
+    const toggle = document.getElementById('navbar-toggle');
+    const menu = document.getElementById('navbar-menu');
+    if(toggle && menu) {
+        toggle.addEventListener('click', function() {
+            menu.classList.toggle('active');
+        });
+        // Cerrar el menú al hacer click en un enlace
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.remove('active'));
+        });
+    }
+
+    // --- FUNCIONALIDAD DE COMPLEMENTOS ---
+    // Función para mostrar notificaciones
     function showNotification(message) {
         const notification = document.createElement('div');
         notification.className = 'notificacion';
         notification.textContent = message;
         document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 2500);
+
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
     }
 
-    // Botón agregar pastel
-    document.querySelectorAll('.accion-btn.agregar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const pastelItem = this.closest('.pastel-item');
-            const eliminarBtn = pastelItem.querySelector('.eliminar');
-            this.classList.add('hidden');
-            eliminarBtn.classList.remove('hidden');
-            const cantidadInput = pastelItem.querySelector('.cantidad-input');
-            if (parseInt(cantidadInput.value) === 0) {
-                cantidadInput.value = 1;
+    // Manejar eventos de los botones de cantidad
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('.quantity-input');
+            let value = parseInt(input.value);
+
+            if (isNaN(value) || value < 0) value = 0;
+
+            if (this.classList.contains('plus')) {
+                input.value = value + 1;
+            } else if (this.classList.contains('minus')) {
+                input.value = Math.max(0, value - 1);
             }
+
+            updateCartButtonState(input);
         });
     });
 
-    // Botón eliminar pastel
-    document.querySelectorAll('.accion-btn.eliminar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const pastelItem = this.closest('.pastel-item');
-            const agregarBtn = pastelItem.querySelector('.agregar');
-            this.classList.add('hidden');
-            agregarBtn.classList.remove('hidden');
-            const cantidadInput = pastelItem.querySelector('.cantidad-input');
-            cantidadInput.value = 0;
+    // Manejar cambios en los inputs de cantidad
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('input', function() {
+            // Solo permite números, elimina letras
+            let val = parseInt(this.value.replace(/\D/g, ''));
+            if (isNaN(val) || val < 0) val = 0;
+            this.value = val;
+            updateCartButtonState(this);
         });
     });
 
-    // Botón aumentar cantidad
-    document.querySelectorAll('.cantidad-btn.aumentar').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
-            input.value = parseInt(input.value) + 1;
+    // Actualizar botones Agregar/Eliminar según cantidad
+    function updateCartButtonState(input) {
+        const card = input.closest('.product-card');
+        const addBtn = card.querySelector('.add-to-cart:not(.remove-btn)');
+        const removeBtn = card.querySelector('.remove-btn');
+        const quantity = parseInt(input.value);
+
+        if (quantity > 0) {
+            addBtn.style.display = 'none';
+            removeBtn.style.display = 'block';
+        } else {
+            addBtn.style.display = 'block';
+            removeBtn.style.display = 'none';
+        }
+    }
+
+    // Botón Agregar al carrito
+    document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.closest('.product-info').querySelector('.quantity-input');
+            let value = parseInt(input.value);
+            if (isNaN(value) || value < 0) value = 0;
+            input.value = value + 1;
+            updateCartButtonState(input);
+            showNotification('Producto agregado al carrito');
         });
     });
 
-    // Botón disminuir cantidad
-    document.querySelectorAll('.cantidad-btn.disminuir').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
-            if (parseInt(input.value) > 0) {
-                input.value = parseInt(input.value) - 1;
-                if (parseInt(input.value) === 0) {
-                    const pastelItem = this.closest('.pastel-item');
-                    const agregarBtn = pastelItem.querySelector('.agregar');
-                    const eliminarBtn = pastelItem.querySelector('.eliminar');
-                    agregarBtn.classList.remove('hidden');
-                    eliminarBtn.classList.add('hidden');
-                }
-            }
+    // Botón Eliminar del carrito
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.closest('.product-info').querySelector('.quantity-input');
+            input.value = 0;
+            updateCartButtonState(input);
+            showNotification('Producto eliminado del carrito');
         });
     });
 
-    // Prevenir valores negativos manualmente
-    document.querySelectorAll('.cantidad-input').forEach(input => {
-        input.addEventListener('change', function() {
-            if (parseInt(this.value) < 0 || isNaN(parseInt(this.value))) {
-                this.value = 0;
-            }
-        });
-    });
-
-    // Botón continuar
-    const continuarBtn = document.getElementById('continuar-btn');
-    if (continuarBtn) {
-        continuarBtn.addEventListener('click', function() {
-            guardarPastelesSeleccionadosYRedirigir();
+    // Botón Finalizar Compra
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener('click', function(e) {
+            e.preventDefault();
+            guardarComplementosSeleccionadosYRedirigir();
         });
     }
 
-    // Menú "Datos del Cliente"
+    // Interceptar el menú 'Datos del Cliente'
     const linkCliente = document.getElementById('link-cliente');
     if (linkCliente) {
         linkCliente.addEventListener('click', function(e) {
             e.preventDefault();
-            guardarPastelesSeleccionadosYRedirigir();
+            guardarComplementosSeleccionadosYRedirigir();
         });
     }
 });
 
-function guardarPastelesSeleccionadosYRedirigir() {
-    // Recolectar los pasteles seleccionados
-    const pastelesSeleccionados = [];
-    document.querySelectorAll('.pastel-item').forEach(pastelItem => {
-        const cantidadInput = pastelItem.querySelector('.cantidad-input');
-        const cantidad = parseInt(cantidadInput.value);
+function guardarComplementosSeleccionadosYRedirigir() {
+    const productosSeleccionados = [];
+    document.querySelectorAll('.product-card').forEach(card => {
+        let cantidad = parseInt(card.querySelector('.quantity-input').value);
+        if (isNaN(cantidad) || cantidad < 0) cantidad = 0;
         if (cantidad > 0) {
-            const nombre = pastelItem.getAttribute('data-pastel') || pastelItem.dataset.pastel;
-            const precio = parseFloat(pastelItem.getAttribute('data-precio') || pastelItem.dataset.precio);
-            const subtotal = cantidad * precio;
-            pastelesSeleccionados.push({
+            const nombre = card.querySelector('.product-name').textContent;
+            const precio = parseFloat(card.querySelector('.product-price').textContent);
+            const subtotal = precio * cantidad;
+
+            productosSeleccionados.push({
                 nombre: nombre,
                 cantidad: cantidad,
                 precio: precio,
@@ -105,28 +130,29 @@ function guardarPastelesSeleccionadosYRedirigir() {
         }
     });
 
-    if (pastelesSeleccionados.length === 0) {
-        alert('Por favor selecciona al menos un pastel antes de continuar.');
+    if (productosSeleccionados.length === 0) {
+        alert('Por favor selecciona al menos un producto');
         return;
     }
 
-    // Leer pedido existente
+    // Leer el pedido existente en localStorage
     const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
     let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
 
-    // Fusionar productos
-    pastelesSeleccionados.forEach(nuevoPastel => {
-        const existente = pedidoActual.items.find(item => item.nombre === nuevoPastel.nombre);
-        if (existente) {
-            existente.cantidad += nuevoPastel.cantidad;
-            existente.subtotal += nuevoPastel.subtotal;
+    // Fusionar los productos actuales con los ya existentes
+    productosSeleccionados.forEach(nuevoProducto => {
+        const productoExistente = pedidoActual.items.find(item => item.nombre === nuevoProducto.nombre);
+        if (productoExistente) {
+            productoExistente.cantidad += nuevoProducto.cantidad;
+            productoExistente.subtotal += nuevoProducto.subtotal;
         } else {
-            pedidoActual.items.push(nuevoPastel);
+            pedidoActual.items.push(nuevoProducto);
         }
     });
 
     pedidoActual.total = pedidoActual.items.reduce((sum, item) => sum + item.subtotal, 0);
 
     localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedidoActual));
+
     window.location.href = 'cliente.html';
 }
