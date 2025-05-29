@@ -279,7 +279,11 @@ document.addEventListener('DOMContentLoaded', function () {
             numeroPedido: 'JP-' + Math.floor(Math.random() * 1000000)
         };
         localStorage.setItem('pedidoCompletoJurassicPan', JSON.stringify(pedidoCompleto));
+        // Borra los datos temporales del resumen y del cliente
         localStorage.removeItem('pedidoJurassicPan');
+        localStorage.removeItem('cliente_nombre');
+        localStorage.removeItem('cliente_telefono');
+        localStorage.removeItem('cliente_correo');
         window.location.href = 'ticket.html';
     }
 
