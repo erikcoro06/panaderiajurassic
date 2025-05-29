@@ -361,3 +361,41 @@
         .pastel-item:nth-child(6) { animation-delay: 0.6s; }
         .pastel-item:nth-child(7) { animation-delay: 0.7s; }
         .pastel-item:nth-child(8) { animation-delay: 0.8s; }
+
+/* Menú de navegación */
+.navbar {
+  background-color: #231f20;
+  padding: 0.5em 0;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  text-align: center;
+}
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  gap: 2em;
+}
+.navbar li {
+  margin: 0;
+  padding: 0;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: color 0.2s, background 0.2s;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  display: block;
+}
+.navbar a:hover,
+.navbar a:focus {
+  background-color: #f2d16b;
+  color: #231f20;
+}
