@@ -1,76 +1,82 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Función para manejar el botón de agregar/eliminar
+    // Mostrar notificaciones simples
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notificacion';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 2500);
+    }
+
+    // Botón agregar pastel
     document.querySelectorAll('.accion-btn.agregar').forEach(btn => {
         btn.addEventListener('click', function() {
             const pastelItem = this.closest('.pastel-item');
             const eliminarBtn = pastelItem.querySelector('.eliminar');
-            
             this.classList.add('hidden');
             eliminarBtn.classList.remove('hidden');
-            
             const cantidadInput = pastelItem.querySelector('.cantidad-input');
-            if (cantidadInput.value == 0) {
+            if (parseInt(cantidadInput.value) === 0) {
                 cantidadInput.value = 1;
             }
         });
     });
-    
-    // Función para manejar el botón de eliminar
+
+    // Botón eliminar pastel
     document.querySelectorAll('.accion-btn.eliminar').forEach(btn => {
         btn.addEventListener('click', function() {
             const pastelItem = this.closest('.pastel-item');
             const agregarBtn = pastelItem.querySelector('.agregar');
-            
             this.classList.add('hidden');
             agregarBtn.classList.remove('hidden');
-            
             const cantidadInput = pastelItem.querySelector('.cantidad-input');
             cantidadInput.value = 0;
         });
     });
-    
-    // Función para aumentar cantidad
+
+    // Botón aumentar cantidad
     document.querySelectorAll('.cantidad-btn.aumentar').forEach(btn => {
         btn.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
             input.value = parseInt(input.value) + 1;
         });
     });
-    
-    // Función para disminuir cantidad
+
+    // Botón disminuir cantidad
     document.querySelectorAll('.cantidad-btn.disminuir').forEach(btn => {
         btn.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
             if (parseInt(input.value) > 0) {
                 input.value = parseInt(input.value) - 1;
-                
-                if (input.value == 0) {
+                if (parseInt(input.value) === 0) {
                     const pastelItem = this.closest('.pastel-item');
                     const agregarBtn = pastelItem.querySelector('.agregar');
                     const eliminarBtn = pastelItem.querySelector('.eliminar');
-                    
                     agregarBtn.classList.remove('hidden');
                     eliminarBtn.classList.add('hidden');
                 }
             }
         });
     });
-    
-    // Validar que no se puedan introducir números negativos manualmente
+
+    // Prevenir valores negativos manualmente
     document.querySelectorAll('.cantidad-input').forEach(input => {
         input.addEventListener('change', function() {
-            if (parseInt(this.value) < 0) {
+            if (parseInt(this.value) < 0 || isNaN(parseInt(this.value))) {
                 this.value = 0;
             }
         });
     });
-    
-    // Manejar el botón de continuar
-    document.getElementById('continuar-btn').addEventListener('click', function() {
-        guardarPastelesSeleccionadosYRedirigir();
-    });
 
-    // Interceptar el menú "Datos del Cliente"
+    // Botón continuar
+    const continuarBtn = document.getElementById('continuar-btn');
+    if (continuarBtn) {
+        continuarBtn.addEventListener('click', function() {
+            guardarPastelesSeleccionadosYRedirigir();
+        });
+    }
+
+    // Menú "Datos del Cliente"
     const linkCliente = document.getElementById('link-cliente');
     if (linkCliente) {
         linkCliente.addEventListener('click', function(e) {
@@ -81,47 +87,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function guardarPastelesSeleccionadosYRedirigir() {
-    const nuevosPasteles = {
-        items: [],
-        total: 0,
-        tipo: "pasteles"
-    };
-
+    // Recolectar los pasteles seleccionados
+    const pastelesSeleccionados = [];
     document.querySelectorAll('.pastel-item').forEach(pastelItem => {
-        const cantidad = parseInt(pastelItem.querySelector('.cantidad-input').value);
+        const cantidadInput = pastelItem.querySelector('.cantidad-input');
+        const cantidad = parseInt(cantidadInput.value);
         if (cantidad > 0) {
-            const nombre = pastelItem.dataset.pastel;
-            const precio = parseFloat(pastelItem.dataset.precio);
+            const nombre = pastelItem.getAttribute('data-pastel') || pastelItem.dataset.pastel;
+            const precio = parseFloat(pastelItem.getAttribute('data-precio') || pastelItem.dataset.precio);
             const subtotal = cantidad * precio;
-            
-            nuevosPasteles.items.push({
+            pastelesSeleccionados.push({
                 nombre: nombre,
                 cantidad: cantidad,
                 precio: precio,
                 subtotal: subtotal
             });
-            
-            nuevosPasteles.total += subtotal;
         }
     });
 
-    if (nuevosPasteles.items.length === 0) {
+    if (pastelesSeleccionados.length === 0) {
         alert('Por favor selecciona al menos un pastel antes de continuar.');
         return;
     }
 
-    // Leer el pedido existente en localStorage
+    // Leer pedido existente
     const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
     let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
 
-    // Fusionar los productos actuales con los ya existentes
-    nuevosPasteles.items.forEach(nuevoProducto => {
-        const productoExistente = pedidoActual.items.find(item => item.nombre === nuevoProducto.nombre);
-        if (productoExistente) {
-            productoExistente.cantidad += nuevoProducto.cantidad;
-            productoExistente.subtotal += nuevoProducto.subtotal;
+    // Fusionar productos
+    pastelesSeleccionados.forEach(nuevoPastel => {
+        const existente = pedidoActual.items.find(item => item.nombre === nuevoPastel.nombre);
+        if (existente) {
+            existente.cantidad += nuevoPastel.cantidad;
+            existente.subtotal += nuevoPastel.subtotal;
         } else {
-            pedidoActual.items.push(nuevoProducto);
+            pedidoActual.items.push(nuevoPastel);
         }
     });
 
