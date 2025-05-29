@@ -1,4 +1,4 @@
-
+* CSS Reset and Base Styles */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -495,3 +495,4 @@ nav {
     display: none;
   }
 }
+que en este código de css pueda poner una imagen de fondo
