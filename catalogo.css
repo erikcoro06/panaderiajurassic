@@ -7,12 +7,16 @@
   --dorado: #D4AF37;
   --texto: #3E2723;
   --texto-claro: #5D4037;
+  --color-navbg: #2e230c;      
+  --color-navtext: #fff;
+  --color-btn-hover: #d4ac0d;
+  --color-secundario: #f5b041;
   --sombra-suave: 0 4px 12px rgba(78, 52, 46, 0.1);
   --sombra-elevacion: 0 8px 24px rgba(78, 52, 46, 0.15);
   --transicion-rapida: all 0.25s ease;
   --transicion-suave: all 0.4s cubic-bezier(0.28, 0.47, 0.29, 0.99);
+  --radius-nav: 11px;
 }
-
 /* Tipografía elegante */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap');
 
@@ -362,7 +366,7 @@ footer {
 
 /* Menú de navegación */
 .navbar {
-  background: var(--color-navbg, #145a32);
+  background: var(--color-navbg);
   box-shadow: 0 1px 8px rgba(20,90,50,0.07);
   position: sticky;
   top: 0;
@@ -377,11 +381,13 @@ footer {
   padding: 0.5em 1em;
 }
 .navbar-logo a {
-  color: var(--color-navtext, #fff);
+  color: var(--color-navtext);
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.25em;
   text-decoration: none;
   letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
 }
 .navbar-menu {
   display: flex;
@@ -391,18 +397,26 @@ footer {
   padding: 0;
 }
 .navbar-menu li a {
-  color: var(--color-navtext, #fff);
+  color: var(--color-navtext);
   text-decoration: none;
-  padding: 0.3em 1em;
-  border-radius: 7px;
+  padding: 0.37em 1.2em;
+  border-radius: var(--radius-nav);
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  letter-spacing: 1.2px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  position: relative;
 }
+
 .navbar-menu li a.activo,
 .navbar-menu li a:hover {
-  background: rgba(213,172,13,0.13);
-  color: var(--color-btn-hover, #d4ac0d);
+  background: rgba(213,172,13,0.15);
+  color: var(--color-btn-hover);
+  box-shadow: 0 2px 8px 0 rgba(212, 175, 55, 0.07);
+  text-shadow: 0 1px 2px #fff2;
 }
+
 .navbar-toggle {
   display: none;
   background: none;
@@ -410,12 +424,13 @@ footer {
   cursor: pointer;
   flex-direction: column;
   gap: 4px;
+  margin-left: 1.5em;
 }
 .navbar-toggle .bar {
   display: block;
   width: 26px;
   height: 3px;
-  background: var(--color-secundario, #f5b041);
+  background: var(--color-secundario);
   border-radius: 2px;
   transition: 0.3s;
 }
@@ -426,11 +441,14 @@ footer {
     display: none;
     flex-direction: column;
     width: 100%;
-    background: var(--color-navbg, #145a32);
+    background: var(--color-navbg);
     position: absolute;
     left: 0;
     top: 100%;
     box-shadow: 0 6px 12px rgba(20,90,50,0.09);
+    border-radius: 0 0 var(--radius-nav) var(--radius-nav);
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
   }
   .navbar-menu.active {
     display: flex;
@@ -442,8 +460,33 @@ footer {
   .navbar-container {
     position: relative;
   }
+  .navbar-menu li {
+    margin-bottom: 0.3em;
+  }
+  .navbar-menu li a {
+    font-size: 1.12em;
+    padding: 0.8em 1em;
+    border-radius: 9px;
+    width: 90vw;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 @keyframes fadeInDown {
   from { opacity:0; transform: translateY(-20px);}
   to { opacity:1; transform: translateY(0);}
+}
+
+/* Sombra sutil en el nav para distinguir del contenido */
+@media (max-width: 800px) {
+  .navbar {
+    box-shadow: 0 4px 18px rgba(20,90,50,0.13);
+  }
+}
+
+/* Opcional: Transición de apertura/cierre */
+.navbar-menu,
+.navbar-menu.active {
+  transition: all 0.3s cubic-bezier(0.28, 0.47, 0.29, 0.99);
 }
