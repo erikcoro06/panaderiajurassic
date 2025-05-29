@@ -67,61 +67,66 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Manejar el botón de continuar
     document.getElementById('continuar-btn').addEventListener('click', function() {
-        const nuevosPasteles = {
-            items: [],
-            total: 0,
-            tipo: "pasteles" // Para identificar que es un pedido de pasteles
-        };
-        
-        // Recolectar todos los pasteles con cantidad > 0
-        document.querySelectorAll('.pastel-item').forEach(pastelItem => {
-            const cantidad = parseInt(pastelItem.querySelector('.cantidad-input').value);
-            if (cantidad > 0) {
-                const nombre = pastelItem.dataset.pastel;
-                const precio = parseFloat(pastelItem.dataset.precio);
-                const subtotal = cantidad * precio;
-                
-                nuevosPasteles.items.push({
-                    nombre: nombre,
-                    cantidad: cantidad,
-                    precio: precio,
-                    subtotal: subtotal
-                });
-                
-                nuevosPasteles.total += subtotal;
-            }
-        });
-        
-        // Validar que se haya seleccionado al menos un pastel
-        if (nuevosPasteles.items.length === 0) {
-            alert('Por favor selecciona al menos un pastel antes de continuar.');
-            return;
-        }
-        
-        // Leer el pedido existente en localStorage
-        const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
-        let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
-
-        // Fusionar los productos actuales con los ya existentes
-        nuevosPasteles.items.forEach(nuevoProducto => {
-            const productoExistente = pedidoActual.items.find(item => item.nombre === nuevoProducto.nombre);
-            if (productoExistente) {
-                // Si el producto ya existe, sumar cantidades y subtotales
-                productoExistente.cantidad += nuevoProducto.cantidad;
-                productoExistente.subtotal += nuevoProducto.subtotal;
-            } else {
-                // Si no existe, agregarlo al pedido
-                pedidoActual.items.push(nuevoProducto);
-            }
-        });
-
-        // Actualizar el total del pedido
-        pedidoActual.total = pedidoActual.items.reduce((sum, item) => sum + item.subtotal, 0);
-
-        // Guardar el pedido actualizado en localStorage
-        localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedidoActual));
-
-        // Redirigir a la página de datos del cliente
-        window.location.href = 'cliente.html';
+        guardarPastelesSeleccionadosYRedirigir();
     });
+
+    // Interceptar el menú "Datos del Cliente"
+    const linkCliente = document.getElementById('link-cliente');
+    if (linkCliente) {
+        linkCliente.addEventListener('click', function(e) {
+            e.preventDefault();
+            guardarPastelesSeleccionadosYRedirigir();
+        });
+    }
 });
+
+function guardarPastelesSeleccionadosYRedirigir() {
+    const nuevosPasteles = {
+        items: [],
+        total: 0,
+        tipo: "pasteles"
+    };
+
+    document.querySelectorAll('.pastel-item').forEach(pastelItem => {
+        const cantidad = parseInt(pastelItem.querySelector('.cantidad-input').value);
+        if (cantidad > 0) {
+            const nombre = pastelItem.dataset.pastel;
+            const precio = parseFloat(pastelItem.dataset.precio);
+            const subtotal = cantidad * precio;
+            
+            nuevosPasteles.items.push({
+                nombre: nombre,
+                cantidad: cantidad,
+                precio: precio,
+                subtotal: subtotal
+            });
+            
+            nuevosPasteles.total += subtotal;
+        }
+    });
+
+    if (nuevosPasteles.items.length === 0) {
+        alert('Por favor selecciona al menos un pastel antes de continuar.');
+        return;
+    }
+
+    // Leer el pedido existente en localStorage
+    const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
+    let pedidoActual = pedidoGuardado ? JSON.parse(pedidoGuardado) : { items: [] };
+
+    // Fusionar los productos actuales con los ya existentes
+    nuevosPasteles.items.forEach(nuevoProducto => {
+        const productoExistente = pedidoActual.items.find(item => item.nombre === nuevoProducto.nombre);
+        if (productoExistente) {
+            productoExistente.cantidad += nuevoProducto.cantidad;
+            productoExistente.subtotal += nuevoProducto.subtotal;
+        } else {
+            pedidoActual.items.push(nuevoProducto);
+        }
+    });
+
+    pedidoActual.total = pedidoActual.items.reduce((sum, item) => sum + item.subtotal, 0);
+
+    localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedidoActual));
+    window.location.href = 'cliente.html';
+}
