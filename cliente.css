@@ -9,7 +9,7 @@
     --color-btn-hover: #d4ac0d;
     --color-borde: #C9B176;
     --radius: 14px;
-    --sombra: 0 6px 24px rgba(42, 33, 24, 0.06);
+    --sombra: 0 6px 24px rgba(42, 33, 24, 0.08);
     --sombra-input: 0 2px 8px rgba(42, 33, 24, 0.04);
 }
 
@@ -25,7 +25,7 @@ body {
 .navbar {
     background: var(--color-navbg);
     padding: 0.5em 0;
-    box-shadow: 0 1px 10px rgba(20,90,50,0.06);
+    box-shadow: 0 1px 10px rgba(20,90,50,0.07);
 }
 .navbar ul {
     display: flex;
@@ -39,33 +39,34 @@ body {
     color: var(--color-navtext);
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.2s;
     letter-spacing: 1px;
-    padding: 0.2em 0.8em;
+    padding: 0.3em 1em;
     border-radius: 7px;
 }
 .navbar a.activo, .navbar a:hover {
     color: var(--color-btn-hover);
-    background: rgba(213,172,13,0.11);
+    background: rgba(213,172,13,0.13);
 }
 
-/* Título */
+/* Encabezados */
 h1, h2 {
     color: var(--color-primario);
     text-align: center;
-    margin-top: 1.7em;
+    margin-top: 1.5em;
     font-family: 'EB Garamond', 'Cormorant Infant', serif;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.3px;
 }
 
 h2 {
-    font-size: 1.25em;
-    margin-top: 0.7em;
+    font-size: 1.17em;
+    margin-top: 0.2em;
     font-weight: 400;
-    letter-spacing: 1.2px;
+    letter-spacing: 1px;
 }
 
+/* Formulario */
 .form-cliente {
     background: #fff;
     max-width: 450px;
@@ -75,7 +76,7 @@ h2 {
     box-shadow: var(--sombra);
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.2em;
     border: 2px solid var(--color-borde);
     animation: fadeInUp 0.8s;
 }
@@ -83,7 +84,7 @@ h2 {
 .form-cliente label {
     font-weight: 500;
     color: var(--color-primario);
-    margin-bottom: 0.2em;
+    margin-bottom: 0.15em;
     letter-spacing: 1px;
 }
 
@@ -100,7 +101,7 @@ h2 {
     font-family: inherit;
     box-shadow: var(--sombra-input);
     outline: none;
-    transition: border 0.2s;
+    transition: border 0.2s, background 0.2s;
 }
 .form-cliente input:focus,
 .form-cliente select:focus,
@@ -192,7 +193,7 @@ footer a:hover {
         gap: 1em;
     }
     h1 {
-        font-size: 2.2em;
+        font-size: 2.15em;
     }
 }
 
