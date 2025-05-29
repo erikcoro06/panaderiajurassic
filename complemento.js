@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- MENÚ NAVBAR RESPONSIVE ---
+    const toggle = document.getElementById('navbar-toggle');
+    const menu = document.getElementById('navbar-menu');
+    if(toggle && menu) {
+        toggle.addEventListener('click', function() {
+            menu.classList.toggle('active');
+        });
+        // Cerrar menú al hacer click en un enlace (opcional)
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.remove('active'));
+        });
+    }
+
+    // --- FUNCIONALIDAD DE COMPLEMENTOS ---
     // Función para mostrar notificaciones
     function showNotification(message) {
         const notification = document.createElement('div');
@@ -17,10 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const input = this.parentElement.querySelector('.quantity-input');
             let value = parseInt(input.value);
 
+            if (isNaN(value) || value < 0) value = 0;
+
             if (this.classList.contains('plus')) {
                 input.value = value + 1;
-            } else if (this.classList.contains('minus') && value > 0) {
-                input.value = value - 1;
+            } else if (this.classList.contains('minus')) {
+                input.value = Math.max(0, value - 1);
             }
 
             updateCartButtonState(input);
@@ -29,8 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Manejar cambios en los inputs de cantidad
     document.querySelectorAll('.quantity-input').forEach(input => {
-        input.addEventListener('change', function() {
-            if (this.value < 0) this.value = 0;
+        input.addEventListener('input', function() {
+            // Remueve letras, solo permite números
+            let val = parseInt(this.value.replace(/\D/g, ''));
+            if (isNaN(val) || val < 0) val = 0;
+            this.value = val;
             updateCartButtonState(this);
         });
     });
@@ -55,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.closest('.product-info').querySelector('.quantity-input');
-            input.value = parseInt(input.value) + 1;
+            let value = parseInt(input.value);
+            if (isNaN(value) || value < 0) value = 0;
+            input.value = value + 1;
             updateCartButtonState(input);
             showNotification('Producto agregado al carrito');
         });
@@ -93,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function guardarComplementosSeleccionadosYRedirigir() {
     const productosSeleccionados = [];
     document.querySelectorAll('.product-card').forEach(card => {
-        const cantidad = parseInt(card.querySelector('.quantity-input').value);
+        let cantidad = parseInt(card.querySelector('.quantity-input').value);
+        if (isNaN(cantidad) || cantidad < 0) cantidad = 0;
         if (cantidad > 0) {
             const nombre = card.querySelector('.product-name').textContent;
             const precio = parseFloat(card.querySelector('.product-price').textContent);
