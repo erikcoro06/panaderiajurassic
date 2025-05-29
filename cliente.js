@@ -1,250 +1,286 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // ==== Elementos del DOM ====
+    // === Variables y elementos ===
     const tablaProductos = document.getElementById('tabla-productos');
     const totalPedidoElement = document.getElementById('total-pedido');
+    let pedido = obtenerPedidoGuardado();
+    let totalPedido = 0;
+    let datosPago = {};
+    let datosEnvio = {};
+    let datosCliente = {};
+
+    // Mostrar productos
+    if (!pedido || !Array.isArray(pedido.items) || pedido.items.length === 0) {
+        alert('No hay productos en tu pedido. Serás redirigido al catálogo.');
+        window.location.href = 'catalogo.html';
+        return;
+    }
+    tablaProductos.innerHTML = "";
+    pedido.items.forEach(item => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td>${item.nombre || "-"}</td>
+            <td>${item.cantidad || 0}</td>
+            <td>$${(item.precio || 0).toFixed(2)}</td>
+            <td>$${(item.subtotal || 0).toFixed(2)}</td>
+        `;
+        tablaProductos.appendChild(fila);
+        totalPedido += item.subtotal || 0;
+    });
+    totalPedidoElement.textContent = `$${totalPedido.toFixed(2)}`;
+
+    // === Formulario 1: Método de pago ===
+    const formMetodoPago = document.getElementById('form-metodo-pago');
     const efectivoSection = document.getElementById('efectivo-section');
     const tarjetaSection = document.getElementById('tarjeta-section');
     const transferenciaSection = document.getElementById('transferencia-section');
     const mensajeCambio = document.getElementById('mensaje-cambio');
-    const formDatosCliente = document.getElementById('datos-cliente');
-
-    // Navegación
-    const btnPanes = document.getElementById('btn-panes');
-    const btnPasteles = document.getElementById('btn-pasteles');
-    const btnComplementos = document.getElementById('btn-complementos');
-    const btnVolver = document.getElementById('btn-volver');
-
-    // ==== Recuperar y mostrar datos del cliente ====
-    ['nombre', 'telefono', 'correo'].forEach(campo => {
-        const valor = localStorage.getItem(`cliente_${campo}`);
-        if (valor) document.getElementById(campo).value = valor;
+    formMetodoPago.addEventListener('change', function (e) {
+        const metodo = formMetodoPago.querySelector('input[name="metodo-pago"]:checked');
+        mostrarSeccionPago(metodo ? metodo.value : null);
     });
+    // Denominaciones rápido
+    document.querySelectorAll('.btn-denominacion').forEach(btn => {
+        btn.onclick = () => {
+            document.getElementById('monto-efectivo').value = btn.dataset.monto;
+            calcularCambio();
+        };
+    });
+    document.getElementById('monto-efectivo').addEventListener('input', calcularCambio);
 
-    // ==== Recuperar pedido ====
-    let pedido = obtenerPedidoGuardado();
-
-    if (!pedido || !Array.isArray(pedido.items) || pedido.items.length === 0) {
-        mostrarAlertaYRedirigir('No hay productos en tu pedido. Serás redirigido al catálogo.', 'pan.html');
-        return;
+    function mostrarSeccionPago(metodo) {
+        efectivoSection.classList.add('hidden');
+        tarjetaSection.classList.add('hidden');
+        transferenciaSection.classList.add('hidden');
+        if (metodo === 'efectivo') {
+            efectivoSection.classList.remove('hidden');
+            calcularCambio();
+        } else if (metodo === 'tarjeta') {
+            tarjetaSection.classList.remove('hidden');
+        } else if (metodo === 'transferencia') {
+            transferenciaSection.classList.remove('hidden');
+            document.getElementById('monto-transferencia').value = totalPedido.toFixed(2);
+            document.getElementById('referencia-id').textContent = generarReferencia();
+        }
     }
 
-    // ==== Mostrar productos en la tabla ====
-    let totalPedido = 0;
-    pedido.items.forEach(item => {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `
-            <td>${item.nombre}</td>
-            <td class="cantidad-col">${item.cantidad}</td>
-            <td class="precio-col">$${item.precio.toFixed(2)}</td>
-            <td class="subtotal-col">$${item.subtotal.toFixed(2)}</td>
-        `;
-        tablaProductos.appendChild(fila);
-        totalPedido += item.subtotal;
+    function calcularCambio() {
+        const monto = parseFloat(document.getElementById('monto-efectivo').value) || 0;
+        if (monto >= totalPedido) {
+            const cambio = monto - totalPedido;
+            mensajeCambio.innerHTML = `<span class="cambio-positivo">Cambio: $${cambio.toFixed(2)}</span>`;
+            mensajeCambio.style.backgroundColor = 'rgba(90, 143, 90, 0.1)';
+        } else {
+            const faltante = totalPedido - monto;
+            mensajeCambio.innerHTML = `<span class="cambio-negativo">Faltan: $${faltante.toFixed(2)}</span>`;
+            mensajeCambio.style.backgroundColor = 'rgba(196, 86, 86, 0.1)';
+        }
+    }
+
+    formMetodoPago.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const metodo = formMetodoPago.querySelector('input[name="metodo-pago"]:checked');
+        if (!metodo) {
+            alert('Selecciona un método de pago');
+            return;
+        }
+        if (!validarMetodoPago(metodo.value)) return;
+        datosPago = recolectarDatosPago(metodo.value);
+        // Siguiente formulario
+        document.getElementById('form-metodo-pago').classList.add('hidden');
+        document.getElementById('form-tipo-envio').classList.remove('hidden');
     });
-    totalPedidoElement.textContent = `$${totalPedido.toFixed(2)}`;
 
-    configurarMetodosPago(totalPedido);
-    configurarNavegacion();
+    function validarMetodoPago(metodo) {
+        if (metodo === 'efectivo') {
+            const monto = parseFloat(document.getElementById('monto-efectivo').value) || 0;
+            if (monto < totalPedido) {
+                alert('El monto en efectivo debe ser mayor o igual al total del pedido.');
+                return false;
+            }
+        } else if (metodo === 'tarjeta') {
+            const numero = document.getElementById('numero-tarjeta').value.trim();
+            const venc = document.getElementById('vencimiento').value.trim();
+            const cvv = document.getElementById('cvv').value.trim();
+            const tipo = document.querySelector('input[name="tipo-tarjeta"]:checked');
+            if (!numero || !/^\d{16}$/.test(numero)) {
+                alert('Ingresa un número de tarjeta válido (16 dígitos).');
+                return false;
+            }
+            if (!venc) {
+                alert('Selecciona la fecha de vencimiento.');
+                return false;
+            }
+            if (!cvv || !/^\d{3,4}$/.test(cvv)) {
+                alert('Ingresa un CVV válido (3 o 4 dígitos).');
+                return false;
+            }
+            if (!tipo) {
+                alert('Selecciona el tipo de tarjeta.');
+                return false;
+            }
+        } else if (metodo === 'transferencia') {
+            const banco = document.getElementById('banco').value;
+            const cuenta = document.getElementById('numero-cuenta').value.trim();
+            const nombre = document.getElementById('nombre-destinatario').value.trim();
+            if (!banco) {
+                alert('Selecciona el banco.');
+                return false;
+            }
+            if (!cuenta || !/^\d{10,20}$/.test(cuenta)) {
+                alert('Ingresa un número de cuenta válido (10-20 dígitos).');
+                return false;
+            }
+            if (!nombre) {
+                alert('Ingresa el nombre del destinatario.');
+                return false;
+            }
+        }
+        return true;
+    }
 
-    // ==== Manejo del envío del formulario ====
+    function recolectarDatosPago(metodo) {
+        if (metodo === 'efectivo') {
+            const monto = parseFloat(document.getElementById('monto-efectivo').value) || 0;
+            return { metodo: 'efectivo', montoRecibido: monto, cambio: monto - totalPedido };
+        } else if (metodo === 'tarjeta') {
+            const numero = document.getElementById('numero-tarjeta').value.trim();
+            const tipo = document.querySelector('input[name="tipo-tarjeta"]:checked').value;
+            return { metodo: 'tarjeta', tipo, ultimosDigitos: numero.slice(-4) };
+        } else if (metodo === 'transferencia') {
+            const banco = document.getElementById('banco').value;
+            const cuenta = document.getElementById('numero-cuenta').value.trim();
+            const nombre = document.getElementById('nombre-destinatario').value.trim();
+            const referencia = document.getElementById('referencia-id').textContent;
+            return { metodo: 'transferencia', banco, numeroCuenta: cuenta.slice(-4), nombreDestinatario: nombre, referencia };
+        }
+        return {};
+    }
+
+    // === Formulario 2: Tipo de envío ===
+    const formTipoEnvio = document.getElementById('form-tipo-envio');
+    const direccionSection = document.getElementById('direccion-section');
+    formTipoEnvio.addEventListener('change', function () {
+        const tipo = formTipoEnvio.querySelector('input[name="tipo-envio"]:checked');
+        if (tipo && tipo.value === 'entrega') {
+            direccionSection.classList.remove('hidden');
+            document.getElementById('direccion-entrega').required = true;
+        } else {
+            direccionSection.classList.add('hidden');
+            document.getElementById('direccion-entrega').required = false;
+        }
+    });
+
+    formTipoEnvio.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const tipo = formTipoEnvio.querySelector('input[name="tipo-envio"]:checked');
+        if (!tipo) {
+            alert('Selecciona el tipo de envío.');
+            return;
+        }
+        if (tipo.value === 'entrega' && !document.getElementById('direccion-entrega').value.trim()) {
+            alert('Ingresa la dirección de entrega.');
+            return;
+        }
+        datosEnvio = {
+            tipo: tipo.value,
+            direccion: tipo.value === 'entrega' ? document.getElementById('direccion-entrega').value.trim() : 'Recoger en tienda'
+        };
+        // Siguiente formulario
+        document.getElementById('form-tipo-envio').classList.add('hidden');
+        document.getElementById('form-datos-cliente').classList.remove('hidden');
+    });
+
+    // === Formulario 3: Datos del cliente ===
+    const formDatosCliente = document.getElementById('form-datos-cliente');
     formDatosCliente.addEventListener('submit', function (e) {
         e.preventDefault();
-        guardarDatosCliente();
-        procesarPedido(totalPedido);
+        const nombre = document.getElementById('nombre').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        if (!nombre || !telefono) {
+            alert('Completa los campos obligatorios.');
+            return;
+        }
+        datosCliente = { nombre, telefono, correo };
+        // Siguiente formulario: resumen final
+        document.getElementById('form-datos-cliente').classList.add('hidden');
+        mostrarResumenFinal();
+        document.getElementById('form-resumen-final').classList.remove('hidden');
     });
 
-    // ==== FUNCIONES ====
+    // === Formulario 4: Resumen final ===
+    const formResumenFinal = document.getElementById('form-resumen-final');
+    const infoResumen = document.getElementById('info-resumen');
+    const btnEditar = document.getElementById('btn-editar');
+    formResumenFinal.addEventListener('submit', function(e) {
+        e.preventDefault();
+        guardarPedidoCompleto();
+    });
+    btnEditar.addEventListener('click', function() {
+        // Permite volver a editar, vuelve al paso 1
+        document.getElementById('form-resumen-final').classList.add('hidden');
+        document.getElementById('form-metodo-pago').classList.remove('hidden');
+    });
 
+    function mostrarResumenFinal() {
+        // Productos
+        let productosHTML = '<strong>Productos:</strong><ul>';
+        pedido.items.forEach(item => {
+            productosHTML += `<li>${item.nombre} x${item.cantidad} - $${item.subtotal.toFixed(2)}</li>`;
+        });
+        productosHTML += `</ul><strong>Total: $${totalPedido.toFixed(2)}</strong><br><br>`;
+
+        // Pago
+        let pagoHTML = `<strong>Método de pago:</strong> ${datosPago.metodo}<br>`;
+        if (datosPago.metodo === 'efectivo') {
+            pagoHTML += `Monto recibido: $${datosPago.montoRecibido.toFixed(2)}<br>Cambio: $${datosPago.cambio.toFixed(2)}<br>`;
+        } else if (datosPago.metodo === 'tarjeta') {
+            pagoHTML += `Tipo: ${datosPago.tipo}<br>Últimos dígitos: ${datosPago.ultimosDigitos}<br>`;
+        } else if (datosPago.metodo === 'transferencia') {
+            pagoHTML += `Banco: ${datosPago.banco}<br>Núm. cuenta: ****${datosPago.numeroCuenta}<br>Referencía: ${datosPago.referencia}<br>`;
+        }
+        pagoHTML += "<br>";
+
+        // Envío
+        let envioHTML = `<strong>Tipo de envío:</strong> ${datosEnvio.tipo === "entrega" ? "Entrega a domicilio" : "Recoger en tienda"}<br>`;
+        if (datosEnvio.tipo === "entrega") {
+            envioHTML += `Dirección: ${datosEnvio.direccion}<br>`;
+        }
+        envioHTML += "<br>";
+
+        // Cliente
+        let clienteHTML = `<strong>Datos del cliente:</strong><br>Nombre: ${datosCliente.nombre}<br>Teléfono: ${datosCliente.telefono}<br>`;
+        if (datosCliente.correo) clienteHTML += `Correo: ${datosCliente.correo}<br>`;
+
+        infoResumen.innerHTML = productosHTML + pagoHTML + envioHTML + clienteHTML;
+    }
+
+    // === Utilidades ===
     function obtenerPedidoGuardado() {
         try {
             const pedidoGuardado = localStorage.getItem('pedidoJurassicPan');
             if (!pedidoGuardado) return { items: [] };
             const pedido = JSON.parse(pedidoGuardado);
+            if (!pedido.items && Array.isArray(pedido)) return { items: pedido };
             return pedido && Array.isArray(pedido.items) ? pedido : { items: [] };
         } catch (e) {
             return { items: [] };
         }
     }
 
-    function guardarDatosCliente() {
-        ['nombre', 'telefono', 'correo'].forEach(campo => {
-            const valor = document.getElementById(campo).value.trim();
-            localStorage.setItem(`cliente_${campo}`, valor);
-        });
-    }
-
-    function configurarMetodosPago(total) {
-        document.querySelectorAll('input[name="metodo-pago"]').forEach(radio => {
-            radio.addEventListener('change', () => mostrarSeccionPago(radio.value, total));
-        });
-        // Mostrar la sección seleccionada por defecto
-        const metodoSeleccionado = document.querySelector('input[name="metodo-pago"]:checked');
-        if (metodoSeleccionado) mostrarSeccionPago(metodoSeleccionado.value, total);
-    }
-
-    function mostrarSeccionPago(metodo, total) {
-        [efectivoSection, tarjetaSection, transferenciaSection].forEach(sec => sec.classList.add('hidden'));
-        if (metodo === 'efectivo') {
-            efectivoSection.classList.remove('hidden');
-            configurarEfectivo(total);
-        } else if (metodo === 'tarjeta') {
-            tarjetaSection.classList.remove('hidden');
-        } else if (metodo === 'transferencia') {
-            transferenciaSection.classList.remove('hidden');
-            document.getElementById('monto-transferencia').value = total.toFixed(2);
-            document.getElementById('referencia-id').textContent = generarReferencia();
-        }
-    }
-
-    function configurarEfectivo(total) {
-        const montoInput = document.getElementById('monto-efectivo');
-        const botones = document.querySelectorAll('.btn-denominacion');
-
-        function calcularCambio(montoEfectivo) {
-            if (isNaN(montoEfectivo) || montoEfectivo < 0) montoEfectivo = 0;
-            if (montoEfectivo >= total) {
-                const cambio = montoEfectivo - total;
-                mensajeCambio.innerHTML = `<span class="cambio-positivo">Cambio: $${cambio.toFixed(2)}</span>`;
-                mensajeCambio.style.backgroundColor = 'rgba(90, 143, 90, 0.1)';
-            } else {
-                const faltante = total - montoEfectivo;
-                mensajeCambio.innerHTML = `<span class="cambio-negativo">Faltan: $${faltante.toFixed(2)}</span>`;
-                mensajeCambio.style.backgroundColor = 'rgba(196, 86, 86, 0.1)';
-            }
-        }
-
-        botones.forEach(btn => {
-            btn.onclick = () => {
-                const monto = parseFloat(btn.dataset.monto);
-                montoInput.value = monto;
-                calcularCambio(monto);
-            };
-        });
-
-        montoInput.oninput = () => {
-            calcularCambio(parseFloat(montoInput.value));
+    function guardarPedidoCompleto() {
+        const pedidoCompleto = {
+            items: pedido.items,
+            total: totalPedido,
+            pago: datosPago,
+            envio: datosEnvio,
+            cliente: datosCliente,
+            fecha: new Date().toLocaleString(),
+            numeroPedido: 'JP-' + Math.floor(Math.random() * 1000000)
         };
-
-        calcularCambio(parseFloat(montoInput.value) || 0);
-    }
-
-    function configurarNavegacion() {
-        btnPanes.onclick = () => guardarYRedirigir('catalogo.html');
-        btnPasteles.onclick = () => guardarYRedirigir('pastel.html');
-        btnComplementos.onclick = () => guardarYRedirigir('complementos.html');
-        btnVolver.onclick = () => {
-            limpiarPedido();
-            window.location.href = 'pan.html';
-        };
-    }
-
-    function procesarPedido(total) {
-        const cliente = {
-            nombre: document.getElementById('nombre').value.trim(),
-            telefono: document.getElementById('telefono').value.trim(),
-            correo: document.getElementById('correo').value.trim() || 'No proporcionado',
-            metodoPago: (document.querySelector('input[name="metodo-pago"]:checked') || {}).value
-        };
-
-        if (!cliente.nombre || !cliente.telefono) {
-            alert('Por favor complete todos los campos obligatorios');
-            return;
-        }
-
-        if (!procesarMetodoPago(cliente.metodoPago, total)) {
-            return;
-        }
-
-        completarPedido(cliente, total);
-    }
-
-    function procesarMetodoPago(metodo, total) {
-        try {
-            if (metodo === 'efectivo') {
-                const montoEfectivo = parseFloat(document.getElementById('monto-efectivo').value) || 0;
-                if (montoEfectivo < total) {
-                    alert('El monto en efectivo debe ser mayor o igual al total del pedido');
-                    return false;
-                }
-                pedido.pago = {
-                    metodo: 'efectivo',
-                    montoRecibido: montoEfectivo,
-                    cambio: montoEfectivo - total
-                };
-            } else if (metodo === 'tarjeta') {
-                const numeroTarjeta = document.getElementById('numero-tarjeta').value.trim();
-                const vencimiento = document.getElementById('vencimiento').value.trim();
-                const cvv = document.getElementById('cvv').value.trim();
-                const tipoTarjeta = document.querySelector('input[name="tipo-tarjeta"]:checked');
-                if (!numeroTarjeta || !vencimiento || !cvv || !tipoTarjeta) {
-                    alert('Por favor complete todos los datos de la tarjeta');
-                    return false;
-                }
-                if (!/^\d{16}$/.test(numeroTarjeta)) {
-                    alert('El número de tarjeta debe tener 16 dígitos');
-                    return false;
-                }
-                pedido.pago = {
-                    metodo: 'tarjeta',
-                    tipo: tipoTarjeta.value,
-                    ultimosDigitos: numeroTarjeta.slice(-4)
-                };
-            } else if (metodo === 'transferencia') {
-                const banco = document.getElementById('banco').value;
-                const numeroCuenta = document.getElementById('numero-cuenta').value.trim();
-                const nombreDestinatario = document.getElementById('nombre-destinatario').value.trim();
-                const referencia = document.getElementById('referencia-id').textContent;
-                if (!banco || !numeroCuenta || !nombreDestinatario) {
-                    alert('Por favor complete todos los datos de la transferencia');
-                    return false;
-                }
-                if (!/^\d{10,20}$/.test(numeroCuenta)) {
-                    alert('El número de cuenta debe tener entre 10 y 20 dígitos');
-                    return false;
-                }
-                pedido.pago = {
-                    metodo: 'transferencia',
-                    banco: banco,
-                    numeroCuenta: numeroCuenta.slice(-4),
-                    nombreDestinatario: nombreDestinatario,
-                    referencia: referencia
-                };
-            } else {
-                alert('Seleccione un método de pago');
-                return false;
-            }
-            return true;
-        } catch (error) {
-            console.error('Error procesando método de pago:', error);
-            alert('Ocurrió un error al procesar el método de pago');
-            return false;
-        }
-    }
-
-    function completarPedido(cliente, total) {
-        pedido.cliente = cliente;
-        pedido.fecha = new Date().toLocaleString();
-        pedido.numeroPedido = 'JP-' + Math.floor(Math.random() * 1000000);
-        pedido.total = total;
-        localStorage.setItem('pedidoCompletoJurassicPan', JSON.stringify(pedido));
-        // Limpiar datos temporales
-        ['nombre', 'telefono', 'correo'].forEach(campo => localStorage.removeItem(`cliente_${campo}`));
-        limpiarPedido();
-        window.location.href = 'ticket.html';
-    }
-
-    function guardarYRedirigir(destino) {
-        localStorage.setItem('pedidoJurassicPan', JSON.stringify(pedido));
-        window.location.href = destino;
-    }
-
-    function limpiarPedido() {
+        localStorage.setItem('pedidoCompletoJurassicPan', JSON.stringify(pedidoCompleto));
         localStorage.removeItem('pedidoJurassicPan');
-    }
-
-    function mostrarAlertaYRedirigir(mensaje, destino) {
-        alert(mensaje);
-        window.location.href = destino;
+        window.location.href = 'ticket.html';
     }
 
     function generarReferencia() {
