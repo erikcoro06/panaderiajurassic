@@ -9,23 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Botones +
-    document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+    document.querySelectorAll('.cantidad-btn.aumentar').forEach(button => {
         button.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.quantity-input');
+            const input = this.parentElement.querySelector('.cantidad-input');
             input.value = parseInt(input.value) + 1;
         });
     });
 
     // Botones -
-    document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+    document.querySelectorAll('.cantidad-btn.disminuir').forEach(button => {
         button.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.quantity-input');
+            const input = this.parentElement.querySelector('.cantidad-input');
             input.value = Math.max(0, parseInt(input.value) - 1);
         });
     });
 
     // Solo números positivos en input
-    document.querySelectorAll('.quantity-input').forEach(input => {
+    document.querySelectorAll('.cantidad-input').forEach(input => {
         input.addEventListener('input', function() {
             let val = parseInt(this.value.replace(/\D/g, ''));
             if (isNaN(val) || val < 0) val = 0;
@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Botón Agregar
-    document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
+    document.querySelectorAll('.accion-btn.agregar').forEach(button => {
         button.addEventListener('click', function() {
-            const productCard = this.closest('.product-card');
-            const input = productCard.querySelector('.quantity-input');
+            const panItem = this.closest('.pan-item');
+            const input = panItem.querySelector('.cantidad-input');
             if (parseInt(input.value) > 0) {
-                this.style.display = 'none';
-                productCard.querySelector('.add-to-cart.remove-btn').style.display = '';
+                this.classList.add('hidden');
+                panItem.querySelector('.accion-btn.eliminar').classList.remove('hidden');
                 showNotification('Agregado al pedido');
             } else {
                 showNotification('Selecciona una cantidad mayor a 0');
@@ -49,23 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Botón Eliminar
-    document.querySelectorAll('.add-to-cart.remove-btn').forEach(button => {
+    document.querySelectorAll('.accion-btn.eliminar').forEach(button => {
         button.addEventListener('click', function() {
-            const productCard = this.closest('.product-card');
-            const input = productCard.querySelector('.quantity-input');
+            const panItem = this.closest('.pan-item');
+            const input = panItem.querySelector('.cantidad-input');
             input.value = 0;
-            this.style.display = 'none';
-            productCard.querySelector('.add-to-cart:not(.remove-btn)').style.display = '';
+            this.classList.add('hidden');
+            panItem.querySelector('.accion-btn.agregar').classList.remove('hidden');
             showNotification('Eliminado del pedido');
         });
-    });
-
-    // Agregar data-producto y data-precio dinámicamente
-    document.querySelectorAll('.product-card').forEach(card => {
-        const nombre = card.querySelector('.product-name')?.textContent?.trim() || '';
-        const precio = parseFloat(card.querySelector('.product-price')?.textContent) || 0;
-        card.setAttribute('data-producto', nombre);
-        card.setAttribute('data-precio', precio);
     });
 
     // Añadir enlace para "Datos del Cliente"
@@ -82,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Guardar selección en localStorage y redirigir
     function guardarProductosSeleccionadosYRedirigir() {
         const productosSeleccionados = [];
-        document.querySelectorAll('.product-card').forEach(item => {
-            const cantidad = parseInt(item.querySelector('.quantity-input').value) || 0;
+        document.querySelectorAll('.pan-item').forEach(item => {
+            const cantidad = parseInt(item.querySelector('.cantidad-input').value) || 0;
             if (cantidad > 0) {
-                const nombre = item.getAttribute('data-producto');
+                const nombre = item.getAttribute('data-pan');
                 const precio = parseFloat(item.getAttribute('data-precio'));
                 const subtotal = cantidad * precio;
                 productosSeleccionados.push({
