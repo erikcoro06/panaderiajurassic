@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => notification.remove(), 2000);
     }
 
-    // Botones +
+    // Botón +
     document.querySelectorAll('.cantidad-btn.aumentar').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Botones -
+    // Botón -
     document.querySelectorAll('.cantidad-btn.disminuir').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.cantidad-input');
