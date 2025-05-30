@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => notification.remove(), 2000);
     }
 
-    // Botones + y -
+    // Botones +
     document.querySelectorAll('.quantity-btn.plus').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.quantity-input');
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Botones -
     document.querySelectorAll('.quantity-btn.minus').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.quantity-input');
@@ -68,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Añadir enlace para "Datos del Cliente"
-    // Busca el enlace del navbar que va a cliente.html
     const links = Array.from(document.querySelectorAll('a')).filter(a => a.getAttribute('href') === 'cliente.html');
     let linkCliente = links[0];
     if (linkCliente) {
