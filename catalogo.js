@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Notificación sencilla ---
+    // Notificación sencilla
     function showNotification(message) {
         const notification = document.createElement('div');
         notification.className = 'notificacion';
@@ -8,23 +8,23 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => notification.remove(), 2000);
     }
 
-    // --- Botones + y - ---
-    document.querySelectorAll('.cantidad-btn.aumentar').forEach(button => {
+    // Botones + y -
+    document.querySelectorAll('.quantity-btn.plus').forEach(button => {
         button.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
+            const input = this.parentElement.querySelector('.quantity-input');
             input.value = parseInt(input.value) + 1;
         });
     });
 
-    document.querySelectorAll('.cantidad-btn.disminuir').forEach(button => {
+    document.querySelectorAll('.quantity-btn.minus').forEach(button => {
         button.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('.cantidad-input');
+            const input = this.parentElement.querySelector('.quantity-input');
             input.value = Math.max(0, parseInt(input.value) - 1);
         });
     });
 
-    // --- Solo números positivos en input ---
-    document.querySelectorAll('.cantidad-input').forEach(input => {
+    // Solo números positivos en input
+    document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
             let val = parseInt(this.value.replace(/\D/g, ''));
             if (isNaN(val) || val < 0) val = 0;
@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Botón Agregar ---
-    document.querySelectorAll('.accion-btn.agregar').forEach(button => {
+    // Botón Agregar
+    document.querySelectorAll('.add-to-cart:not(.remove-btn)').forEach(button => {
         button.addEventListener('click', function() {
-            const productoItem = this.closest('.producto-item');
-            const input = productoItem.querySelector('.cantidad-input');
+            const productCard = this.closest('.product-card');
+            const input = productCard.querySelector('.quantity-input');
             if (parseInt(input.value) > 0) {
-                this.classList.add('hidden');
-                productoItem.querySelector('.accion-btn.eliminar').classList.remove('hidden');
+                this.style.display = 'none';
+                productCard.querySelector('.add-to-cart.remove-btn').style.display = '';
                 showNotification('Agregado al pedido');
             } else {
                 showNotification('Selecciona una cantidad mayor a 0');
@@ -47,35 +47,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Botón Eliminar ---
-    document.querySelectorAll('.accion-btn.eliminar').forEach(button => {
+    // Botón Eliminar
+    document.querySelectorAll('.add-to-cart.remove-btn').forEach(button => {
         button.addEventListener('click', function() {
-            const productoItem = this.closest('.producto-item');
-            const input = productoItem.querySelector('.cantidad-input');
+            const productCard = this.closest('.product-card');
+            const input = productCard.querySelector('.quantity-input');
             input.value = 0;
-            this.classList.add('hidden');
-            productoItem.querySelector('.accion-btn.agregar').classList.remove('hidden');
+            this.style.display = 'none';
+            productCard.querySelector('.add-to-cart:not(.remove-btn)').style.display = '';
             showNotification('Eliminado del pedido');
         });
     });
 
-    // --- Enlace "Datos del Cliente" ---
-    const linkCliente = document.getElementById('link-cliente');
+    // Agregar data-producto y data-precio dinámicamente
+    document.querySelectorAll('.product-card').forEach(card => {
+        const nombre = card.querySelector('.product-name')?.textContent?.trim() || '';
+        const precio = parseFloat(card.querySelector('.product-price')?.textContent) || 0;
+        card.setAttribute('data-producto', nombre);
+        card.setAttribute('data-precio', precio);
+    });
+
+    // Añadir enlace para "Datos del Cliente"
+    // Busca el enlace del navbar que va a cliente.html
+    const links = Array.from(document.querySelectorAll('a')).filter(a => a.getAttribute('href') === 'cliente.html');
+    let linkCliente = links[0];
     if (linkCliente) {
+        linkCliente.id = 'link-cliente';
         linkCliente.addEventListener('click', function(e) {
             e.preventDefault();
             guardarProductosSeleccionadosYRedirigir();
         });
     }
 
-    // --- Guardar selección en localStorage y redirigir ---
+    // Guardar selección en localStorage y redirigir
     function guardarProductosSeleccionadosYRedirigir() {
         const productosSeleccionados = [];
-        document.querySelectorAll('.producto-item').forEach(item => {
-            const cantidad = parseInt(item.querySelector('.cantidad-input').value) || 0;
+        document.querySelectorAll('.product-card').forEach(item => {
+            const cantidad = parseInt(item.querySelector('.quantity-input').value) || 0;
             if (cantidad > 0) {
-                const nombre = item.dataset.producto;
-                const precio = parseFloat(item.dataset.precio);
+                const nombre = item.getAttribute('data-producto');
+                const precio = parseFloat(item.getAttribute('data-precio'));
                 const subtotal = cantidad * precio;
                 productosSeleccionados.push({
                     nombre,
