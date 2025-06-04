@@ -43,17 +43,19 @@
             <label><input type="radio" name="metodo-pago" value="transferencia"> Transferencia</label>
 
             <!-- Efectivo -->
-            <div id="efectivo-section" class="hidden">
-                <label for="monto-efectivo">Monto recibido:</label>
-                <input type="number" id="monto-efectivo" min="0" step="1" placeholder="Monto recibido">
-                <div id="mensaje-cambio"></div>
-                <div>
-                    <button type="button" class="btn-denominacion" data-monto="100">100</button>
-                    <button type="button" class="btn-denominacion" data-monto="200">200</button>
-                    <button type="button" class="btn-denominacion" data-monto="500">500</button>
-                </div>
-                <div id="sugerencia-cambio"></div> <!-- Nueva función: sugerir billetes para el cambio -->
-            </div>
+         <div id="efectivo-section" class="hidden">
+    <label for="monto-efectivo">Monto recibido:</label>
+    <input type="number" id="monto-efectivo" min="0" step="1" placeholder="Monto recibido">
+    <div id="mensaje-cambio"></div>
+    <div>
+        <button type="button" class="btn-denominacion" data-monto="20">20</button>
+        <button type="button" class="btn-denominacion" data-monto="50">50</button>
+        <button type="button" class="btn-denominacion" data-monto="100">100</button>
+        <button type="button" class="btn-denominacion" data-monto="200">200</button>
+        <button type="button" class="btn-denominacion" data-monto="500">500</button>
+        <button type="button" class="btn-denominacion" data-monto="1000">1000</button>
+    </div>
+</div>
 
             <!-- Tarjeta -->
             <div id="tarjeta-section" class="hidden">
