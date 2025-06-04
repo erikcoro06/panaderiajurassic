@@ -99,15 +99,21 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Tarjeta: validación e ícono
-  numeroTarjetaInput.addEventListener('input', () => {
+numeroTarjetaInput.addEventListener('input', () => {
     const val = numeroTarjetaInput.value.replace(/\D/g, '');
     numeroTarjetaInput.value = val.slice(0, 16);
     let icon = '';
+
     if (/^4/.test(val)) icon = '💳 Visa';
     else if (/^5[1-5]/.test(val)) icon = '💳 MasterCard';
     else if (/^3[47]/.test(val)) icon = '💳 AmEx';
+    else if (/^6(011|5)/.test(val)) icon = '💳 Discover';
+    else if (/^35/.test(val)) icon = '💳 JCB';
+    else if (/^30[0-5]/.test(val)) icon = '💳 Diners Club';
+    
     iconoTarjeta.textContent = icon;
-  });
+});
+
 
   // Comprobante de transferencia
   if (comprobanteTransferencia) {
